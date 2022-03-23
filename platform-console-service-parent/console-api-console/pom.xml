@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>platform-console-service-parent</artifactId>
+		<groupId>com.wordplay.console</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>console-api-console</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<scm>
+		<connection>scm:git:git://github.com/hidlestone/platform-console.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/hidlestone/platform-console.git</developerConnection>
+		<url>https://github.com/hidlestone/platform-console</url>
+	</scm>
+	
+	<!-- 该模块不写代码，打包的时候，根据以下配置的路径打成jar包 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>../console-service-console/src/main/api/com/wordplay/platform/console/client/api</source>
+								<source>../console-service-console/src/main/api/com/wordplay/platform/console/model</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

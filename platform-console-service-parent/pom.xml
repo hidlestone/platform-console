@@ -4,12 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>fall-platform-dependencies</artifactId>
-		<groupId>com.fallframework.platform</groupId>
+		<artifactId>platform-console</artifactId>
+		<groupId>com.wordplay.console</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>com.wordplay.console</groupId>
-	<artifactId>platform-console</artifactId>
+	<artifactId>platform-console-service-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<scm>
@@ -17,10 +16,10 @@
 		<developerConnection>scm:git:ssh://git@github.com/hidlestone/platform-console.git</developerConnection>
 		<url>https://github.com/hidlestone/platform-console</url>
 	</scm>
-	
-	<modules>
-		<module>platform-console-control-parent</module>
-		<module>platform-console-service-parent</module>
-	</modules>
 
+	<modules>
+		<module>console-service-console</module>
+		<module>console-api-console</module>
+	</modules>
+	
 </project>
