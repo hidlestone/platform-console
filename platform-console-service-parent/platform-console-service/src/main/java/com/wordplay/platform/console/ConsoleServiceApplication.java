@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 @SpringBootApplication
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.fallframework"})
+@ComponentScan(basePackages = {"com.fallframework","com.wordplay"})
 public class ConsoleServiceApplication {
 
 	public static void main(String[] args) {
