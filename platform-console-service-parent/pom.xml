@@ -18,8 +18,8 @@
 	</scm>
 
 	<modules>
-		<module>console-service-console</module>
-		<module>console-api-console</module>
+		<module>platform-console-api</module>
+		<module>platform-console-service</module>
 	</modules>
-	
+
 </project>

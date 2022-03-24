@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME}                 # docker环境中配置的APPLICATION_NAME
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+          - common.yml
+        namespace: ${NACOS_NAMESPACE}
+        server-addr: ${NACOS_ADDR}:8848
+        file-extension: yml

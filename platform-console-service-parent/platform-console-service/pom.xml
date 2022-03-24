@@ -8,15 +8,25 @@
 		<groupId>com.wordplay.console</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>console-service-console</artifactId>
+	<artifactId>platform-console-service</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-
 	<scm>
 		<connection>scm:git:git://github.com/hidlestone/platform-console.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/hidlestone/platform-console.git</developerConnection>
 		<url>https://github.com/hidlestone/platform-console</url>
 	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-i18n</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
