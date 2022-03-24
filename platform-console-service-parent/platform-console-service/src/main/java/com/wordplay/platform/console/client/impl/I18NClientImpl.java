@@ -11,7 +11,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -65,17 +67,17 @@ public class I18NClientImpl implements I18NClient {
 	}
 
 	@Override
-	@PostMapping("/get")
+	@GetMapping("/get")
 	@ApiOperation(value = "ID查询I8N词条")
-	public ResponseResult<I18nResource> get(Long id) {
+	public ResponseResult<I18nResource> get(@RequestParam Long id) {
 		I18nResource i18nResource = i18nResourceService.getById(id);
 		return ResponseResult.success(i18nResource);
 	}
 
 	@Override
-	@PostMapping("/selectbyresourcekey")
+	@GetMapping("/selectbyresourcekey")
 	@ApiOperation(value = "resourceKey查询I8N词条")
-	public ResponseResult<List<I18nResource>> selectByResourceKey(String resourceKey) {
+	public ResponseResult<List<I18nResource>> selectByResourceKey(@RequestParam String resourceKey) {
 		return i18nResourceService.selectByResourceKey(resourceKey);
 	}
 
