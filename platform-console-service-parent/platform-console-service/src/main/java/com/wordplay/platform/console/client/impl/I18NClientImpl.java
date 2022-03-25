@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,8 @@ import java.util.List;
  */
 @Api(tags = "I18N") // 该client接口说明，即接口文档中的标题列。
 @RestController
+@RequestMapping("/i18n")
+//@RequestMapping("/${platform.console.service.version}/i18n")
 public class I18NClientImpl implements I18NClient {
 
 	@Autowired
@@ -75,10 +78,10 @@ public class I18NClientImpl implements I18NClient {
 	}
 
 	@Override
-	@GetMapping("/selectbyresourcekey")
+	@GetMapping("/getbyresourcekey")
 	@ApiOperation(value = "resourceKey查询I8N词条")
-	public ResponseResult<List<I18nResource>> selectByResourceKey(@RequestParam String resourceKey) {
-		return i18nResourceService.selectByResourceKey(resourceKey);
+	public ResponseResult<List<I18nResource>> getByResourceKey(@RequestParam String resourceKey) {
+		return i18nResourceService.getByResourceKey(resourceKey);
 	}
 
 	@Override

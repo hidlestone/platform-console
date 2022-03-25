@@ -35,8 +35,8 @@ public interface I18NClient {
 	@GetMapping("/get")
 	ResponseResult<I18nResource> get(@RequestParam Long id);
 
-	@GetMapping("/selectbyresourcekey")
-	ResponseResult<List<I18nResource>> selectByResourceKey(@RequestParam String resourceKey);
+	@GetMapping("/getbyresourcekey")
+	ResponseResult<List<I18nResource>> getByResourceKey(@RequestParam String resourceKey);
 
 	@PostMapping("/list")
 	ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceRequest request);

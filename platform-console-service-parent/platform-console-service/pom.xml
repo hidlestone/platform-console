@@ -26,6 +26,10 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-i18n</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-sms</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
