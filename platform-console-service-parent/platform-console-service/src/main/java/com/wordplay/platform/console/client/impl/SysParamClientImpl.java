@@ -72,7 +72,7 @@ public class SysParamClientImpl implements SysParamClient {
 	}
 
 	@Override
-	@PostMapping("/deletegroup")
+	@PostMapping("/deleteitem")
 	@ApiOperation(value = "删除明细项")
 	public ResponseResult deleteItem(@RequestParam String code) {
 		sysParamItemService.removeById(code);

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "邮件历史")
 @RestController
-@RequestMapping("/mailtemplate")
+@RequestMapping("/mailhistory")
 public class MailHistoryClientImpl implements MailHistoryClient {
 
 	@Autowired
