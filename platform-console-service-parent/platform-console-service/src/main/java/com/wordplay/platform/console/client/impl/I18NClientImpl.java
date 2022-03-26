@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * @author zhuangpf
  */
-@Api(tags = "I18N") // 该client接口说明，即接口文档中的标题列。
+@Api(tags = "I18N多语言") // 该client接口说明，即接口文档中的标题列。
 @RestController
 @RequestMapping("/i18n")
 //@RequestMapping("/${platform.console.service.version}/i18n")
@@ -34,7 +35,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "新增I8N词条")
-	public ResponseResult save(I18nResourceRequest request) {
+	public ResponseResult save(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
 		BeanUtils.copyProperties(request, i18nResource);
 		i18nResourceService.save(i18nResource);
@@ -44,7 +45,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量新增I8N词条")
-	public ResponseResult saveBatch(List<I18nResourceRequest> i18nResourceRequestList) {
+	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> i18nResourceRequestList) {
 		List<I18nResource> i18nResourceList = JSON.parseArray(JSON.toJSONString(i18nResourceRequestList), I18nResource.class);
 		for (I18nResource entity : i18nResourceList) {
 			i18nResourceService.save(entity);
@@ -55,7 +56,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除I8N词条")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		i18nResourceService.removeById(id);
 		return ResponseResult.success();
 	}
@@ -63,7 +64,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改I8N词条")
-	public ResponseResult update(I18nResourceRequest request) {
+	public ResponseResult update(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
 		i18nResourceService.updateById(i18nResource);
 		return ResponseResult.success();
@@ -87,7 +88,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询I8N词条")
-	public ResponseResult<Page<I18nResource>> list(I18nResourceRequest request) {
+	public ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceRequest request) {
 		return i18nResourceService.list(request);
 	}
 

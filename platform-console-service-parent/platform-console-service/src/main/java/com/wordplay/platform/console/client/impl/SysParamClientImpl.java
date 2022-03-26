@@ -17,7 +17,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/savegroup")
 	@ApiOperation(value = "保存配置组及明细项")
-	public ResponseResult saveGroup(SysParamGroupRequest request) {
+	public ResponseResult saveGroup(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = new SysParamGroup();
 		BeanUtils.copyProperties(request, sysParamGroup);
@@ -52,7 +54,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/saveitem")
 	@ApiOperation(value = "保存配置明细项")
-	public ResponseResult saveItem(SysParamItemRequest request) {
+	public ResponseResult saveItem(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
 		return ResponseResult.success();
@@ -61,7 +63,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/deletegroup")
 	@ApiOperation(value = "删除配置组及明细项")
-	public ResponseResult deleteGroup(String code) {
+	public ResponseResult deleteGroup(@RequestParam String code) {
 		// 配置组
 		sysParamGroupService.removeById(code);
 		// 明细项
@@ -72,7 +74,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/deletegroup")
 	@ApiOperation(value = "删除明细项")
-	public ResponseResult deleteItem(String code) {
+	public ResponseResult deleteItem(@RequestParam String code) {
 		sysParamItemService.removeById(code);
 		return ResponseResult.success();
 	}
@@ -80,7 +82,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/updategroup")
 	@ApiOperation(value = "更新配置组及明细项")
-	public ResponseResult updateGroup(SysParamGroupRequest request) {
+	public ResponseResult updateGroup(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = new SysParamGroup();
 		BeanUtils.copyProperties(request, sysParamGroup);
@@ -94,7 +96,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/updateitem")
 	@ApiOperation(value = "更新配置明细项")
-	public ResponseResult updateItem(SysParamItemRequest request) {
+	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
 		sysParamItemService.updateById(sysParamItem);

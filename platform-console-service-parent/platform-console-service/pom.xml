@@ -30,6 +30,18 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-sms</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-mq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-rbac</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -13,7 +13,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信配置")
-	public ResponseResult save(SmsConfigRequest request) {
+	public ResponseResult save(@RequestBody SmsConfigRequest request) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(request, smsConfig);
 		smsConfigService.save(smsConfig);
@@ -42,7 +44,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信配置")
-	public ResponseResult saveBatch(List<SmsConfigRequest> smsConfigRequestList) {
+	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> smsConfigRequestList) {
 		List<SmsConfig> smsConfigList = JSON.parseArray(JSON.toJSONString(smsConfigRequestList), SmsConfig.class);
 		smsConfigService.saveBatch(smsConfigList);
 		return ResponseResult.success();
@@ -51,7 +53,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除短信配置")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		smsConfigService.removeById(id);
 		return ResponseResult.success();
 	}
@@ -59,7 +61,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信配置")
-	public ResponseResult update(SmsConfigRequest request) {
+	public ResponseResult update(@RequestBody SmsConfigRequest request) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(request, smsConfig);
 		smsConfigService.updateById(smsConfig);
@@ -69,7 +71,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询短信配置")
-	public ResponseResult<SmsConfig> get(Long id) {
+	public ResponseResult<SmsConfig> get(@RequestParam Long id) {
 		SmsConfig smsConfig = smsConfigService.getById(id);
 		return ResponseResult.success(smsConfig);
 	}
@@ -77,7 +79,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信配置")
-	public ResponseResult<Page<SmsConfig>> list(SmsConfigRequest request) {
+	public ResponseResult<Page<SmsConfig>> list(@RequestBody SmsConfigRequest request) {
 		return smsConfigService.list(request);
 	}
 
