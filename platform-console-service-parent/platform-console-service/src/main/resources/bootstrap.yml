@@ -71,7 +71,9 @@ mybatis-plus:
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
         
         
-        
+fall:
+  file:
+    upload-file-path: E://fallplatform-file/  
         
         
         
