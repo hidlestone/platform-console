@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(tags = "文件组管理")
 @RestController
-@RequestMapping("/filegroup")
+@RequestMapping("/${platform.console.service.version}/filegroup")
 public class FileGroupClientImpl implements FileGroupClient {
 
 	@Autowired
@@ -67,5 +67,5 @@ public class FileGroupClientImpl implements FileGroupClient {
 	public ResponseResult<Page<FileGroup>> list(FileGroupRequest request) {
 		return fileGroupService.list(request);
 	}
-	
+
 }

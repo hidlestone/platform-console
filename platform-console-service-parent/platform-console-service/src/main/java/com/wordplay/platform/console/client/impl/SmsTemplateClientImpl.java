@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Api(tags = "短信模板")
 @RestController
-@RequestMapping("/smstemplate")
+@RequestMapping("/${platform.console.service.version}/smstemplate")
 public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Autowired

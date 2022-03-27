@@ -25,8 +25,7 @@ import java.util.List;
  */
 @Api(tags = "I18N多语言") // 该client接口说明，即接口文档中的标题列。
 @RestController
-@RequestMapping("/i18n")
-//@RequestMapping("/${platform.console.service.version}/i18n")
+@RequestMapping("/${platform.console.service.version}/i18n")
 public class I18NClientImpl implements I18NClient {
 
 	@Autowired

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "邮件发送配置")
 @RestController
-@RequestMapping("/mailsenderconfig")
+@RequestMapping("/${platform.console.service.version}/mailsenderconfig")
 public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Autowired
@@ -70,5 +70,5 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	public ResponseResult<Page<MailSenderConfig>> list(MailSenderConfigRequest request) {
 		return mailSenderConfigService.list(request);
 	}
-	
+
 }

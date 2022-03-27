@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "MQ轨迹日志")
 @RestController
-@RequestMapping("/mqtracelog")
+@RequestMapping("/${platform.console.service.version}/mqtracelog")
 public class MqTraceLogClientImpl implements MqTraceLogClient {
 
 	@Autowired

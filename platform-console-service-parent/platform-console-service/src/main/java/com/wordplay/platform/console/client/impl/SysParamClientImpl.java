@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Api(tags = "系统参数")
 @RestController
-@RequestMapping("/sysparam")
+@RequestMapping("/${platform.console.service.version}/sysparam")
 public class SysParamClientImpl implements SysParamClient {
 
 	@Autowired

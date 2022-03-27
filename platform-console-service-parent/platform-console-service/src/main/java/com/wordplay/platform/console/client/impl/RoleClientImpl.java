@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Api(tags = "角色管理")
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/${platform.console.service.version}/role")
 public class RoleClientImpl implements RoleClient {
 
 	@Autowired

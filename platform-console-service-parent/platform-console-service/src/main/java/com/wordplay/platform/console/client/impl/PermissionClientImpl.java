@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "接口权限管理")
 @RestController
-@RequestMapping("/permission")
+@RequestMapping("/${platform.console.service.version}/permission")
 public class PermissionClientImpl implements PermissionClient {
 
 	@Autowired

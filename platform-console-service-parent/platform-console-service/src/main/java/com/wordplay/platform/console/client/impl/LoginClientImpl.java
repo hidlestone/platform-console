@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "用户登录")
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/${platform.console.service.version}/login")
 public class LoginClientImpl implements LoginClient {
 }

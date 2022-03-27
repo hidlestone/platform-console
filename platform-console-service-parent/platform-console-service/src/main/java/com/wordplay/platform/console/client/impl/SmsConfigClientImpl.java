@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Api(tags = "短信配置")
 @RestController
-@RequestMapping("/smsconfig")
+@RequestMapping("/${platform.console.service.version}/smsconfig")
 public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Autowired

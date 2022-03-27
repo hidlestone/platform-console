@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/${platform.console.service.version}/user")
 public class UserClientImpl implements UserClient {
 
 	@Autowired
@@ -39,5 +39,5 @@ public class UserClientImpl implements UserClient {
 	public ResponseResult<Page<User>> list(UserQueryRequest request) {
 		return userService.list(request);
 	}
-	
+
 }

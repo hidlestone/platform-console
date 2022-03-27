@@ -208,3 +208,11 @@ spring:
 ![pic](doc/images/nacos-02.png)    
 
 
+client 对外的接口URL：   
+@FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/filegroup")   
+${DB_HOST:localhost}表示先从配置文件yml中或者启动命令中读取DB_HOST的值，如果没有读取到，就是用默认值localhost(其他变量类似)   
+
+service 只到version层级：  
+@RequestMapping("/${platform.console.service.version}/filegroup")  
+
+

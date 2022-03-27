@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "菜单管理")
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/${platform.console.service.version}/menu")
 public class MenuClientImpl implements MenuClient {
 
 	@Autowired
