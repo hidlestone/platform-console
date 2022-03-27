@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailTemplate;
 import com.fallframework.platform.starter.mail.model.MailTemplateRequest;
+import com.wordplay.platform.console.model.MailTemplateReq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,18 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MailTemplateClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MailTemplateRequest request);
+	ResponseResult save(@RequestBody MailTemplateReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MailTemplateRequest request);
+	ResponseResult update(@RequestBody MailTemplateReq req);
 
 	@GetMapping("/get")
 	ResponseResult<MailTemplate> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateRequest request);
+	ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateReq req);
 
 }

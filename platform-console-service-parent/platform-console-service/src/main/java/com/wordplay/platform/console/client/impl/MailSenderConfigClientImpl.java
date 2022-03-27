@@ -6,6 +6,7 @@ import com.fallframework.platform.starter.mail.entity.MailSenderConfig;
 import com.fallframework.platform.starter.mail.model.MailSenderConfigRequest;
 import com.fallframework.platform.starter.mail.service.MailSenderConfigService;
 import com.wordplay.platform.console.client.api.MailSenderConfigClient;
+import com.wordplay.platform.console.model.MailSenderConfigReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -31,9 +32,9 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailSenderConfigRequest request) {
+	public ResponseResult save(@RequestBody MailSenderConfigReq req) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
-		BeanUtils.copyProperties(request, mailSenderConfig);
+		BeanUtils.copyProperties(req, mailSenderConfig);
 		mailSenderConfigService.save(mailSenderConfig);
 		return ResponseResult.success();
 	}
@@ -49,9 +50,9 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailSenderConfigRequest request) {
+	public ResponseResult update(@RequestBody MailSenderConfigReq req) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
-		BeanUtils.copyProperties(request, mailSenderConfig);
+		BeanUtils.copyProperties(req, mailSenderConfig);
 		mailSenderConfigService.updateById(mailSenderConfig);
 		return ResponseResult.success();
 	}
@@ -67,7 +68,9 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Page<MailSenderConfig>> list(MailSenderConfigRequest request) {
+	public ResponseResult<Page<MailSenderConfig>> list(MailSenderConfigReq req) {
+		MailSenderConfigRequest request = new MailSenderConfigRequest();
+		BeanUtils.copyProperties(req, request);
 		return mailSenderConfigService.list(request);
 	}
 

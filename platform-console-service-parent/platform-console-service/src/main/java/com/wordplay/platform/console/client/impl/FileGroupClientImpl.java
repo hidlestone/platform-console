@@ -12,6 +12,7 @@ import com.fallframework.platform.starter.file.model.FileInfoResponse;
 import com.fallframework.platform.starter.file.service.FileGroupService;
 import com.fallframework.platform.starter.file.service.FileInfoService;
 import com.wordplay.platform.console.client.api.FileGroupClient;
+import com.wordplay.platform.console.model.FileGroupReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -64,8 +65,10 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Page<FileGroup>> list(FileGroupRequest request) {
-		return fileGroupService.list(request);
+	public ResponseResult<Page<FileGroup>> list(FileGroupReq req) {
+		FileGroupRequest fileGroupRequest = new FileGroupRequest();
+		BeanUtils.copyProperties(req, fileGroupRequest);
+		return fileGroupService.list(fileGroupRequest);
 	}
 
 }

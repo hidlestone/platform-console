@@ -39,8 +39,8 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>../console-service-console/src/main/api/com/wordplay/platform/console/client/api</source>
-								<source>../console-service-console/src/main/api/com/wordplay/platform/console/model</source>
+								<source>../platform-console-service/src/main/api/com/wordplay/platform/console/client/api</source>
+								<source>../platform-console-service/src/main/api/com/wordplay/platform/console/model</source>
 							</sources>
 						</configuration>
 					</execution>

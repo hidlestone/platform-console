@@ -7,6 +7,7 @@ import com.fallframework.platform.starter.i18n.entity.I18nResource;
 import com.fallframework.platform.starter.i18n.model.I18nResourceRequest;
 import com.fallframework.platform.starter.i18n.service.I18nResourceService;
 import com.wordplay.platform.console.client.api.I18NClient;
+import com.wordplay.platform.console.model.I18nResourceReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -34,9 +35,9 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "新增I8N词条")
-	public ResponseResult save(@RequestBody I18nResourceRequest request) {
+	public ResponseResult save(@RequestBody I18nResourceReq req) {
 		I18nResource i18nResource = new I18nResource();
-		BeanUtils.copyProperties(request, i18nResource);
+		BeanUtils.copyProperties(req, i18nResource);
 		i18nResourceService.save(i18nResource);
 		return ResponseResult.success();
 	}
@@ -44,8 +45,8 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量新增I8N词条")
-	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> i18nResourceRequestList) {
-		List<I18nResource> i18nResourceList = JSON.parseArray(JSON.toJSONString(i18nResourceRequestList), I18nResource.class);
+	public ResponseResult saveBatch(@RequestBody List<I18nResourceReq> reqList) {
+		List<I18nResource> i18nResourceList = JSON.parseArray(JSON.toJSONString(reqList), I18nResource.class);
 		for (I18nResource entity : i18nResourceList) {
 			i18nResourceService.save(entity);
 		}
@@ -63,7 +64,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改I8N词条")
-	public ResponseResult update(@RequestBody I18nResourceRequest request) {
+	public ResponseResult update(@RequestBody I18nResourceReq req) {
 		I18nResource i18nResource = new I18nResource();
 		i18nResourceService.updateById(i18nResource);
 		return ResponseResult.success();
@@ -87,7 +88,9 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询I8N词条")
-	public ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceRequest request) {
+	public ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceReq req) {
+		I18nResourceRequest request = new I18nResourceRequest();
+		BeanUtils.copyProperties(req, request);
 		return i18nResourceService.list(request);
 	}
 

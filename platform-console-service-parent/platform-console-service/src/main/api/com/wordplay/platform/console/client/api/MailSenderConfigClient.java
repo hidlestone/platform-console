@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailSenderConfig;
 import com.fallframework.platform.starter.mail.model.MailSenderConfigRequest;
+import com.wordplay.platform.console.model.MailSenderConfigReq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,18 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MailSenderConfigClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MailSenderConfigRequest request);
+	ResponseResult save(@RequestBody MailSenderConfigReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MailSenderConfigRequest request);
+	ResponseResult update(@RequestBody MailSenderConfigReq req);
 
 	@GetMapping("/get")
 	ResponseResult<MailSenderConfig> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MailSenderConfig>> list(@RequestBody MailSenderConfigRequest request);
+	ResponseResult<Page<MailSenderConfig>> list(@RequestBody MailSenderConfigReq req);
 
 }

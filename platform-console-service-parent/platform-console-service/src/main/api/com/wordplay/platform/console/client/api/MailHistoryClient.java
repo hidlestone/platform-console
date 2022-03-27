@@ -3,7 +3,7 @@ package com.wordplay.platform.console.client.api;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailHistory;
-import com.fallframework.platform.starter.mail.model.MailHistoryRequest;
+import com.wordplay.platform.console.model.MailHistoryReq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +23,6 @@ public interface MailHistoryClient {
 	ResponseResult<MailHistory> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MailHistory>> list(@RequestBody MailHistoryRequest request);
+	ResponseResult<Page<MailHistory>> list(@RequestBody MailHistoryReq req);
 
 }

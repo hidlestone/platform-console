@@ -6,6 +6,7 @@ import com.fallframework.platform.starter.mail.entity.MailTemplate;
 import com.fallframework.platform.starter.mail.model.MailTemplateRequest;
 import com.fallframework.platform.starter.mail.service.MailTemplateService;
 import com.wordplay.platform.console.client.api.MailTemplateClient;
+import com.wordplay.platform.console.model.MailTemplateReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -31,9 +32,9 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailTemplateRequest request) {
+	public ResponseResult save(@RequestBody MailTemplateReq req) {
 		MailTemplate mailTemplate = new MailTemplate();
-		BeanUtils.copyProperties(request, mailTemplate);
+		BeanUtils.copyProperties(req, mailTemplate);
 		mailTemplateService.save(mailTemplate);
 		return ResponseResult.success();
 	}
@@ -49,9 +50,9 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailTemplateRequest request) {
+	public ResponseResult update(@RequestBody MailTemplateReq req) {
 		MailTemplate mailTemplate = new MailTemplate();
-		BeanUtils.copyProperties(request, mailTemplate);
+		BeanUtils.copyProperties(req, mailTemplate);
 		mailTemplateService.update(mailTemplate);
 		return ResponseResult.success();
 	}
@@ -67,8 +68,10 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateRequest request) {
+	public ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateReq req) {
+		MailTemplateRequest request = new MailTemplateRequest();
+		BeanUtils.copyProperties(req, request);
 		return mailTemplateService.list(request);
 	}
-	
+
 }
