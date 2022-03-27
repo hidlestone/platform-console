@@ -188,8 +188,8 @@ server:
 platform:
   console:
     service:
-      name: "platform-console-service-"
-      version: "payn"
+      name: platform-console-service-
+      version: payn
 
 spring:
   application:
