@@ -3,6 +3,7 @@ package com.wordplay.platform.console;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * @author zhuangpf
  */
+@EnableDiscoveryClient
 @EnableFeignClients(
 		basePackages = {"com.wordplay.platform.console.client.api"}
 )
@@ -20,8 +22,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 		"com.fallframework.platform.starter.sms.mapper",
 		"com.fallframework.platform.starter.file.mapper",
 		"com.fallframework.platform.starter.mq.mapper",
-//		"com.fallframework.platform.starter.task.quartz.mapper",
-//		"com.fallframework.platform.starter.task.xxljob.mapper",
 		"com.fallframework.platform.starter.rbac.mapper",
 })
 @SpringBootApplication

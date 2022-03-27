@@ -18,6 +18,7 @@
 	</scm>
 
 	<dependencies>
+		<!-- 基础模块START -->
 		<dependency>
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-config</artifactId>
@@ -45,6 +46,16 @@
 		<dependency>
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-sms</artifactId>
+		</dependency>
+		<!-- 基础模块END -->
+		<!-- nacos注册中心客户端 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 	</dependencies>
 
