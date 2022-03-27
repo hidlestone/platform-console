@@ -48,6 +48,10 @@
 			<artifactId>fall-platform-starter-sms</artifactId>
 		</dependency>
 		<!-- 基础模块END -->
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-shiro</artifactId>
+		</dependency>
 		<!-- nacos注册中心客户端 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
