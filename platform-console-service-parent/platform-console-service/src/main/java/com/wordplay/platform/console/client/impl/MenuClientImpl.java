@@ -3,6 +3,7 @@ package com.wordplay.platform.console.client.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
+import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
 import com.fallframework.platform.starter.rbac.model.MenuRequest;
 import com.fallframework.platform.starter.rbac.service.MenuService;
 import com.wordplay.platform.console.client.api.MenuClient;
@@ -65,10 +66,24 @@ public class MenuClientImpl implements MenuClient {
 	}
 
 	@Override
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation(value = "分页查询菜单")
 	public ResponseResult<Page<Menu>> list(@RequestBody MenuRequest request) {
 		return menuService.list(request);
 	}
-	
+
+	@Override
+	@PostMapping("/getmenusbyuserid")
+	@ApiOperation(value = "根据用户ID查询菜单")
+	public ResponseResult<Page<Menu>> getMenusByUserId(MenuQueryRequest request) {
+		return menuService.getMenusByUserId(request);
+	}
+
+	@Override
+	@PostMapping("/getmenusbyroleids")
+	@ApiOperation(value = "根据角色ID查询菜单")
+	public ResponseResult<Page<Menu>> getMenusByRoleIds(MenuQueryRequest request) {
+		return menuService.getMenusByRoleIds(request);
+	}
+
 }

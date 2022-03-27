@@ -3,6 +3,7 @@ package com.wordplay.platform.console.client.api;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
+import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
 import com.fallframework.platform.starter.rbac.model.MenuRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,4 +34,10 @@ public interface MenuClient {
 	@PostMapping("/list")
 	ResponseResult<Page<Menu>> list(@RequestBody MenuRequest request);
 
+	@PostMapping("/getmenusbyuserid")
+	ResponseResult<Page<Menu>> getMenusByUserId(@RequestBody MenuQueryRequest request);
+
+	@PostMapping("/getmenusbyroleids")
+	ResponseResult<Page<Menu>> getMenusByRoleIds(@RequestBody MenuQueryRequest request);
+	
 }
