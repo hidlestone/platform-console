@@ -6,8 +6,8 @@ platform-console
 ```
 platform-console
     platform-console-control-parent         操作台control父工程
-        platform-control-console            操作台control。PC端
-        platform-control-{app}-control      操作台control。APP端
+        platform-control-console            操作台control-PC端
+        platform-control-{app}-control      操作台control-APP端
     platform-console-service-parent         操作台service父工程
         platform-console-api                对外的API包
         platform-console-service            操作台service
