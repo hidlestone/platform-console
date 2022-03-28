@@ -1,13 +1,18 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mq.entity.MqTraceLog;
 import com.fallframework.platform.starter.mq.model.MqTraceLogRequest;
 import com.fallframework.platform.starter.mq.service.MqTraceLogService;
 import com.wordplay.platform.console.client.api.MqTraceLogClient;
+import com.wordplay.platform.console.model.request.MqTraceLogReq;
+import com.wordplay.platform.console.model.response.MqTraceLogResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,15 +42,22 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询MQ轨迹日志")
-	public ResponseResult<MqTraceLog> get(Long id) {
+	public ResponseResult<MqTraceLogResponse> get(Long id) {
 		MqTraceLog mqTraceLog = mqTraceLogService.getById(id);
-		return ResponseResult.success(mqTraceLog);
+		MqTraceLogResponse response = new MqTraceLogResponse();
+		BeanUtils.copyProperties(mqTraceLog, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询MQ轨迹日志")
-	public ResponseResult<Page<MqTraceLog>> list(MqTraceLogRequest request) {
-		return mqTraceLogService.list(request);
+	public ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogReq req) {
+		MqTraceLogRequest request = new MqTraceLogRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<MqTraceLog> page = mqTraceLogService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MqTraceLogResponse.class);
+		return ResponseResult.success(leaf);
 	}
+
 }

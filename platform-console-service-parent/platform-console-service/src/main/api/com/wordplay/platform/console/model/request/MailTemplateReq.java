@@ -1,4 +1,4 @@
-package com.wordplay.platform.console.model;
+package com.wordplay.platform.console.model.request;
 
 import com.fallframework.platform.starter.api.request.BasePageRequest;
 import io.swagger.annotations.ApiModel;
@@ -11,30 +11,30 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel(value = "邮件模板请求参数")
+@ApiModel("邮件模板请求参数")
 public class MailTemplateReq extends BasePageRequest {
 
 	private static final long serialVersionUID = -734434411782269463L;
 
-	@ApiModelProperty(value = "邮件模板配置编码")
+	@ApiModelProperty("邮件模板配置编码")
 	private String code;
 
-	@ApiModelProperty(value = "邮件模板配置描述")
+	@ApiModelProperty("邮件模板配置描述")
 	private String desc;
 
-	@ApiModelProperty(value = "标题")
+	@ApiModelProperty("标题")
 	private String title;
 
-	@ApiModelProperty(value = "发送者")
+	@ApiModelProperty("发送者")
 	private String from;
 
-	@ApiModelProperty(value = "内容")
+	@ApiModelProperty("内容")
 	private String content;
 
-	@ApiModelProperty(value = "文件组ID")
+	@ApiModelProperty("文件组ID")
 	private Long fileGroupId;
 
-	@ApiModelProperty(value = "重试次数")
+	@ApiModelProperty("重试次数")
 	private Byte retryCount;
 
 }

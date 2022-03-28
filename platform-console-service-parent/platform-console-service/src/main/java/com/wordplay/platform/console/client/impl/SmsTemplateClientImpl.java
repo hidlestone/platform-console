@@ -2,11 +2,15 @@ package com.wordplay.platform.console.client.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.sms.entity.SmsTemplate;
 import com.fallframework.platform.starter.sms.model.SmsTemplateReqeust;
 import com.fallframework.platform.starter.sms.service.SmsTemplateService;
 import com.wordplay.platform.console.client.api.SmsTemplateClient;
+import com.wordplay.platform.console.model.request.SmsTemplateReq;
+import com.wordplay.platform.console.model.response.SmsTemplateResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -34,9 +38,9 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信模板")
-	public ResponseResult save(@RequestBody SmsTemplateReqeust request) {
+	public ResponseResult save(@RequestBody SmsTemplateReq req) {
 		SmsTemplate smsTemplate = new SmsTemplate();
-		BeanUtils.copyProperties(request, smsTemplate);
+		BeanUtils.copyProperties(req, smsTemplate);
 		smsTemplateService.save(smsTemplate);
 		return ResponseResult.success();
 	}
@@ -44,8 +48,8 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信模板")
-	public ResponseResult saveBatch(@RequestBody List<SmsTemplateReqeust> smsTemplateReqeustList) {
-		List<SmsTemplate> smsTemplateList = JSON.parseArray(JSON.toJSONString(smsTemplateReqeustList), SmsTemplate.class);
+	public ResponseResult saveBatch(@RequestBody List<SmsTemplateReq> reqList) {
+		List<SmsTemplate> smsTemplateList = JSON.parseArray(JSON.toJSONString(reqList), SmsTemplate.class);
 		smsTemplateService.saveBatch(smsTemplateList);
 		return ResponseResult.success();
 	}
@@ -61,9 +65,9 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信模板")
-	public ResponseResult update(@RequestBody SmsTemplateReqeust request) {
+	public ResponseResult update(@RequestBody SmsTemplateReq req) {
 		SmsTemplate smsTemplate = new SmsTemplate();
-		BeanUtils.copyProperties(request, smsTemplate);
+		BeanUtils.copyProperties(req, smsTemplate);
 		smsTemplateService.updateById(smsTemplate);
 		return ResponseResult.success();
 	}
@@ -71,16 +75,22 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询短信模板")
-	public ResponseResult<SmsTemplate> get(@RequestParam Long id) {
+	public ResponseResult<SmsTemplateResponse> get(@RequestParam Long id) {
 		SmsTemplate smsTemplate = smsTemplateService.getById(id);
-		return ResponseResult.success(smsTemplate);
+		SmsTemplateResponse response = new SmsTemplateResponse();
+		BeanUtils.copyProperties(smsTemplate, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@GetMapping("/list")
 	@ApiOperation(value = "分页查询短信模板")
-	public ResponseResult<Page<SmsTemplate>> list(@RequestBody SmsTemplateReqeust request) {
-		return smsTemplateService.list(request);
+	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req) {
+		SmsTemplateReqeust reqeust = new SmsTemplateReqeust();
+		BeanUtils.copyProperties(req, reqeust);
+		Page<SmsTemplate> page = smsTemplateService.list(reqeust).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, SmsTemplateResponse.class);
+		return ResponseResult.success(leaf);
 	}
-	
+
 }

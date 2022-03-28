@@ -1,12 +1,15 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailHistory;
 import com.fallframework.platform.starter.mail.model.MailHistoryRequest;
 import com.fallframework.platform.starter.mail.service.MailHistoryService;
 import com.wordplay.platform.console.client.api.MailHistoryClient;
-import com.wordplay.platform.console.model.MailHistoryReq;
+import com.wordplay.platform.console.model.request.MailHistoryReq;
+import com.wordplay.platform.console.model.response.MailHistoryResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -38,18 +41,22 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询邮件历史")
-	public ResponseResult<MailHistory> get(Long id) {
+	public ResponseResult<MailHistoryResponse> get(Long id) {
 		MailHistory mailHistory = mailHistoryService.getById(id);
-		return ResponseResult.success(mailHistory);
+		MailHistoryResponse response = new MailHistoryResponse();
+		BeanUtils.copyProperties(mailHistory, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件历史")
-	public ResponseResult<Page<MailHistory>> list(MailHistoryReq req) {
+	public ResponseResult<Leaf<MailHistoryResponse>> list(MailHistoryReq req) {
 		MailHistoryRequest request = new MailHistoryRequest();
 		BeanUtils.copyProperties(req, request);
-		return mailHistoryService.list(request);
+		Page<MailHistory> page = mailHistoryService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailHistoryResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

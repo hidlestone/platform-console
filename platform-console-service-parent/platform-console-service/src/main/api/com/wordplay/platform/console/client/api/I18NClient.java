@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.i18n.entity.I18nResource;
-import com.wordplay.platform.console.model.I18nResourceReq;
+import com.wordplay.platform.console.model.request.I18nResourceReq;
+import com.wordplay.platform.console.model.response.I18nResourceResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +33,12 @@ public interface I18NClient {
 	ResponseResult update(@RequestBody I18nResourceReq req);
 
 	@GetMapping("/get")
-	ResponseResult<I18nResource> get(@RequestParam Long id);
+	ResponseResult<I18nResourceResponse> get(@RequestParam Long id);
 
 	@GetMapping("/getbyresourcekey")
-	ResponseResult<List<I18nResource>> getByResourceKey(@RequestParam String resourceKey);
+	ResponseResult<List<I18nResourceResponse>> getByResourceKey(@RequestParam String resourceKey);
 
 	@PostMapping("/list")
-	ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceReq req);
+	ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceReq req);
 
 }

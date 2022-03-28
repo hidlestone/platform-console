@@ -1,10 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.mail.entity.MailTemplate;
-import com.fallframework.platform.starter.mail.model.MailTemplateRequest;
-import com.wordplay.platform.console.model.MailTemplateReq;
+import com.wordplay.platform.console.model.request.MailTemplateReq;
+import com.wordplay.platform.console.model.response.MailTemplateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +28,9 @@ public interface MailTemplateClient {
 	ResponseResult update(@RequestBody MailTemplateReq req);
 
 	@GetMapping("/get")
-	ResponseResult<MailTemplate> get(@RequestParam Long id);
+	ResponseResult<MailTemplateResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateReq req);
+	ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateReq req);
 
 }

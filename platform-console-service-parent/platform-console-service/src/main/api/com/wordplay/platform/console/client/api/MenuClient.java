@@ -1,10 +1,10 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.rbac.entity.Menu;
-import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
-import com.fallframework.platform.starter.rbac.model.MenuRequest;
+import com.wordplay.platform.console.model.request.MenuQueryReq;
+import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.response.MenuResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,24 +20,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MenuClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MenuRequest request);
+	ResponseResult save(@RequestBody MenuReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MenuRequest request);
+	ResponseResult update(@RequestBody MenuReq req);
 
 	@GetMapping("/get")
-	ResponseResult<Menu> get(@RequestParam Long id);
+	ResponseResult<MenuResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<Menu>> list(@RequestBody MenuRequest request);
+	ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuReq req);
 
 	@PostMapping("/getmenusbyuserid")
-	ResponseResult<Page<Menu>> getMenusByUserId(@RequestBody MenuQueryRequest request);
+	ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req);
 
 	@PostMapping("/getmenusbyroleids")
-	ResponseResult<Page<Menu>> getMenusByRoleIds(@RequestBody MenuQueryRequest request);
-	
+	ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req);
+
 }

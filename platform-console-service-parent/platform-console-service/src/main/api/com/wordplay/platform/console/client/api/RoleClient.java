@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.rbac.entity.Role;
-import com.fallframework.platform.starter.rbac.model.RoleRequest;
+import com.wordplay.platform.console.model.request.RoleReq;
+import com.wordplay.platform.console.model.response.RoleResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,21 +21,21 @@ import java.util.List;
 public interface RoleClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody RoleRequest request);
+	ResponseResult save(@RequestBody RoleReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody RoleRequest request);
+	ResponseResult update(@RequestBody RoleReq req);
 
 	@GetMapping("/get")
-	ResponseResult<Role> get(@RequestParam Long id);
+	ResponseResult<RoleResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<Role>> list(@RequestBody RoleRequest request);
+	ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req);
 
 	@GetMapping("/getrolesbyuserid")
-	List<Role> getRolesByUserId(@RequestParam Long userId);
-	
+	ResponseResult getRolesByUserId(@RequestParam Long userId);
+
 }

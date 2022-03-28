@@ -1,15 +1,14 @@
 package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.AccountPwdLoginRequest;
-import com.wordplay.platform.console.model.LoginSuccessResponse;
-import com.wordplay.platform.console.model.QRCodeLoginRequest;
-import com.wordplay.platform.console.model.VerificationCodeLoginRequest;
+import com.wordplay.platform.console.model.request.AccountPwdLoginRequest;
+import com.wordplay.platform.console.model.request.QRCodeLoginRequest;
+import com.wordplay.platform.console.model.request.VerificationCodeLoginRequest;
+import com.wordplay.platform.console.model.response.LoginSuccessResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户登录
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public interface LoginClient {
 
 	@PostMapping("/loginbyaccount")
-	ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginRequest request, HttpServletResponse response);
+	ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginRequest request);
 
 	@PostMapping("/loginbyverificationcode")
 	ResponseResult loginByVerificationCode(@RequestBody VerificationCodeLoginRequest request);

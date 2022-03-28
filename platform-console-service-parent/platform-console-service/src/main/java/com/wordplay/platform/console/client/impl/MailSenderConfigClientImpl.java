@@ -1,12 +1,15 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailSenderConfig;
 import com.fallframework.platform.starter.mail.model.MailSenderConfigRequest;
 import com.fallframework.platform.starter.mail.service.MailSenderConfigService;
 import com.wordplay.platform.console.client.api.MailSenderConfigClient;
-import com.wordplay.platform.console.model.MailSenderConfigReq;
+import com.wordplay.platform.console.model.request.MailSenderConfigReq;
+import com.wordplay.platform.console.model.response.MailSenderConfigResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -60,18 +63,22 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询邮件发送配置")
-	public ResponseResult<MailSenderConfig> get(@RequestParam Long id) {
+	public ResponseResult<MailSenderConfigResponse> get(@RequestParam Long id) {
 		MailSenderConfig mailSenderConfig = mailSenderConfigService.getById(id);
-		return ResponseResult.success(mailSenderConfig);
+		MailSenderConfigResponse response = new MailSenderConfigResponse();
+		BeanUtils.copyProperties(mailSenderConfig, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Page<MailSenderConfig>> list(MailSenderConfigReq req) {
+	public ResponseResult<Leaf<MailSenderConfigResponse>> list(MailSenderConfigReq req) {
 		MailSenderConfigRequest request = new MailSenderConfigRequest();
 		BeanUtils.copyProperties(req, request);
-		return mailSenderConfigService.list(request);
+		Page<MailSenderConfig> page = mailSenderConfigService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailSenderConfigResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

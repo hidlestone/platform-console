@@ -1,13 +1,18 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.User;
 import com.fallframework.platform.starter.rbac.model.UserQueryRequest;
 import com.fallframework.platform.starter.rbac.service.UserService;
 import com.wordplay.platform.console.client.api.UserClient;
+import com.wordplay.platform.console.model.request.UserQueryReq;
+import com.wordplay.platform.console.model.response.UserResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,16 +33,22 @@ public class UserClientImpl implements UserClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询用户")
-	public ResponseResult<User> get(Long id) {
+	public ResponseResult<UserResponse> get(Long id) {
 		User user = userService.getById(id);
-		return ResponseResult.success(user);
+		UserResponse response = new UserResponse();
+		BeanUtils.copyProperties(user, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询用户")
-	public ResponseResult<Page<User>> list(UserQueryRequest request) {
-		return userService.list(request);
+	public ResponseResult<Leaf<UserResponse>> list(UserQueryReq req) {
+		UserQueryRequest request = new UserQueryRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<User> page = userService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, UserResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

@@ -1,11 +1,15 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Permission;
 import com.fallframework.platform.starter.rbac.model.PermissionRequest;
 import com.fallframework.platform.starter.rbac.service.PermissionService;
 import com.wordplay.platform.console.client.api.PermissionClient;
+import com.wordplay.platform.console.model.request.PermissionReq;
+import com.wordplay.platform.console.model.response.PermissionResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +34,7 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存接口权限")
-	public ResponseResult save(@RequestBody PermissionRequest request) {
+	public ResponseResult save(@RequestBody PermissionReq request) {
 		Permission permission = new Permission();
 		BeanUtils.copyProperties(request, permission);
 		permissionService.save(permission);
@@ -48,7 +52,7 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改接口权限")
-	public ResponseResult update(@RequestBody PermissionRequest request) {
+	public ResponseResult update(@RequestBody PermissionReq request) {
 		Permission permission = new Permission();
 		BeanUtils.copyProperties(request, permission);
 		permissionService.updateById(permission);
@@ -58,16 +62,22 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询接口权限")
-	public ResponseResult<Permission> get(Long id) {
+	public ResponseResult<PermissionResponse> get(Long id) {
 		Permission permission = permissionService.getById(id);
-		return ResponseResult.success(permission);
+		PermissionResponse response = new PermissionResponse();
+		BeanUtils.copyProperties(permission, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询接口权限")
-	public ResponseResult<Page<Permission>> list(@RequestBody PermissionRequest request) {
-		return permissionService.list(request);
+	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req) {
+		PermissionRequest request = new PermissionRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<Permission> page = permissionService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, PermissionResponse.class);
+		return ResponseResult.success(leaf);
 	}
-	
+
 }

@@ -3,16 +3,18 @@ package com.wordplay.platform.console.client.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.file.entity.FileGroup;
 import com.fallframework.platform.starter.file.entity.FileInfo;
 import com.fallframework.platform.starter.file.model.FileGroupRequest;
-import com.fallframework.platform.starter.file.model.FileGroupResponse;
-import com.fallframework.platform.starter.file.model.FileInfoResponse;
 import com.fallframework.platform.starter.file.service.FileGroupService;
 import com.fallframework.platform.starter.file.service.FileInfoService;
 import com.wordplay.platform.console.client.api.FileGroupClient;
-import com.wordplay.platform.console.model.FileGroupReq;
+import com.wordplay.platform.console.model.request.FileGroupReq;
+import com.wordplay.platform.console.model.response.FileGroupResp;
+import com.wordplay.platform.console.model.response.FileInfoResp;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -50,25 +52,27 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/get")
 	@ApiOperation(value = "查询文件组及明细")
-	public ResponseResult<FileGroupResponse> get(Long id) {
+	public ResponseResult<FileGroupResp> get(Long id) {
 		FileGroup fileGroup = fileGroupService.getById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
 		wrapper.eq("file_group_id", id);
 		List<FileInfo> fileInfoList = fileInfoService.list(wrapper);
-		FileGroupResponse fileGroupResponse = new FileGroupResponse();
-		BeanUtils.copyProperties(fileGroup, fileGroupResponse);
-		List<FileInfoResponse> fileInfoResponseList = JSON.parseArray(JSON.toJSONString(fileInfoList), FileInfoResponse.class);
-		fileGroupResponse.setFileInfoResponseList(fileInfoResponseList);
-		return ResponseResult.success(fileGroupResponse);
+		FileGroupResp fileGroupResp = new FileGroupResp();
+		BeanUtils.copyProperties(fileGroup, fileGroupResp);
+		List<FileInfoResp> fileInfoRespList = JSON.parseArray(JSON.toJSONString(fileInfoList), FileInfoResp.class);
+		fileGroupResp.setFileInfoResponseList(fileInfoRespList);
+		return ResponseResult.success(fileGroupResp);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Page<FileGroup>> list(FileGroupReq req) {
+	public ResponseResult<Leaf<FileGroupResp>> list(FileGroupReq req) {
 		FileGroupRequest fileGroupRequest = new FileGroupRequest();
 		BeanUtils.copyProperties(req, fileGroupRequest);
-		return fileGroupService.list(fileGroupRequest);
+		Page<FileGroup> page = fileGroupService.list(fileGroupRequest).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, FileGroupResp.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

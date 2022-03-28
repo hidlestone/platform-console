@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.sms.entity.SmsTemplate;
-import com.fallframework.platform.starter.sms.model.SmsTemplateReqeust;
+import com.wordplay.platform.console.model.request.SmsTemplateReq;
+import com.wordplay.platform.console.model.response.SmsTemplateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,21 +21,21 @@ import java.util.List;
 public interface SmsTemplateClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody SmsTemplateReqeust request);
+	ResponseResult save(@RequestBody SmsTemplateReq req);
 
 	@PostMapping("/savebatch")
-	ResponseResult saveBatch(@RequestBody List<SmsTemplateReqeust> smsTemplateReqeustList);
+	ResponseResult saveBatch(@RequestBody List<SmsTemplateReq> reqList);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody SmsTemplateReqeust request);
+	ResponseResult update(@RequestBody SmsTemplateReq req);
 
 	@GetMapping("/get")
-	ResponseResult<SmsTemplate> get(@RequestParam Long id);
+	ResponseResult<SmsTemplateResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<SmsTemplate>> list(@RequestBody SmsTemplateReqeust request);
+	ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req);
 
 }

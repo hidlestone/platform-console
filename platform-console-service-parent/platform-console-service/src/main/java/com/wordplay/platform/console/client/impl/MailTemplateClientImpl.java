@@ -1,12 +1,15 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailTemplate;
 import com.fallframework.platform.starter.mail.model.MailTemplateRequest;
 import com.fallframework.platform.starter.mail.service.MailTemplateService;
 import com.wordplay.platform.console.client.api.MailTemplateClient;
-import com.wordplay.platform.console.model.MailTemplateReq;
+import com.wordplay.platform.console.model.request.MailTemplateReq;
+import com.wordplay.platform.console.model.response.MailTemplateResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -60,18 +63,22 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询邮件发送配置")
-	public ResponseResult<MailTemplate> get(@RequestParam Long id) {
+	public ResponseResult<MailTemplateResponse> get(@RequestParam Long id) {
 		MailTemplate mailTemplate = mailTemplateService.getById(id);
-		return ResponseResult.success(mailTemplate);
+		MailTemplateResponse response = new MailTemplateResponse();
+		BeanUtils.copyProperties(mailTemplate, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Page<MailTemplate>> list(@RequestBody MailTemplateReq req) {
+	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateReq req) {
 		MailTemplateRequest request = new MailTemplateRequest();
 		BeanUtils.copyProperties(req, request);
-		return mailTemplateService.list(request);
+		Page<MailTemplate> page = mailTemplateService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailTemplateResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

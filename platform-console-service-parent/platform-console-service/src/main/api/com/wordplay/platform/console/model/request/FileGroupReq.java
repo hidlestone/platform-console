@@ -1,4 +1,4 @@
-package com.wordplay.platform.console.model;
+package com.wordplay.platform.console.model.request;
 
 import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.request.BasePageRequest;
@@ -14,21 +14,21 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ApiModel(value = "文件组请求参数")
+@ApiModel("文件组请求参数")
 public class FileGroupReq extends BasePageRequest {
 
 	private static final long serialVersionUID = -2465784424791444246L;
 
-	@ApiModelProperty(value = "主键")
+	@ApiModelProperty("主键")
 	private Long id;
 
-	@ApiModelProperty(value = "描述")
+	@ApiModelProperty("描述")
 	private String desc;
 
-	@ApiModelProperty(value = "文件组状态")
+	@ApiModelProperty("文件组状态")
 	private StatusEnum status;
 
-	@ApiModelProperty(value = "文件明细项请求参数")
+	@ApiModelProperty("文件明细项请求参数")
 	private List<FileInfoReq> fileInfoList;
 
 }

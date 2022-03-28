@@ -1,13 +1,18 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.sms.entity.SmsHistory;
 import com.fallframework.platform.starter.sms.model.SmsHistoryRequest;
 import com.fallframework.platform.starter.sms.service.SmsHistoryService;
 import com.wordplay.platform.console.client.api.SmsHistoryClient;
+import com.wordplay.platform.console.model.request.SmsHistoryReq;
+import com.wordplay.platform.console.model.response.SmsHistoryResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,17 +43,21 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询短信历史")
-	public ResponseResult<SmsHistory> get(@RequestParam Long id) {
-		smsHistoryService.getById(id);
-		return ResponseResult.success();
+	public ResponseResult<SmsHistoryResponse> get(@RequestParam Long id) {
+		SmsHistory smsHistory = smsHistoryService.getById(id);
+		SmsHistoryResponse response = new SmsHistoryResponse();
+		BeanUtils.copyProperties(smsHistory, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@GetMapping("/list")
 	@ApiOperation(value = "分页查询短信历史")
-	public ResponseResult<Page<SmsHistory>> list(@RequestBody SmsHistoryRequest request) {
-		smsHistoryService.list(request);
-		return ResponseResult.success();
+	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req) {
+		SmsHistoryRequest request = new SmsHistoryRequest();
+		Page<SmsHistory> page = smsHistoryService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, SmsHistoryResponse.class);
+		return ResponseResult.success(leaf);
 	}
-	
+
 }

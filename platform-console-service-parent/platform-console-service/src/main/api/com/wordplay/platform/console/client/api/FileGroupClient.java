@@ -1,10 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.file.entity.FileGroup;
-import com.fallframework.platform.starter.file.model.FileGroupResponse;
-import com.wordplay.platform.console.model.FileGroupReq;
+import com.wordplay.platform.console.model.request.FileGroupReq;
+import com.wordplay.platform.console.model.response.FileGroupResp;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +22,9 @@ public interface FileGroupClient {
 	ResponseResult delete(@RequestParam Long id);
 
 	@GetMapping("/get")
-	ResponseResult<FileGroupResponse> get(@RequestParam Long id);
+	ResponseResult<FileGroupResp> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<FileGroup>> list(@RequestBody FileGroupReq req);
+	ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupReq req);
 
 }

@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.rbac.entity.Permission;
-import com.fallframework.platform.starter.rbac.model.PermissionRequest;
+import com.wordplay.platform.console.model.request.PermissionReq;
+import com.wordplay.platform.console.model.response.PermissionResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PermissionClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody PermissionRequest request);
+	ResponseResult save(@RequestBody PermissionReq request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody PermissionRequest request);
+	ResponseResult update(@RequestBody PermissionReq request);
 
 	@GetMapping("/get")
-	ResponseResult<Permission> get(@RequestParam Long id);
+	ResponseResult<PermissionResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<Permission>> list(@RequestBody PermissionRequest request);
+	ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req);
 
 }

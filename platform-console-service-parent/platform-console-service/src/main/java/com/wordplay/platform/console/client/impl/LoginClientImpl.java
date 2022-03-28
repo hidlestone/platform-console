@@ -8,10 +8,10 @@ import com.fallframework.platform.starter.rbac.model.TokenTypeEnum;
 import com.fallframework.platform.starter.shiro.constant.ShiroStarterConstant;
 import com.fallframework.platform.starter.shiro.util.JWTUtil;
 import com.wordplay.platform.console.client.api.LoginClient;
-import com.wordplay.platform.console.model.AccountPwdLoginRequest;
-import com.wordplay.platform.console.model.LoginSuccessResponse;
-import com.wordplay.platform.console.model.QRCodeLoginRequest;
-import com.wordplay.platform.console.model.VerificationCodeLoginRequest;
+import com.wordplay.platform.console.model.request.AccountPwdLoginRequest;
+import com.wordplay.platform.console.model.request.QRCodeLoginRequest;
+import com.wordplay.platform.console.model.request.VerificationCodeLoginRequest;
+import com.wordplay.platform.console.model.response.LoginSuccessResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author zhuangpf
@@ -44,7 +42,7 @@ public class LoginClientImpl implements LoginClient {
 	@Override
 	@PostMapping("/loginbyaccount")
 	@ApiOperation(value = "账号密码登录")
-	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginRequest request, HttpServletResponse response) {
+	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginRequest request) {
 		if ((StringUtils.isBlank(request.getAccount()) && StringUtils.isBlank(request.getTel()))
 				|| StringUtils.isBlank(request.getPassword())) {
 			return ResponseResult.fail("账号密码不能为空");
@@ -71,8 +69,8 @@ public class LoginClientImpl implements LoginClient {
 		resp.setAccesstoken(accesstoken);
 		resp.setRefreshtoken(refreshtoken);
 		// 在返回的请求头中设置token信息
-		response.setHeader("accesstoken", accesstoken);
-		response.setHeader("refreshtoken", refreshtoken);
+//		response.setHeader("accesstoken", accesstoken);
+//		response.setHeader("refreshtoken", refreshtoken);
 		return ResponseResult.success(resp);
 	}
 

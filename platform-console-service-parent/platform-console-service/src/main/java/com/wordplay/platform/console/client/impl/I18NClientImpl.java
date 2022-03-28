@@ -2,12 +2,15 @@ package com.wordplay.platform.console.client.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.i18n.entity.I18nResource;
 import com.fallframework.platform.starter.i18n.model.I18nResourceRequest;
 import com.fallframework.platform.starter.i18n.service.I18nResourceService;
 import com.wordplay.platform.console.client.api.I18NClient;
-import com.wordplay.platform.console.model.I18nResourceReq;
+import com.wordplay.platform.console.model.request.I18nResourceReq;
+import com.wordplay.platform.console.model.response.I18nResourceResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -73,25 +76,31 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "ID查询I8N词条")
-	public ResponseResult<I18nResource> get(@RequestParam Long id) {
+	public ResponseResult<I18nResourceResponse> get(@RequestParam Long id) {
 		I18nResource i18nResource = i18nResourceService.getById(id);
-		return ResponseResult.success(i18nResource);
+		I18nResourceResponse response = new I18nResourceResponse();
+		BeanUtils.copyProperties(i18nResource, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@GetMapping("/getbyresourcekey")
 	@ApiOperation(value = "resourceKey查询I8N词条")
-	public ResponseResult<List<I18nResource>> getByResourceKey(@RequestParam String resourceKey) {
-		return i18nResourceService.getByResourceKey(resourceKey);
+	public ResponseResult<List<I18nResourceResponse>> getByResourceKey(@RequestParam String resourceKey) {
+		List<I18nResource> i18nResourceList = i18nResourceService.getByResourceKey(resourceKey).getData();
+		List<I18nResourceResponse> respList = JSON.parseArray(JSON.toJSONString(i18nResourceList), I18nResourceResponse.class);
+		return ResponseResult.success(respList);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询I8N词条")
-	public ResponseResult<Page<I18nResource>> list(@RequestBody I18nResourceReq req) {
+	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceReq req) {
 		I18nResourceRequest request = new I18nResourceRequest();
 		BeanUtils.copyProperties(req, request);
-		return i18nResourceService.list(request);
+		Page<I18nResource> page = i18nResourceService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, I18nResourceResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

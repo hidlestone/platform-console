@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.sms.entity.SmsHistory;
-import com.fallframework.platform.starter.sms.model.SmsHistoryRequest;
+import com.wordplay.platform.console.model.request.SmsHistoryReq;
+import com.wordplay.platform.console.model.response.SmsHistoryResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +22,9 @@ public interface SmsHistoryClient {
 	ResponseResult delete(@RequestParam Long id);
 
 	@GetMapping("/get")
-	ResponseResult<SmsHistory> get(@RequestParam Long id);
+	ResponseResult<SmsHistoryResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<SmsHistory>> list(@RequestBody SmsHistoryRequest request);
+	ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req);
 
 }

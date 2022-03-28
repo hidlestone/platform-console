@@ -1,9 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.mq.entity.MqTraceLog;
-import com.fallframework.platform.starter.mq.model.MqTraceLogRequest;
+import com.wordplay.platform.console.model.request.MqTraceLogReq;
+import com.wordplay.platform.console.model.response.MqTraceLogResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +19,9 @@ public interface MqTraceLogClient {
 	ResponseResult delete(@RequestParam Long id);
 
 	@GetMapping("/get")
-	ResponseResult<MqTraceLog> get(@RequestParam Long id);
+	ResponseResult<MqTraceLogResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MqTraceLog>> list(MqTraceLogRequest request);
+	ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogReq req);
 
 }

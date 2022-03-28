@@ -1,12 +1,17 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
 import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
 import com.fallframework.platform.starter.rbac.model.MenuRequest;
 import com.fallframework.platform.starter.rbac.service.MenuService;
 import com.wordplay.platform.console.client.api.MenuClient;
+import com.wordplay.platform.console.model.request.MenuQueryReq;
+import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.response.MenuResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -32,9 +37,9 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存菜单")
-	public ResponseResult save(@RequestBody MenuRequest request) {
+	public ResponseResult save(@RequestBody MenuReq req) {
 		Menu menu = new Menu();
-		BeanUtils.copyProperties(request, menu);
+		BeanUtils.copyProperties(req, menu);
 		menuService.save(menu);
 		return ResponseResult.success();
 	}
@@ -50,9 +55,9 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改菜单")
-	public ResponseResult update(@RequestBody MenuRequest request) {
+	public ResponseResult update(@RequestBody MenuReq req) {
 		Menu menu = new Menu();
-		BeanUtils.copyProperties(request, menu);
+		BeanUtils.copyProperties(req, menu);
 		menuService.updateById(menu);
 		return ResponseResult.success();
 	}
@@ -60,30 +65,44 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询菜单")
-	public ResponseResult<Menu> get(@RequestParam Long id) {
+	public ResponseResult<MenuResponse> get(@RequestParam Long id) {
 		Menu menu = menuService.getById(id);
-		return ResponseResult.success(menu);
+		MenuResponse response = new MenuResponse();
+		BeanUtils.copyProperties(menu, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询菜单")
-	public ResponseResult<Page<Menu>> list(@RequestBody MenuRequest request) {
-		return menuService.list(request);
+	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuReq req) {
+		MenuRequest request = new MenuRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<Menu> page = menuService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 	@Override
 	@PostMapping("/getmenusbyuserid")
 	@ApiOperation(value = "根据用户ID查询菜单")
-	public ResponseResult<Page<Menu>> getMenusByUserId(MenuQueryRequest request) {
-		return menuService.getMenusByUserId(request);
+	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(MenuQueryReq req) {
+		MenuQueryRequest request = new MenuQueryRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<Menu> page = menuService.getMenusByUserId(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 	@Override
 	@PostMapping("/getmenusbyroleids")
 	@ApiOperation(value = "根据角色ID查询菜单")
-	public ResponseResult<Page<Menu>> getMenusByRoleIds(MenuQueryRequest request) {
-		return menuService.getMenusByRoleIds(request);
+	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(MenuQueryReq req) {
+		MenuQueryRequest request = new MenuQueryRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<Menu> page = menuService.getMenusByRoleIds(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

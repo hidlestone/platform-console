@@ -2,11 +2,15 @@ package com.wordplay.platform.console.client.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.sms.entity.SmsConfig;
 import com.fallframework.platform.starter.sms.model.SmsConfigRequest;
 import com.fallframework.platform.starter.sms.service.SmsConfigService;
 import com.wordplay.platform.console.client.api.SmsConfigClient;
+import com.wordplay.platform.console.model.request.SmsConfigReq;
+import com.wordplay.platform.console.model.response.SmsConfigResponse;
+import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -34,9 +38,9 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信配置")
-	public ResponseResult save(@RequestBody SmsConfigRequest request) {
+	public ResponseResult save(@RequestBody SmsConfigReq req) {
 		SmsConfig smsConfig = new SmsConfig();
-		BeanUtils.copyProperties(request, smsConfig);
+		BeanUtils.copyProperties(req, smsConfig);
 		smsConfigService.save(smsConfig);
 		return ResponseResult.success();
 	}
@@ -44,8 +48,8 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信配置")
-	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> smsConfigRequestList) {
-		List<SmsConfig> smsConfigList = JSON.parseArray(JSON.toJSONString(smsConfigRequestList), SmsConfig.class);
+	public ResponseResult saveBatch(@RequestBody List<SmsConfigReq> reqList) {
+		List<SmsConfig> smsConfigList = JSON.parseArray(JSON.toJSONString(reqList), SmsConfig.class);
 		smsConfigService.saveBatch(smsConfigList);
 		return ResponseResult.success();
 	}
@@ -61,9 +65,9 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信配置")
-	public ResponseResult update(@RequestBody SmsConfigRequest request) {
+	public ResponseResult update(@RequestBody SmsConfigReq req) {
 		SmsConfig smsConfig = new SmsConfig();
-		BeanUtils.copyProperties(request, smsConfig);
+		BeanUtils.copyProperties(req, smsConfig);
 		smsConfigService.updateById(smsConfig);
 		return ResponseResult.success();
 	}
@@ -71,16 +75,22 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询短信配置")
-	public ResponseResult<SmsConfig> get(@RequestParam Long id) {
+	public ResponseResult<SmsConfigResponse> get(@RequestParam Long id) {
 		SmsConfig smsConfig = smsConfigService.getById(id);
-		return ResponseResult.success(smsConfig);
+		SmsConfigResponse response = new SmsConfigResponse();
+		BeanUtils.copyProperties(smsConfig, response);
+		return ResponseResult.success(response);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信配置")
-	public ResponseResult<Page<SmsConfig>> list(@RequestBody SmsConfigRequest request) {
-		return smsConfigService.list(request);
+	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigReq req) {
+		SmsConfigRequest request = new SmsConfigRequest();
+		BeanUtils.copyProperties(req, request);
+		Page<SmsConfig> page = smsConfigService.list(request).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, SmsConfigResponse.class);
+		return ResponseResult.success(leaf);
 	}
 
 }

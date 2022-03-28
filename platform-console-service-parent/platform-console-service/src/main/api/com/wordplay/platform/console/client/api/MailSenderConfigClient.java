@@ -1,10 +1,9 @@
 package com.wordplay.platform.console.client.api;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.mail.entity.MailSenderConfig;
-import com.fallframework.platform.starter.mail.model.MailSenderConfigRequest;
-import com.wordplay.platform.console.model.MailSenderConfigReq;
+import com.wordplay.platform.console.model.request.MailSenderConfigReq;
+import com.wordplay.platform.console.model.response.MailSenderConfigResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +28,9 @@ public interface MailSenderConfigClient {
 	ResponseResult update(@RequestBody MailSenderConfigReq req);
 
 	@GetMapping("/get")
-	ResponseResult<MailSenderConfig> get(@RequestParam Long id);
+	ResponseResult<MailSenderConfigResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Page<MailSenderConfig>> list(@RequestBody MailSenderConfigReq req);
+	ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req);
 
 }
