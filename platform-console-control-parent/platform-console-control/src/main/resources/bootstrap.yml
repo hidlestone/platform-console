@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: 
+    - payn                                # 本机标识，与spring.application.name可拼接成本机配置名称，例如platform-console-service-payn.yml
+  application:
+    name: platform-console-control        # 服务名称，必填
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+        - common.yml
+        namespace: platform-dev           # 命名空间，根据实例情况填写
+        server-addr: 127.0.0.1:8848       # nacos地址，根据实例情况填写
+        file-extension: yml
+        
+        
+        
+        
+        
+        
+        

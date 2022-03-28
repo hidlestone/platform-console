@@ -34,9 +34,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存接口权限")
-	public ResponseResult save(@RequestBody PermissionReq request) {
+	public ResponseResult save(@RequestBody PermissionReq req) {
 		Permission permission = new Permission();
-		BeanUtils.copyProperties(request, permission);
+		BeanUtils.copyProperties(req, permission);
 		permissionService.save(permission);
 		return ResponseResult.success();
 	}
@@ -52,9 +52,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改接口权限")
-	public ResponseResult update(@RequestBody PermissionReq request) {
+	public ResponseResult update(@RequestBody PermissionReq req) {
 		Permission permission = new Permission();
-		BeanUtils.copyProperties(request, permission);
+		BeanUtils.copyProperties(req, permission);
 		permissionService.updateById(permission);
 		return ResponseResult.success();
 	}

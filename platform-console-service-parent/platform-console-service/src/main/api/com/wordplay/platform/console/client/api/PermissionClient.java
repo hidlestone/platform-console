@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PermissionClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody PermissionReq request);
+	ResponseResult save(@RequestBody PermissionReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody PermissionReq request);
+	ResponseResult update(@RequestBody PermissionReq req);
 
 	@GetMapping("/get")
 	ResponseResult<PermissionResponse> get(@RequestParam Long id);

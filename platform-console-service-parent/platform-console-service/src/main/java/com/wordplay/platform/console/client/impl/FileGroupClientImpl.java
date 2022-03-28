@@ -20,7 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除文件组及明细")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		fileGroupService.removeById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
 		wrapper.eq("file_group_id", id);
@@ -52,7 +54,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/get")
 	@ApiOperation(value = "查询文件组及明细")
-	public ResponseResult<FileGroupResp> get(Long id) {
+	public ResponseResult<FileGroupResp> get(@RequestParam Long id) {
 		FileGroup fileGroup = fileGroupService.getById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
 		wrapper.eq("file_group_id", id);
@@ -67,7 +69,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Leaf<FileGroupResp>> list(FileGroupReq req) {
+	public ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupReq req) {
 		FileGroupRequest fileGroupRequest = new FileGroupRequest();
 		BeanUtils.copyProperties(req, fileGroupRequest);
 		Page<FileGroup> page = fileGroupService.list(fileGroupRequest).getData();

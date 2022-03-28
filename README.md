@@ -207,12 +207,27 @@ spring:
 ![pic](doc/images/nacos-01.png)    
 ![pic](doc/images/nacos-02.png)    
 
-
 client 对外的接口URL：   
 @FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/filegroup")   
 ${DB_HOST:localhost}表示先从配置文件yml中或者启动命令中读取DB_HOST的值，如果没有读取到，就是用默认值localhost(其他变量类似)   
 
 service 只到version层级：  
 @RequestMapping("/${platform.console.service.version}/filegroup")  
+
+## 三、起步
+### 打包
+在platform-console-service   
+com.wordplay.platform.console 包下添加对外接口，添加请求响应等。
+
+platform-console-service-parent/platform-console-api/pom.xml -> install
+
+platform-console-control 中引入 platform-console-api 依赖。
+
+
+### 调用关系  
+control --(通过client接口&Nacos)--> service
+
+
+
 
 

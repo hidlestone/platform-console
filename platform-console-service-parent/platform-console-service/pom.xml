@@ -52,7 +52,7 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-shiro</artifactId>
 		</dependency>
-		<!-- nacos注册中心客户端 -->
+		<!-- nacos注册中心客户端START -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -61,6 +61,7 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
+		<!-- nacos注册中心客户端END -->
 	</dependencies>
 
 	<build>

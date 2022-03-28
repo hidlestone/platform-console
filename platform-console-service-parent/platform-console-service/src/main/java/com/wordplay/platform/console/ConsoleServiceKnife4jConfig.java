@@ -20,9 +20,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
-public class ConsoleKnife4jConfig {
+public class ConsoleServiceKnife4jConfig {
 
-	@Bean(value = "consoleapi")
+	@Bean(value = "consoleserviceapi")
 	public Docket sourceClientApi() {
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(new ApiInfoBuilder()
 				.title("platform-console-service RESTful APIs")
@@ -30,7 +30,7 @@ public class ConsoleKnife4jConfig {
 				.termsOfServiceUrl("http://localhost:6060/")
 				.version("1.0-SNAPSHOT").build())
 				// 分组名称
-				.groupName("CONSOLE").select()
+				.groupName("CONSOLE-SERVICE").select()
 				// 指定client扫描包路径
 				.apis(RequestHandlerSelectors.basePackage("com.wordplay.platform.console.client.impl"))
 				.paths(PathSelectors.any()).build();
