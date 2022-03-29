@@ -190,6 +190,9 @@ platform:
     service:
       name: platform-console-service-
       version: payn
+    control:
+      name: platform-console-control-
+      version: payn
 
 spring:
   application:
@@ -202,8 +205,38 @@ spring:
         server-addr: 127.0.0.1
         namespace: platform-dev
         group: DEFAULT_GROUP
-        service: ${spring.application.name}
+        service: ${platform.console.service.name}${platform.console.service.version}
+        ip: 127.0.0.1       #用于指定注册地址127.0.0.1
 ```
+	
+platform-console-control-payn.yml
+```yaml
+server:
+  port: 7070
+
+platform:
+  console:
+    service:
+      name: platform-console-service-
+      version: payn
+    control:
+      name: platform-console-control-
+      version: payn
+
+spring:
+  application:
+    name: platform-console-control
+  cloud:
+    config:
+      override-none: true
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1
+        namespace: platform-dev
+        group: DEFAULT_GROUP
+        service: ${platform.console.control.name}${platform.console.control.version}
+```
+
 ![pic](doc/images/nacos-01.png)    
 ![pic](doc/images/nacos-02.png)    
 
@@ -225,7 +258,7 @@ platform-console-control 中引入 platform-console-api 依赖。
 
 
 ### 调用关系  
-control --(通过client接口&Nacos)--> service
+前端 ----> control --(通过client接口&Nacos)--> service
 
 
 
