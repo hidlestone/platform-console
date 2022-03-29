@@ -1,9 +1,12 @@
 package com.wordplay.platform.console.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.ReUtil;
 import com.fallframework.platform.starter.api.response.ResponseResult;
+import com.fallframework.platform.starter.cache.redis.util.RedisUtil;
 import com.fallframework.platform.starter.mail.model.MailSendInfoRequest;
 import com.fallframework.platform.starter.mail.service.PlatformMailSender;
+import com.fallframework.platform.starter.rbac.constant.RbacStarterConstant;
 import com.wordplay.platform.console.model.enums.VerifyCodeSenderEnum;
 import com.wordplay.platform.console.model.request.VerifyCodeSenderRequest;
 import com.wordplay.platform.console.service.VerifyCodeService;
@@ -25,6 +28,8 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 
 	@Autowired
 	private PlatformMailSender platformMailSender;
+	@Autowired
+	private RedisUtil redisUtil;
 
 	@Override
 	public ResponseResult sendVerifyCode(VerifyCodeSenderRequest request) {
@@ -32,14 +37,21 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 		if (!validateResp.isSuccess()) {
 			return validateResp;
 		}
+		// 生成四位随机的验证码
+		String randomVerifyCode = RandomUtil.randomNumbers(4);
 		// 发送邮件
 		if (VerifyCodeSenderEnum.MAIL.equals(request.getVerifyCodeSender())) {
 			// TODO 发送模板邮件
 			MailSendInfoRequest infoRequest = new MailSendInfoRequest();
 			platformMailSender.sendTemplateEmail(infoRequest);
+
 		} else {
 			// TODO 发送模板短信
 		}
+		String key = StringUtils.isNotEmpty(request.getTel()) ? request.getTel() : request.getMailAddress();
+		// 存储到缓存中。user:verificationcode:{业务类型}:{tel/mail}
+		String cachekey = RbacStarterConstant.CACHE_KEY_USER_VERIFICATIONCODE + request.getVerifyCodeType().name().toLowerCase() + ":" + key;
+		redisUtil.set(cachekey, randomVerifyCode, 5 * 60);// 默认可用时间5分钟
 		return ResponseResult.success();
 	}
 
