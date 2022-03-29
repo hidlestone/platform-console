@@ -16,6 +16,7 @@ platform-console
 ### 1.2、API接口文档地址：  
 ```
 http://localhost:6060/doc.html#/home
+http://localhost:7070/doc.html#/home
 ```
 
 ### 1.3、整合platform基础模块
