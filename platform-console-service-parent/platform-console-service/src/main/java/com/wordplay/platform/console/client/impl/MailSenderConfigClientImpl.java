@@ -73,7 +73,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailSenderConfigResponse>> list(MailSenderConfigReq req) {
+	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req) {
 		MailSenderConfigRequest request = new MailSenderConfigRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<MailSenderConfig> page = mailSenderConfigService.list(request).getData();

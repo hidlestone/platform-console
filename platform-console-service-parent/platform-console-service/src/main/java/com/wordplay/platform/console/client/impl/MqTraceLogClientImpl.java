@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +43,7 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询MQ轨迹日志")
-	public ResponseResult<MqTraceLogResponse> get(Long id) {
+	public ResponseResult<MqTraceLogResponse> get(@RequestParam Long id) {
 		MqTraceLog mqTraceLog = mqTraceLogService.getById(id);
 		MqTraceLogResponse response = new MqTraceLogResponse();
 		BeanUtils.copyProperties(mqTraceLog, response);
@@ -52,7 +53,7 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询MQ轨迹日志")
-	public ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogReq req) {
+	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogReq req) {
 		MqTraceLogRequest request = new MqTraceLogRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<MqTraceLog> page = mqTraceLogService.list(request).getData();

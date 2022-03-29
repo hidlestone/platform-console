@@ -68,19 +68,19 @@ public class SysParamControl {
 
 	@GetMapping("/getgroupitems")
 	@ApiOperation(value = "根据配置组编码查询配置组及明细项")
-	public ResponseResult<SysParamGroupResp> getGroupItems(String code) {
+	public ResponseResult<SysParamGroupResp> getGroupItems(@RequestParam String code) {
 		return sysParamClient.getGroupItems(code);
 	}
 
 	@GetMapping("/getitemsbygroupcode")
 	@ApiOperation(value = "根据配置组编码查询配置明细项")
-	public ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(String groupCode) {
+	public ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(@RequestParam String groupCode) {
 		return sysParamClient.getItemsByGroupCode(groupCode);
 	}
 
 	@GetMapping("/groupList")
 	@ApiOperation(value = "分页查询配置组及明细项")
-	public ResponseResult<Leaf<SysParamGroupResp>> groupList(SysParamGroupReq req) {
+	public ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupReq req) {
 		return sysParamClient.groupList(req);
 	}
 

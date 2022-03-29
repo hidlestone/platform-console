@@ -86,7 +86,7 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/getmenusbyuserid")
 	@ApiOperation(value = "根据用户ID查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(MenuQueryReq req) {
+	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<Menu> page = menuService.getMenusByUserId(request).getData();
@@ -97,7 +97,7 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/getmenusbyroleids")
 	@ApiOperation(value = "根据角色ID查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(MenuQueryReq req) {
+	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<Menu> page = menuService.getMenusByRoleIds(request).getData();

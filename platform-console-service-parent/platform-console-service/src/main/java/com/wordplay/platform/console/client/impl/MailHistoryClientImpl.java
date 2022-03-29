@@ -16,7 +16,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,7 +35,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 	@Override
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除邮件历史")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		mailHistoryService.removeById(id);
 		return ResponseResult.success();
 	}
@@ -41,7 +43,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询邮件历史")
-	public ResponseResult<MailHistoryResponse> get(Long id) {
+	public ResponseResult<MailHistoryResponse> get(@RequestParam Long id) {
 		MailHistory mailHistory = mailHistoryService.getById(id);
 		MailHistoryResponse response = new MailHistoryResponse();
 		BeanUtils.copyProperties(mailHistory, response);
@@ -51,7 +53,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件历史")
-	public ResponseResult<Leaf<MailHistoryResponse>> list(MailHistoryReq req) {
+	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryReq req) {
 		MailHistoryRequest request = new MailHistoryRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<MailHistory> page = mailHistoryService.list(request).getData();

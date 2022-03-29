@@ -111,7 +111,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@GetMapping("/getgroupitems")
 	@ApiOperation(value = "根据配置组编码查询配置组及明细项")
-	public ResponseResult<SysParamGroupResp> getGroupItems(String code) {
+	public ResponseResult<SysParamGroupResp> getGroupItems(@RequestParam String code) {
 		ResponseResult<SysParamGroupResponse> list = sysParamGroupService.get(code);
 		SysParamGroupResp resp = JSON.parseObject(JSON.toJSONString(list), SysParamGroupResp.class);
 		return ResponseResult.success(resp);
@@ -120,7 +120,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@GetMapping("/getitemsbygroupcode")
 	@ApiOperation(value = "根据配置组编码查询配置明细项")
-	public ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(String groupCode) {
+	public ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(@RequestParam String groupCode) {
 		List<SysParamItem> list = sysParamItemService.getByGroupCode(groupCode).getData();
 		List<SysParamItemResp> respList = JSON.parseArray(JSON.toJSONString(list), SysParamItemResp.class);
 		return ResponseResult.success(respList);
@@ -129,7 +129,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@GetMapping("/groupList")
 	@ApiOperation(value = "分页查询配置组及明细项")
-	public ResponseResult<Leaf<SysParamGroupResp>> groupList(SysParamGroupReq req) {
+	public ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupReq req) {
 		SysParamGroupRequest request = new SysParamGroupRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<SysParamGroupResponse> page = sysParamGroupService.list(request).getData();

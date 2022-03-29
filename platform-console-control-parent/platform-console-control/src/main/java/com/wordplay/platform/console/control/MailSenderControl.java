@@ -50,7 +50,7 @@ public class MailSenderControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailSenderConfigResponse>> list(MailSenderConfigReq req) {
+	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req) {
 		return mailSenderConfigClient.list(req);
 	}
 

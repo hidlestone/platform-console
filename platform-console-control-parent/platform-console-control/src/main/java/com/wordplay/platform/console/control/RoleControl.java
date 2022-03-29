@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,31 +30,31 @@ public class RoleControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存角色")
-	public ResponseResult save(RoleReq req) {
+	public ResponseResult save(@RequestBody RoleReq req) {
 		return roleClient.save(req);
 	}
 
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除角色")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		return roleClient.delete(id);
 	}
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改角色")
-	public ResponseResult update(RoleReq req) {
+	public ResponseResult update(@RequestBody RoleReq req) {
 		return roleClient.update(req);
 	}
 
 	@GetMapping("/get")
 	@ApiOperation(value = "查询角色")
-	public ResponseResult<RoleResponse> get(Long id) {
+	public ResponseResult<RoleResponse> get(@RequestParam Long id) {
 		return roleClient.get(id);
 	}
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询角色")
-	public ResponseResult<Leaf<RoleResponse>> list(RoleReq req) {
+	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req) {
 		return roleClient.list(req);
 	}
 
@@ -62,5 +63,5 @@ public class RoleControl {
 	public ResponseResult<List<RoleResponse>> getRolesByUserId(@RequestParam Long userId) {
 		return roleClient.getRolesByUserId(userId);
 	}
-	
+
 }

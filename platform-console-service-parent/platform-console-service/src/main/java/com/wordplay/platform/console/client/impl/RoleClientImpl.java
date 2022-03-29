@@ -17,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存角色")
-	public ResponseResult save(RoleReq req) {
+	public ResponseResult save(@RequestBody RoleReq req) {
 		Role role = new Role();
 		BeanUtils.copyProperties(req, role);
 		roleService.save(role);
@@ -47,7 +48,7 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除角色")
-	public ResponseResult delete(Long id) {
+	public ResponseResult delete(@RequestParam Long id) {
 		roleService.removeById(id);
 		return ResponseResult.success();
 	}
@@ -55,7 +56,7 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改角色")
-	public ResponseResult update(RoleReq req) {
+	public ResponseResult update(@RequestBody RoleReq req) {
 		Role role = new Role();
 		BeanUtils.copyProperties(req, role);
 		roleService.updateById(role);
@@ -65,7 +66,7 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "查询角色")
-	public ResponseResult<RoleResponse> get(Long id) {
+	public ResponseResult<RoleResponse> get(@RequestParam Long id) {
 		Role role = roleService.getById(id);
 		RoleResponse response = new RoleResponse();
 		BeanUtils.copyProperties(response, response);
@@ -75,7 +76,7 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询角色")
-	public ResponseResult<Leaf<RoleResponse>> list(RoleReq req) {
+	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req) {
 		RoleRequest request = new RoleRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<Role> page = roleService.list(request).getData();

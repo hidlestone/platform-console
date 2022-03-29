@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,13 +34,13 @@ public class MqTraceLogControl {
 
 	@GetMapping("/get")
 	@ApiOperation(value = "查询MQ轨迹日志")
-	public ResponseResult<MqTraceLogResponse> get(Long id) {
+	public ResponseResult<MqTraceLogResponse> get(@RequestParam Long id) {
 		return mqTraceLogClient.get(id);
 	}
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询MQ轨迹日志")
-	public ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogReq req) {
+	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogReq req) {
 		return mqTraceLogClient.list(req);
 	}
 

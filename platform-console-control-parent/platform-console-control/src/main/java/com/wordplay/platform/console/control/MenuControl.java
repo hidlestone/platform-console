@@ -59,13 +59,13 @@ public class MenuControl {
 
 	@PostMapping("/getmenusbyuserid")
 	@ApiOperation(value = "根据用户ID查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(MenuQueryReq req) {
+	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
 		return menuClient.getMenusByUserId(req);
 	}
 
 	@PostMapping("/getmenusbyroleids")
 	@ApiOperation(value = "根据角色ID查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(MenuQueryReq req) {
+	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
 		return menuClient.getMenusByRoleIds(req);
 	}
 
