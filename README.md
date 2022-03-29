@@ -249,7 +249,7 @@ service 只到version层级：
 @RequestMapping("/${platform.console.service.version}/filegroup")  
 
 ## 三、起步
-### 打包
+### 3.1、打包
 在platform-console-service   
 com.wordplay.platform.console 包下添加对外接口，添加请求响应等。
 
@@ -257,8 +257,7 @@ platform-console-service-parent/platform-console-api/pom.xml -> install
 
 platform-console-control 中引入 platform-console-api 依赖。
 
-
-### 调用关系  
+### 3.2、调用关系  
 先启动service，再启动control。
 
 前端 ----> control --(通过client接口&Nacos)--> service

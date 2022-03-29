@@ -5,12 +5,16 @@ import com.fallframework.platform.starter.api.request.BasePageRequest;
 import com.wordplay.platform.console.model.enums.SexEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 /**
  * @author zhuangpf
  */
+@Getter
+@Setter
 @ApiModel("用户查询请求参数")
 public class UserQueryReq extends BasePageRequest {
 
