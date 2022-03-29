@@ -31,7 +31,7 @@ public class ConsoleServiceKnife4jConfig {
 				.version("1.0-SNAPSHOT").build())
 				// 分组名称
 				.groupName("CONSOLE-SERVICE").select()
-				// 指定client扫描包路径
+				// 指定扫描包路径
 				.apis(RequestHandlerSelectors.basePackage("com.wordplay.platform.console.client.impl"))
 				.paths(PathSelectors.any()).build();
 		return docket;
