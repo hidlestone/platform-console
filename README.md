@@ -259,9 +259,9 @@ platform-console-control 中引入 platform-console-api 依赖。
 
 
 ### 调用关系  
+先启动service，再启动control。
+
 前端 ----> control --(通过client接口&Nacos)--> service
-
-
 
 
 

@@ -25,7 +25,7 @@ public class ConsoleControlKnife4jConfig {
 	@Bean(value = "consolecontrolapi")
 	public Docket sourceClientApi() {
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(new ApiInfoBuilder()
-				.title("platform-console-control RESTful APIs")
+				.title("platform-console-control APIs")
 				.description("platform-console接口文档")
 				.termsOfServiceUrl("http://localhost:7070/")
 				.version("1.0-SNAPSHOT").build())
