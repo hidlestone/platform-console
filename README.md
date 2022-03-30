@@ -264,3 +264,7 @@ platform-console-control 中引入 platform-console-api 依赖。
 
 
 
+https://www.mojohaus.org/build-helper-maven-plugin/usage.html
+
+
+

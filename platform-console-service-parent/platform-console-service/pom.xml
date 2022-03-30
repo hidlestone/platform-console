@@ -62,6 +62,11 @@
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 		<!-- nacos注册中心客户端END -->
+		<dependency>
+			<groupId>com.wordplay.console</groupId>
+			<artifactId>platform-console-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -90,7 +95,7 @@
 				<configuration>
 					<fork>true</fork>
 					<classifier>exec</classifier>
-					<mainClass></mainClass>
+					<mainClass>com.wordplay.platform.console.ConsoleServiceApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

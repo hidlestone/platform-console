@@ -17,6 +17,16 @@
 		<developerConnection>scm:git:ssh://git@github.com/hidlestone/platform-console.git</developerConnection>
 		<url>https://github.com/hidlestone/platform-console</url>
 	</scm>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.wordplay.console</groupId>
+				<artifactId>platform-console-api</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 	<modules>
 		<module>platform-console-control-parent</module>

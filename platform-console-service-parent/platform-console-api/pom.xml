@@ -26,6 +26,7 @@
 
 	<!-- 该模块不写代码，打包的时候，根据以下配置的路径打成jar包。即只包含对外的client接口和model(request/respon参数等)。 -->
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
