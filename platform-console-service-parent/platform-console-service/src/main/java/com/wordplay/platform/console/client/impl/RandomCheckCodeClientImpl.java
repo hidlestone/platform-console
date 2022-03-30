@@ -6,6 +6,7 @@ import com.wordplay.platform.console.service.RandomCheckCodeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class RandomCheckCodeClientImpl implements RandomCheckCodeClient {
 	private RandomCheckCodeService randomCheckCodeService;
 
 	@Override
-	@PostMapping("/getrandomcheckcode")
+	@GetMapping("/getrandomcheckcode")
 	@ApiOperation(value = "四位随机校验码")
 	public ResponseResult getRandomCheckCode() {
 		return randomCheckCodeService.getRandomCheckCode();

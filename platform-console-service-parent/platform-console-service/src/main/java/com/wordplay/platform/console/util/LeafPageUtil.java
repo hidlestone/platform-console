@@ -23,6 +23,7 @@ public class LeafPageUtil {
 		Leaf leaf = new Leaf();
 		leaf.setRecords(page.getRecords());
 		leaf.setTotal(page.getTotal());
+		leaf.setSize(page.getSize());
 		leaf.setCurrent(page.getCurrent());
 		return leaf;
 	}

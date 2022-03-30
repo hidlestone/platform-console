@@ -3,6 +3,7 @@ package com.wordplay.platform.console.client.api;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.model.request.VerifyCodeSenderRequest;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/verifycode")
 public interface VerifyCodeClient {
 
+	@PostMapping("/sendverifycode")
 	ResponseResult sendVerifyCode(@RequestBody VerifyCodeSenderRequest request);
 
 }
