@@ -22,6 +22,10 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-api-dependency</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- 该模块不写代码，打包的时候，根据以下配置的路径打成jar包。即只包含对外的client接口和model(request/respon参数等)。 -->

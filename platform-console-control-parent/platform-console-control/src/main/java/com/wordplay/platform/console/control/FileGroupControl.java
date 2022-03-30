@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author zhuangpf
  */
-@Api(tags = "文件组管理")
+@Api(tags = "文件组上传下载")
 @RestController
 @RequestMapping("/filegroup")
-public class FileGroupcontrol {
+public class FileGroupControl {
 
 	@Autowired
 	private FileGroupClient fileGroupClient;
