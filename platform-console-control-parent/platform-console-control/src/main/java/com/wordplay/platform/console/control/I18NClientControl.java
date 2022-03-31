@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Api(tags = "I18N多语言")
 @RestController
-@RequestMapping("/i18n")
+@RequestMapping("/${platform.console.control.version}/i18n")
 public class I18NClientControl {
 
 	@Autowired

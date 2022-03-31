@@ -56,7 +56,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	public ResponseResult update(@RequestBody MailTemplateReq req) {
 		MailTemplate mailTemplate = new MailTemplate();
 		BeanUtils.copyProperties(req, mailTemplate);
-		mailTemplateService.update(mailTemplate);
+		mailTemplateService.updateById(mailTemplate);
 		return ResponseResult.success();
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "随机校验码")
 @RestController
-@RequestMapping("/verifycode")
+@RequestMapping("/${platform.console.control.version}/verifycode")
 public class RandomCheckCodeControl {
 
 	@Autowired

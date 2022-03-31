@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Api(tags = "系统参数")
 @RestController
-@RequestMapping("/smstemplate")
+@RequestMapping("/${platform.console.control.version}/smstemplate")
 public class SysParamControl {
 
 	@Autowired

@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Api(tags = "短信模板")
 @RestController
-@RequestMapping("/smstemplate")
+@RequestMapping("/${platform.console.control.version}/smstemplate")
 public class SmsTemplateControl {
 
 	@Autowired

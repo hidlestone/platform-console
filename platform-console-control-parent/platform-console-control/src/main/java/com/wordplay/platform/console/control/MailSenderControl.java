@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "邮件发送配置")
 @RestController
-@RequestMapping("/mailsender")
+@RequestMapping("/${platform.console.control.version}/mailsender")
 public class MailSenderControl {
 
 	@Autowired

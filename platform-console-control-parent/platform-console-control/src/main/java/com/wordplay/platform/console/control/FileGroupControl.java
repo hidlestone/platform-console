@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "文件组上传下载")
 @RestController
-@RequestMapping("/filegroup")
+@RequestMapping("/${platform.console.control.version}/filegroup")
 public class FileGroupControl {
 
 	@Autowired

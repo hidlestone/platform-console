@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "本地文件上传下载")
 @RestController
-@RequestMapping("/localfileprocess")
+@RequestMapping("/${platform.console.control.version}/localfileprocess")
 public class LocalFileProcessControl {
 
 	@Autowired

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "验证码")
 @RestController
-@RequestMapping("/verifycode")
+@RequestMapping("/${platform.console.control.version}/verifycode")
 public class VerifyCodeControl {
 
 	@Autowired

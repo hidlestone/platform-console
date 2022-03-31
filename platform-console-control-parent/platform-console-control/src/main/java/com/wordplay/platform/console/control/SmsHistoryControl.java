@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "短信历史")
 @RestController
-@RequestMapping("/smshistory")
+@RequestMapping("/${platform.console.control.version}/smshistory")
 public class SmsHistoryControl {
 
 	@Autowired

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "邮件模板")
 @RestController
-@RequestMapping("/mailtemplate")
+@RequestMapping("/${platform.console.control.version}/mailtemplate")
 public class MailTemplateControl {
 
 	@Autowired
