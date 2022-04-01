@@ -6,15 +6,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * @author zhuangpf
  */
 @Getter
 @Setter
-@ApiModel("用户信息响应参数")
-public class UserResponse extends BaseEntityResponse {
-
-	private static final long serialVersionUID = 8958948271004116164L;
+@ApiModel("用户详细信息响应参数")
+public class UserDtlInfoResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("用户昵称")
 	private String username;
@@ -30,5 +30,8 @@ public class UserResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("介绍")
 	private String introduction;
+
+	@ApiModelProperty("用户角色")
+	private List<String> roles;
 
 }

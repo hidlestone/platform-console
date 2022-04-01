@@ -3,6 +3,7 @@ package com.wordplay.platform.console.client.api;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.model.request.UserQueryReq;
+import com.wordplay.platform.console.model.response.UserDtlInfoResponse;
 import com.wordplay.platform.console.model.response.UserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +24,8 @@ public interface UserClient {
 
 	@PostMapping("/list")
 	ResponseResult<Leaf<UserResponse>> list(@RequestBody UserQueryReq req);
+
+	@GetMapping("/getuserinfo")
+	ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken);
 
 }
