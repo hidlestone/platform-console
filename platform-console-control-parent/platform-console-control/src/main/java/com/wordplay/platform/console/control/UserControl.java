@@ -4,6 +4,7 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.UserClient;
 import com.wordplay.platform.console.model.request.UserQueryReq;
+import com.wordplay.platform.console.model.response.UserDtlInfoResponse;
 import com.wordplay.platform.console.model.response.UserResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +37,12 @@ public class UserControl {
 	@ApiOperation(value = "分页查询用户")
 	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserQueryReq req) {
 		return userClient.list(req);
+	}
+
+	@GetMapping("/getuserinfo")
+	@ApiOperation(value = "根据accessToken获取用户信息")
+	public ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken) {
+		return userClient.getUserInfo(accesstoken);
 	}
 
 	@GetMapping("/logout")

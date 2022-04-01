@@ -72,7 +72,7 @@ public class UserClientImpl implements UserClient {
 	@Override
 	@GetMapping("/getuserinfo")
 	@ApiOperation(value = "根据accessToken获取用户信息")
-	public ResponseResult<UserDtlInfoResponse> getUserInfo(String accesstoken) {
+	public ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken) {
 		User model = null;
 		try {
 			model = jwtUtil.parseToken(accesstoken);
@@ -99,7 +99,7 @@ public class UserClientImpl implements UserClient {
 	@Override
 	@GetMapping("/logout")
 	@ApiOperation(value = "用户登出")
-	public ResponseResult logout(String accesstoken) {
+	public ResponseResult logout(@RequestParam String accesstoken) {
 		User model = null;
 		try {
 			model = jwtUtil.parseToken(accesstoken);
