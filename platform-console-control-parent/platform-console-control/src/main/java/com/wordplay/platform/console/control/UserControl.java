@@ -38,4 +38,10 @@ public class UserControl {
 		return userClient.list(req);
 	}
 
+	@GetMapping("/logout")
+	@ApiOperation(value = "用户登出")
+	public ResponseResult logout(@RequestParam String accesstoken) {
+		return userClient.logout(accesstoken);
+	}
+
 }
