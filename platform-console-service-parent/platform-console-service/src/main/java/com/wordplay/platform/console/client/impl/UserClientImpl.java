@@ -4,6 +4,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
+import com.fallframework.platform.starter.cache.redis.util.RedisUtil;
+import com.fallframework.platform.starter.rbac.constant.RbacStarterConstant;
 import com.fallframework.platform.starter.rbac.entity.Role;
 import com.fallframework.platform.starter.rbac.entity.User;
 import com.fallframework.platform.starter.rbac.model.UserQueryRequest;
@@ -42,6 +44,8 @@ public class UserClientImpl implements UserClient {
 	@Autowired
 	private RoleService roleService;
 	@Autowired
+	private RedisUtil redisUtil;
+	@Autowired
 	private JWTUtil jwtUtil;
 
 	@Override
@@ -66,7 +70,7 @@ public class UserClientImpl implements UserClient {
 	}
 
 	@Override
-	@PostMapping("/getuserinfo")
+	@GetMapping("/getuserinfo")
 	@ApiOperation(value = "根据accessToken获取用户信息")
 	public ResponseResult<UserDtlInfoResponse> getUserInfo(String accesstoken) {
 		User model = null;
@@ -90,6 +94,25 @@ public class UserClientImpl implements UserClient {
 		List<String> roles = roleList.stream().map(e -> e.getRoleCode()).distinct().collect(Collectors.toList());
 		response.setRoles(roles);
 		return ResponseResult.success(response);
+	}
+
+	@Override
+	@GetMapping("/logout")
+	@ApiOperation(value = "用户登出")
+	public ResponseResult logout(String accesstoken) {
+		User model = null;
+		try {
+			model = jwtUtil.parseToken(accesstoken);
+			if (null == model) {
+				return ResponseResult.fail("用户不存在");
+			}
+		} catch (Exception e) {
+			return ResponseResult.fail("token不可用");
+		}
+		// 删除缓存中的token
+		redisUtil.del(RbacStarterConstant.CACHE_KEY_ACCESSTOKEN + model.getId());
+		redisUtil.del(RbacStarterConstant.CACHE_KEY_REFRESHTOKEN + model.getId());
+		return ResponseResult.success();
 	}
 
 }

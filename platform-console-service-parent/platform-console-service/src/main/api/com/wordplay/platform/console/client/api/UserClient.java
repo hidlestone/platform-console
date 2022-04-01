@@ -28,4 +28,7 @@ public interface UserClient {
 	@GetMapping("/getuserinfo")
 	ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken);
 
+	@GetMapping("/logout")
+	ResponseResult logout(@RequestParam String accesstoken);
+
 }
