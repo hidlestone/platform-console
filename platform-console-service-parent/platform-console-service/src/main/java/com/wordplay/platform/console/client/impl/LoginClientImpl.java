@@ -85,6 +85,7 @@ public class LoginClientImpl implements LoginClient {
 		UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(curUser, userResponse);
 		userResponse.setIntroduction(curUser.getRemark());
+		resp.setCurUserInfo(userResponse);
 		// 角色信息
 		List<Role> roleList = roleService.getRolesByUserId(curUser.getId());
 		if (CollectionUtil.isEmpty(roleList)) {

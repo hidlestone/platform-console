@@ -30,7 +30,7 @@ public class UserQueryReq extends BasePageRequest {
 	private String username;
 
 	@ApiModelProperty("头像URL")
-	private String avtar;
+	private String avatar;
 
 	@ApiModelProperty("电话号码")
 	private String tel;

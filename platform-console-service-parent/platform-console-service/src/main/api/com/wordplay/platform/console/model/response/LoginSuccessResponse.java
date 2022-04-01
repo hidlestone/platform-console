@@ -25,7 +25,7 @@ public class LoginSuccessResponse extends BaseEntityResponse {
 	private String refreshtoken;
 
 	@ApiModelProperty("用户信息")
-	private UserResponse userInfo;
+	private UserResponse curUserInfo;
 
 	@ApiModelProperty("用户角色")
 	private List<String> roles;

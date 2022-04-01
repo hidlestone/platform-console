@@ -20,7 +20,7 @@ public class UserResponse extends BaseEntityResponse {
 	private String username;
 
 	@ApiModelProperty("头像URL")
-	private String avtar;
+	private String avatar;
 
 	@ApiModelProperty("电话号码")
 	private String tel;
