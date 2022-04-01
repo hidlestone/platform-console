@@ -1,11 +1,14 @@
 package com.wordplay.platform.console.client.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.cache.redis.util.RedisUtil;
 import com.fallframework.platform.starter.core.util.EncryptionUtil;
 import com.fallframework.platform.starter.rbac.constant.RbacStarterConstant;
+import com.fallframework.platform.starter.rbac.entity.Role;
 import com.fallframework.platform.starter.rbac.entity.User;
 import com.fallframework.platform.starter.rbac.model.TokenTypeEnum;
+import com.fallframework.platform.starter.rbac.service.RoleService;
 import com.fallframework.platform.starter.rbac.util.RequestContexUtil;
 import com.fallframework.platform.starter.shiro.model.AccountLoginToken;
 import com.fallframework.platform.starter.shiro.model.LoginTypeEnum;
@@ -15,6 +18,7 @@ import com.wordplay.platform.console.model.request.AccountPwdLoginRequest;
 import com.wordplay.platform.console.model.request.QRCodeLoginRequest;
 import com.wordplay.platform.console.model.request.VerificationCodeLoginRequest;
 import com.wordplay.platform.console.model.response.LoginSuccessResponse;
+import com.wordplay.platform.console.model.response.UserResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -22,15 +26,15 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhuangpf
@@ -44,6 +48,8 @@ public class LoginClientImpl implements LoginClient {
 	private JWTUtil jwtUtill;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private RoleService roleService;
 
 	@Override
 	@PostMapping("/loginbyaccount")
@@ -75,6 +81,16 @@ public class LoginClientImpl implements LoginClient {
 		resp.setRefreshtoken(refreshtoken);
 		// 在返回的请求头中设置token信息
 		RequestContexUtil.setTokenHeader(accesstoken, refreshtoken);
+		// 用户信息
+		UserResponse userResponse = new UserResponse();
+		BeanUtils.copyProperties(curUser, userResponse);
+		userResponse.setIntroduction(curUser.getRemark());
+		// 角色信息
+		List<Role> roleList = roleService.getRolesByUserId(curUser.getId());
+		if (CollectionUtil.isNotEmpty(roleList)) {
+			List<String> roles = roleList.stream().map(e -> e.getRoleCode()).distinct().collect(Collectors.toList());
+			resp.setRoles(roles);
+		}
 		return ResponseResult.success(resp);
 	}
 
@@ -82,8 +98,8 @@ public class LoginClientImpl implements LoginClient {
 	@PostMapping("/loginbyverificationcode")
 	@ApiOperation(value = "账号验证码登录")
 	public ResponseResult loginByVerificationCode(VerificationCodeLoginRequest request) {
-		
-		
+
+
 		return null;
 	}
 

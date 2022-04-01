@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * @author zhuangpf
  */
@@ -21,5 +23,11 @@ public class LoginSuccessResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("刷新token")
 	private String refreshtoken;
+
+	@ApiModelProperty("用户信息")
+	private UserResponse userInfo;
+
+	@ApiModelProperty("用户角色")
+	private List<String> roles;
 
 }
