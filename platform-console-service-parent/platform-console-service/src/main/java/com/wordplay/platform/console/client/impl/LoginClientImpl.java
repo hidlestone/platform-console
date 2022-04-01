@@ -87,10 +87,11 @@ public class LoginClientImpl implements LoginClient {
 		userResponse.setIntroduction(curUser.getRemark());
 		// 角色信息
 		List<Role> roleList = roleService.getRolesByUserId(curUser.getId());
-		if (CollectionUtil.isNotEmpty(roleList)) {
-			List<String> roles = roleList.stream().map(e -> e.getRoleCode()).distinct().collect(Collectors.toList());
-			resp.setRoles(roles);
+		if (CollectionUtil.isEmpty(roleList)) {
+			return ResponseResult.fail("当前用户角色信息不存在");
 		}
+		List<String> roles = roleList.stream().map(e -> e.getRoleCode()).distinct().collect(Collectors.toList());
+		resp.setRoles(roles);
 		return ResponseResult.success(resp);
 	}
 
