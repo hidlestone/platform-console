@@ -1,19 +1,28 @@
 package com.wordplay.platform.console.client.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
+import com.fallframework.platform.starter.rbac.entity.User;
 import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
 import com.fallframework.platform.starter.rbac.model.MenuRequest;
 import com.fallframework.platform.starter.rbac.service.MenuService;
+import com.fallframework.platform.starter.rbac.util.RequestContexUtil;
+import com.fallframework.platform.starter.shiro.util.JWTUtil;
 import com.wordplay.platform.console.client.api.MenuClient;
 import com.wordplay.platform.console.model.request.MenuQueryReq;
 import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.response.FrontMenuResponse;
+import com.wordplay.platform.console.model.response.MenuMetaInfoResponse;
 import com.wordplay.platform.console.model.response.MenuResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +31,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhuangpf
@@ -33,6 +47,8 @@ public class MenuClientImpl implements MenuClient {
 
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private JWTUtil jwtUtil;
 
 	@Override
 	@PostMapping("/save")
@@ -85,7 +101,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/getmenusbyuserid")
-	@ApiOperation(value = "根据用户ID查询菜单")
+	@ApiOperation(value = "根据用户ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
@@ -96,13 +112,75 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/getmenusbyroleids")
-	@ApiOperation(value = "根据角色ID查询菜单")
+	@ApiOperation(value = "根据角色ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<Menu> page = menuService.getMenusByRoleIds(request).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
 		return ResponseResult.success(leaf);
+	}
+
+	@Override
+	@GetMapping("/getallmenus")
+	@ApiOperation(value = "根据token获取当前用户所有菜单")
+	public ResponseResult<List<FrontMenuResponse>> getAllMenus() {
+		// TODO
+		Subject currentUser = SecurityUtils.getSubject();
+		User curUser = (User) currentUser.getPrincipal();
+		String accesstoken = RequestContexUtil.getAccesstoken();
+		if (StringUtils.isEmpty(accesstoken)) {
+			return ResponseResult.fail("token不存在");
+		}
+		try {
+			curUser = jwtUtil.parseToken(accesstoken);
+			if (null == curUser) {
+				return ResponseResult.fail("用户不存在");
+			}
+		} catch (Exception e) {
+			return ResponseResult.fail("token不可用");
+		}
+		// 获取当前用户所有可访问的菜单
+		List<Menu> menuList = menuService.getAllMenusByUserId(curUser.getId()).getData();
+		if (CollectionUtil.isEmpty(menuList)) {
+			return ResponseResult.fail("菜单不存在");
+		}
+		// 转换成前端展示的数据结构
+		List<FrontMenuResponse> oneMenuResponseList = new ArrayList<>();
+		// 一级菜单，即parentId为null，按照order降序
+		List<Menu> oneMenuList = menuList.stream().filter(e -> null == e.getParentId()).sorted(Comparator.comparing(Menu::getOrder).reversed()).collect(Collectors.toList());
+		if (CollectionUtil.isEmpty(oneMenuList)) {
+			return ResponseResult.fail("一级菜单不存在");
+		}
+		for (Menu menu : oneMenuList) {
+			FrontMenuResponse oneFrontMenu = menuToFrontMenu(menu);
+			oneFrontMenu.setComponent("Layout");
+			oneMenuResponseList.add(oneFrontMenu);
+			// 二级菜单
+			List<FrontMenuResponse> twoMenuResponseList = new ArrayList<>();
+			List<Menu> twoMenuList = menuList.stream().filter(e -> menu.getId().equals(e.getParentId())).sorted(Comparator.comparing(Menu::getOrder).reversed()).collect(Collectors.toList());
+			for (Menu menu2 : twoMenuList) {
+				FrontMenuResponse twoFrontMenu = menuToFrontMenu(menu2);
+				twoFrontMenu.setComponent(menu.getFuncLink());
+				twoMenuResponseList.add(twoFrontMenu);
+			}
+			oneFrontMenu.setChildren(twoMenuResponseList);
+		}
+		return ResponseResult.success();
+	}
+
+	public FrontMenuResponse menuToFrontMenu(Menu menu) {
+		FrontMenuResponse frontMenu = new FrontMenuResponse();
+		frontMenu.setPath(menu.getFuncLink());
+		frontMenu.setRedirect(menu.getFuncLink());
+		frontMenu.setAlwaysShow(true);
+		frontMenu.setName(menu.getMenuName());
+		MenuMetaInfoResponse meta = new MenuMetaInfoResponse();
+		meta.setTitle(menu.getMenuName());
+		meta.setIcon(menu.getIcon());
+		/*meta.setRoles();*/
+		frontMenu.setMeta(meta);
+		return frontMenu;
 	}
 
 }

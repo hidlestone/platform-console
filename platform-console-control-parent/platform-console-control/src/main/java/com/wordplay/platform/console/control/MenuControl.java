@@ -5,6 +5,7 @@ import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MenuClient;
 import com.wordplay.platform.console.model.request.MenuQueryReq;
 import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.response.FrontMenuResponse;
 import com.wordplay.platform.console.model.response.MenuResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author zhuangpf
@@ -58,15 +61,21 @@ public class MenuControl {
 	}
 
 	@PostMapping("/getmenusbyuserid")
-	@ApiOperation(value = "根据用户ID查询菜单")
+	@ApiOperation(value = "根据用户ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
 		return menuClient.getMenusByUserId(req);
 	}
 
 	@PostMapping("/getmenusbyroleids")
-	@ApiOperation(value = "根据角色ID查询菜单")
+	@ApiOperation(value = "根据角色ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
 		return menuClient.getMenusByRoleIds(req);
+	}
+
+	@GetMapping("/getallmenus")
+	@ApiOperation(value = "根据token获取当前用户所有菜单")
+	public ResponseResult<List<FrontMenuResponse>> getAllMenus() {
+		return menuClient.getAllMenus();
 	}
 
 }
