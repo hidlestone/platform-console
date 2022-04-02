@@ -148,7 +148,7 @@ public class MenuClientImpl implements MenuClient {
 		// 转换成前端展示的数据结构
 		List<FrontMenuResponse> oneMenuResponseList = new ArrayList<>();
 		// 一级菜单，即parentId为null，按照order降序
-		List<Menu> oneMenuList = menuList.stream().filter(e -> null == e.getParentId()).sorted(Comparator.comparing(Menu::getOrder).reversed()).collect(Collectors.toList());
+		List<Menu> oneMenuList = menuList.stream().filter(e -> null == e.getParentId()).sorted(Comparator.comparing(Menu::getOrder)).collect(Collectors.toList());
 		if (CollectionUtil.isEmpty(oneMenuList)) {
 			return ResponseResult.fail("一级菜单不存在");
 		}
@@ -158,7 +158,7 @@ public class MenuClientImpl implements MenuClient {
 			oneMenuResponseList.add(oneFrontMenu);
 			// 二级菜单
 			List<FrontMenuResponse> twoMenuResponseList = new ArrayList<>();
-			List<Menu> twoMenuList = menuList.stream().filter(e -> menu.getId().equals(e.getParentId())).sorted(Comparator.comparing(Menu::getOrder).reversed()).collect(Collectors.toList());
+			List<Menu> twoMenuList = menuList.stream().filter(e -> menu.getId().equals(e.getParentId())).sorted(Comparator.comparing(Menu::getOrder)).collect(Collectors.toList());
 			for (Menu menu2 : twoMenuList) {
 				FrontMenuResponse twoFrontMenu = menuToFrontMenu(menu2);
 				twoFrontMenu.setComponent(menu.getFuncLink());
@@ -166,7 +166,7 @@ public class MenuClientImpl implements MenuClient {
 			}
 			oneFrontMenu.setChildren(twoMenuResponseList);
 		}
-		return ResponseResult.success();
+		return ResponseResult.success(oneMenuResponseList);
 	}
 
 	public FrontMenuResponse menuToFrontMenu(Menu menu) {
