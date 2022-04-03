@@ -33,6 +33,9 @@ public class MenuReq extends BasePageRequest {
 	@ApiModelProperty("菜单描述")
 	private String menuDesc;
 
+	@ApiModelProperty("访问路径")
+	private String path;
+
 	@ApiModelProperty("功能链接如：/platform/msg-log")
 	private String funcLink;
 

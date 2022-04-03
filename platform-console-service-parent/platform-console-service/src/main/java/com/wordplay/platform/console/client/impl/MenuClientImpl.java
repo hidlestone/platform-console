@@ -155,6 +155,7 @@ public class MenuClientImpl implements MenuClient {
 		for (Menu menu : oneMenuList) {
 			FrontMenuResponse oneFrontMenu = menuToFrontMenu(menu);
 			oneFrontMenu.setComponent("Layout");
+			oneFrontMenu.setRedirect(menu.getFuncLink());
 			oneMenuResponseList.add(oneFrontMenu);
 			// 二级菜单
 			List<FrontMenuResponse> twoMenuResponseList = new ArrayList<>();
@@ -169,10 +170,14 @@ public class MenuClientImpl implements MenuClient {
 		return ResponseResult.success(oneMenuResponseList);
 	}
 
+	/**
+	 * @param menu 菜单对象
+	 * @return 前端展示的菜单数据
+	 */
 	public FrontMenuResponse menuToFrontMenu(Menu menu) {
 		FrontMenuResponse frontMenu = new FrontMenuResponse();
-		frontMenu.setPath(menu.getFuncLink());
-		frontMenu.setRedirect(menu.getFuncLink());
+		frontMenu.setPath(menu.getPath());
+		/*frontMenu.setRedirect(menu.getFuncLink());*/
 		frontMenu.setAlwaysShow(true);
 		frontMenu.setName(menu.getMenuName());
 		MenuMetaInfoResponse meta = new MenuMetaInfoResponse();
