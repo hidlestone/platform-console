@@ -41,8 +41,8 @@ public class UserControl {
 
 	@GetMapping("/getuserinfo")
 	@ApiOperation(value = "根据accessToken获取用户信息")
-	public ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken) {
-		return userClient.getUserInfo(accesstoken);
+	public ResponseResult<UserDtlInfoResponse> getUserInfo() {
+		return userClient.getUserInfo();
 	}
 
 	@GetMapping("/logout")

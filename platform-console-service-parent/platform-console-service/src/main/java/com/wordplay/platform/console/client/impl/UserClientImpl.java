@@ -11,6 +11,7 @@ import com.fallframework.platform.starter.rbac.entity.User;
 import com.fallframework.platform.starter.rbac.model.UserQueryRequest;
 import com.fallframework.platform.starter.rbac.service.RoleService;
 import com.fallframework.platform.starter.rbac.service.UserService;
+import com.fallframework.platform.starter.rbac.util.RequestContexUtil;
 import com.fallframework.platform.starter.shiro.util.JWTUtil;
 import com.wordplay.platform.console.client.api.UserClient;
 import com.wordplay.platform.console.model.request.UserQueryReq;
@@ -72,7 +73,8 @@ public class UserClientImpl implements UserClient {
 	@Override
 	@GetMapping("/getuserinfo")
 	@ApiOperation(value = "根据accessToken获取用户信息")
-	public ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken) {
+	public ResponseResult<UserDtlInfoResponse> getUserInfo() {
+		String accesstoken = RequestContexUtil.getAccesstoken();
 		User model = null;
 		try {
 			model = jwtUtil.parseToken(accesstoken);

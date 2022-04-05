@@ -162,7 +162,7 @@ public class MenuClientImpl implements MenuClient {
 			List<Menu> twoMenuList = menuList.stream().filter(e -> menu.getId().equals(e.getParentId())).sorted(Comparator.comparing(Menu::getOrder)).collect(Collectors.toList());
 			for (Menu menu2 : twoMenuList) {
 				FrontMenuResponse twoFrontMenu = menuToFrontMenu(menu2);
-				twoFrontMenu.setComponent(menu.getFuncLink());
+				twoFrontMenu.setComponent(menu2.getFuncLink());
 				twoMenuResponseList.add(twoFrontMenu);
 			}
 			oneFrontMenu.setChildren(twoMenuResponseList);

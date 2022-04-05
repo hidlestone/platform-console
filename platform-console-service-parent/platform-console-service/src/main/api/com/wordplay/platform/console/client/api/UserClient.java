@@ -26,7 +26,7 @@ public interface UserClient {
 	ResponseResult<Leaf<UserResponse>> list(@RequestBody UserQueryReq req);
 
 	@GetMapping("/getuserinfo")
-	ResponseResult<UserDtlInfoResponse> getUserInfo(@RequestParam String accesstoken);
+	ResponseResult<UserDtlInfoResponse> getUserInfo();
 
 	@GetMapping("/logout")
 	ResponseResult logout(@RequestParam String accesstoken);
