@@ -52,20 +52,16 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-shiro</artifactId>
 		</dependency>
-		<!-- nacos注册中心客户端START -->
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-		</dependency>
-		<!-- nacos注册中心客户端END -->
+		<!-- client接口包 -->
 		<dependency>
 			<groupId>com.wordplay.console</groupId>
 			<artifactId>platform-console-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- 对于其他service节点，相当于control -->
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-control-dependency</artifactId>
 		</dependency>
 	</dependencies>
 
