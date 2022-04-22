@@ -93,5 +93,13 @@ public class RoleClientImpl implements RoleClient {
 		return ResponseResult.success(respList);
 	}
 
+	@Override
+	@PostMapping("/getallrole")
+	@ApiOperation(value = "查询所有角色")
+	public ResponseResult<List<RoleResponse>> getAllRole() {
+		List<Role> roleList = roleService.getAllRole().getData();
+		List<RoleResponse> roleResponseList = JSON.parseArray(JSON.toJSONString(roleList), RoleResponse.class);
+		return ResponseResult.success(roleResponseList);
+	}
 
 }

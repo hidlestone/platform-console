@@ -19,4 +19,10 @@ public class RoleResponse extends BaseEntityResponse {
 	@ApiModelProperty("角色编码")
 	private String roleCode;
 
+	@ApiModelProperty("角色名称")
+	private String roleName;
+
+	@ApiModelProperty("角色描述")
+	private String roleDesc;
+	
 }

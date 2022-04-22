@@ -64,4 +64,10 @@ public class RoleControl {
 		return roleClient.getRolesByUserId(userId);
 	}
 
+	@PostMapping("/getallrole")
+	@ApiOperation(value = "查询所有角色")
+	ResponseResult<List<RoleResponse>> getAllRole() {
+		return roleClient.getAllRole();
+	}
+
 }

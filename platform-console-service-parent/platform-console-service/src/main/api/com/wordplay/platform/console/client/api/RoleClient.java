@@ -36,6 +36,9 @@ public interface RoleClient {
 	ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req);
 
 	@GetMapping("/getrolesbyuserid")
-	ResponseResult getRolesByUserId(@RequestParam Long userId);
+	ResponseResult<List<RoleResponse>> getRolesByUserId(@RequestParam Long userId);
+
+	@PostMapping("/getallrole")
+	ResponseResult<List<RoleResponse>> getAllRole();
 
 }
