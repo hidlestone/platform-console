@@ -1,6 +1,8 @@
 package com.wordplay.platform.console.model.response;
 
+import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.response.BaseEntityResponse;
+import com.fallframework.platform.starter.rbac.model.OpenTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -39,8 +41,8 @@ public class MenuResponse extends BaseEntityResponse {
 	@ApiModelProperty("功能链接如：/platform/msg-log")
 	private String funcLink;
 
-	@ApiModelProperty("打开方式，inner-link：通过链接打开tab，outter-link：通过链接打开浏览器新窗口，默认空表示:调用/console/open读取元数据打开")
-	private Byte openType;
+	@ApiModelProperty("打开方式，inner-link：通过链接打开tab，outter-link：通过链接打开浏览器新窗口，默认空表示")
+	private OpenTypeEnum openType;
 
 	@ApiModelProperty("图标")
 	private String icon;
@@ -52,7 +54,7 @@ public class MenuResponse extends BaseEntityResponse {
 	private String remark;
 
 	@ApiModelProperty("是否显示")
-	private Byte isShow;
+	private StatusEnum status;
 
 	@ApiModelProperty("创建用户ID")
 	private Long createUserId;

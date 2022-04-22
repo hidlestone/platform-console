@@ -1,6 +1,7 @@
 package com.wordplay.platform.console.client.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
@@ -170,7 +171,23 @@ public class MenuClientImpl implements MenuClient {
 		return ResponseResult.success(oneMenuResponseList);
 	}
 
+	@Override
+	public ResponseResult<List<MenuResponse>> getMenuTree(MenuQueryReq req) {
+		MenuQueryRequest request = new MenuQueryRequest();
+		BeanUtils.copyProperties(req, request);
+		ResponseResult<List<Menu>> menuTreeList = menuService.getMenuTree(request);
+		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuTreeList), MenuResponse.class);
+		return ResponseResult.success(menuResponseList);
+	}
+
+	@Override
+	public ResponseResult<List<Menu>> getMenuListByParentId(Long parentId) {
+		return menuService.getMenuListByParentId(parentId);
+	}
+
 	/**
+	 * 转换成前端展示的字段
+	 *
 	 * @param menu 菜单对象
 	 * @return 前端展示的菜单数据
 	 */

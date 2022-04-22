@@ -2,6 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
+import com.fallframework.platform.starter.rbac.entity.Menu;
 import com.wordplay.platform.console.model.request.MenuQueryReq;
 import com.wordplay.platform.console.model.request.MenuReq;
 import com.wordplay.platform.console.model.response.FrontMenuResponse;
@@ -45,5 +46,11 @@ public interface MenuClient {
 
 	@GetMapping("/getallmenus")
 	ResponseResult<List<FrontMenuResponse>> getAllMenus();
+
+	@PostMapping("/getmenutree")
+	ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req);
+
+	@GetMapping("/getmenulistbyparentid")
+	ResponseResult<List<Menu>> getMenuListByParentId(@RequestParam Long parentId);
 
 }
