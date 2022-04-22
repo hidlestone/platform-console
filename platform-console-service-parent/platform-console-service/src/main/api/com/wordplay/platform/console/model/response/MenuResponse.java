@@ -1,8 +1,8 @@
 package com.wordplay.platform.console.model.response;
 
+import com.fallframework.platform.starter.api.model.OpenTypeEnum;
 import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.response.BaseEntityResponse;
-import com.fallframework.platform.starter.rbac.model.OpenTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

@@ -78,4 +78,16 @@ public class MenuControl {
 		return menuClient.getAllMenus();
 	}
 
+	@GetMapping("/getmenutree")
+	@ApiOperation(value = "查询菜单树")
+	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
+		return menuClient.getMenuTree(req);
+	}
+
+	@GetMapping("/getmenulistbyparentid")
+	@ApiOperation(value = "根据父ID查询菜单")
+	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
+		return menuClient.getMenuListByParentId(parentId);
+	}
+
 }

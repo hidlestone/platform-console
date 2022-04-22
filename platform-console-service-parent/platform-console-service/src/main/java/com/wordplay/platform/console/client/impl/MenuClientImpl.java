@@ -174,7 +174,7 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@GetMapping("/getmenutree")
 	@ApiOperation(value = "查询菜单树")
-	public ResponseResult<List<MenuResponse>> getMenuTree(MenuQueryReq req) {
+	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
 		ResponseResult<List<Menu>> menuTreeList = menuService.getMenuTree(request);
@@ -185,8 +185,10 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@GetMapping("/getmenulistbyparentid")
 	@ApiOperation(value = "根据父ID查询菜单")
-	public ResponseResult<List<Menu>> getMenuListByParentId(Long parentId) {
-		return menuService.getMenuListByParentId(parentId);
+	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
+		ResponseResult<List<Menu>> menuList = menuService.getMenuListByParentId(parentId);
+		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
+		return ResponseResult.success(menuResponseList);
 	}
 
 	/**
