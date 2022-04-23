@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zhuangpf
@@ -67,5 +68,8 @@ public class MenuResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("更改时间")
 	private Date gmtModified;
+
+	@ApiModelProperty("子菜单")
+	List<MenuResponse> children;
 
 }

@@ -126,7 +126,6 @@ public class MenuClientImpl implements MenuClient {
 	@GetMapping("/getallmenus")
 	@ApiOperation(value = "根据token获取当前用户所有菜单")
 	public ResponseResult<List<FrontMenuResponse>> getAllMenus() {
-		// TODO
 		Subject currentUser = SecurityUtils.getSubject();
 		User curUser = (User) currentUser.getPrincipal();
 		String accesstoken = RequestContexUtil.getAccesstoken();
@@ -172,13 +171,13 @@ public class MenuClientImpl implements MenuClient {
 	}
 
 	@Override
-	@GetMapping("/getmenutree")
+	@PostMapping("/getmenutree")
 	@ApiOperation(value = "查询菜单树")
 	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
 		MenuQueryRequest request = new MenuQueryRequest();
 		BeanUtils.copyProperties(req, request);
-		ResponseResult<List<Menu>> menuTreeList = menuService.getMenuTree(request);
-		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuTreeList), MenuResponse.class);
+		ResponseResult<List<Menu>> responseResult = menuService.getMenuTree(request);
+		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(responseResult.getData()), MenuResponse.class);
 		return ResponseResult.success(menuResponseList);
 	}
 

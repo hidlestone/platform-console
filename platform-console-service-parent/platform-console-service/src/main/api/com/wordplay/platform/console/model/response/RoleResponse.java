@@ -16,6 +16,9 @@ public class RoleResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = 646520292769514586L;
 
+	@ApiModelProperty("ID")
+	private Long id;
+	
 	@ApiModelProperty("角色编码")
 	private String roleCode;
 

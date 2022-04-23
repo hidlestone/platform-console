@@ -21,7 +21,7 @@ import java.util.List;
 public interface RoleClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody RoleReq req);
+	ResponseResult<RoleResponse> save(@RequestBody RoleReq req);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);

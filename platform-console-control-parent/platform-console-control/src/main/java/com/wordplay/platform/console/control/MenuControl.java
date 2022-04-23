@@ -78,7 +78,7 @@ public class MenuControl {
 		return menuClient.getAllMenus();
 	}
 
-	@GetMapping("/getmenutree")
+	@PostMapping("/getmenutree")
 	@ApiOperation(value = "查询菜单树")
 	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
 		return menuClient.getMenuTree(req);
