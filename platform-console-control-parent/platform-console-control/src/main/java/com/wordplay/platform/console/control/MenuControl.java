@@ -90,4 +90,10 @@ public class MenuControl {
 		return menuClient.getMenuListByParentId(parentId);
 	}
 
+	@GetMapping("/getmainmenus")
+	@ApiOperation(value = "查询主菜单")
+	public ResponseResult<List<MenuResponse>> getMainMenus() {
+		return menuClient.getMainMenus();
+	}
+	
 }

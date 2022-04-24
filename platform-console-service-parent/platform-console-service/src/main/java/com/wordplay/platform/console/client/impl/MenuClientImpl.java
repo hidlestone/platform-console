@@ -2,6 +2,7 @@ package com.wordplay.platform.console.client.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
@@ -186,6 +187,17 @@ public class MenuClientImpl implements MenuClient {
 	@ApiOperation(value = "根据父ID查询菜单")
 	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
 		ResponseResult<List<Menu>> menuList = menuService.getMenuListByParentId(parentId);
+		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
+		return ResponseResult.success(menuResponseList);
+	}
+
+	@Override
+	@GetMapping("/getmainmenus")
+	@ApiOperation(value = "查询主菜单")
+	public ResponseResult<List<MenuResponse>> getMainMenus() {
+		QueryWrapper<Menu> wrapper = new QueryWrapper();
+		wrapper.isNull("parent_id");
+		List<Menu> menuList = menuService.list(wrapper);
 		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
 		return ResponseResult.success(menuResponseList);
 	}

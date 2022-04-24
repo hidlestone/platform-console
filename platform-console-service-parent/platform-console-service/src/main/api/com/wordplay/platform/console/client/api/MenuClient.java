@@ -52,4 +52,7 @@ public interface MenuClient {
 	@GetMapping("/getmenulistbyparentid")
 	ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId);
 
+	@GetMapping("/getmainmenus")
+	ResponseResult<List<MenuResponse>> getMainMenus();
+
 }

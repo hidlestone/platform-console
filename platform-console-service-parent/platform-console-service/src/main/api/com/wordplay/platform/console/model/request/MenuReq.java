@@ -52,6 +52,6 @@ public class MenuReq extends BasePageRequest {
 	private String remark;
 
 	@ApiModelProperty("是否显示")
-	private StatusEnum isShow;
+	private StatusEnum status;
 
 }
