@@ -1,0 +1,24 @@
+server:
+  port: 7070
+
+platform:
+  console:
+    service:
+      name: platform-console-service-
+      version: payn
+    control:
+      name: platform-console-control-
+      version: payn
+
+spring:
+  application:
+    name: platform-console-control
+  cloud:
+    config:
+      override-none: true
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1
+        namespace: platform-dev
+        group: DEFAULT_GROUP
+        service: ${platform.console.control.name}${platform.console.control.version}

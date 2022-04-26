@@ -95,5 +95,5 @@ public class MenuControl {
 	public ResponseResult<List<MenuResponse>> getMainMenus() {
 		return menuClient.getMainMenus();
 	}
-	
+
 }

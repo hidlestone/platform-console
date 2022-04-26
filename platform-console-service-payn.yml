@@ -1,0 +1,25 @@
+server:
+  port: 6060
+
+platform:
+  console:
+    service:
+      name: platform-console-service-
+      version: payn
+    control:
+      name: platform-console-control-
+      version: payn
+
+spring:
+  application:
+    name: platform-console-service
+  cloud:
+    config:
+      override-none: true
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1
+        namespace: platform-dev
+        group: DEFAULT_GROUP
+        service: ${platform.console.service.name}${platform.console.service.version}
+        ip: 127.0.0.1       #用于指定注册地址127.0.0.1
