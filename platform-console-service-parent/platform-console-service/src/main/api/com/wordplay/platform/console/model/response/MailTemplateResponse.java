@@ -40,7 +40,7 @@ public class MailTemplateResponse extends BaseEntityResponse {
 	private Long fileGroupId;
 
 	@ApiModelProperty("重试次数")
-	private Boolean retryCount;
+	private Byte retryCount;
 
 	@ApiModelProperty("创建用户ID")
 	private Long createUserId;

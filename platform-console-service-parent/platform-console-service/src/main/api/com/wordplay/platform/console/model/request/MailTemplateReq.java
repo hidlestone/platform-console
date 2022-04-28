@@ -16,6 +16,9 @@ public class MailTemplateReq extends BasePageRequest {
 
 	private static final long serialVersionUID = -734434411782269463L;
 
+	@ApiModelProperty("ID")
+	private Long id;
+
 	@ApiModelProperty("邮件模板配置编码")
 	private String code;
 

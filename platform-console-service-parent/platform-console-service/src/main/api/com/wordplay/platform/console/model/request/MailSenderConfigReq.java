@@ -16,6 +16,9 @@ public class MailSenderConfigReq extends BasePageRequest {
 
 	private static final long serialVersionUID = -5804463321305692737L;
 
+	@ApiModelProperty("ID")
+	private Long id;
+
 	@ApiModelProperty("如：smtp.163.com")
 	private String host;
 
