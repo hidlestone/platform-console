@@ -22,3 +22,4 @@ spring:
         namespace: platform-dev
         group: DEFAULT_GROUP
         service: ${platform.console.control.name}${platform.console.control.version}
+        ip: 127.0.0.1       # 用于指定注册地址127.0.0.1

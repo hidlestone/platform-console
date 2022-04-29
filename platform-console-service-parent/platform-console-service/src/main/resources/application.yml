@@ -1,2 +1,21 @@
 # flyway maven 插件数据库配置
+# V1.0_0_202204292225__s_menu_update.sql
+# V  1.0_0(版本号) 202204292225(时间) s_menu_update(操作描述)
+spring:
+  first-datasource:
+    skip: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fallplatform?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    table: flyway-schema-history
+    location: db/migration/platform
+  second-datasource:
+    skip: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fallplatform?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    table: flyway-schema-history
+    location: db/migration/other
 
