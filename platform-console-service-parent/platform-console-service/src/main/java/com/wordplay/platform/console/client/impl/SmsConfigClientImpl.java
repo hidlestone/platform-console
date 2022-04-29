@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,6 +69,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	public ResponseResult update(@RequestBody SmsConfigReq req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);
+		smsConfig.setGmtModified(new Date());
 		smsConfigService.updateById(smsConfig);
 		return ResponseResult.success();
 	}

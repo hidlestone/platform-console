@@ -58,7 +58,7 @@ public class SmsTemplateControl {
 		return smsTemplateClient.get(id);
 	}
 
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信模板")
 	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req) {
 		return smsTemplateClient.list(req);

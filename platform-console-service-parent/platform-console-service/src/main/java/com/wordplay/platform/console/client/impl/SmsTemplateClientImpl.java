@@ -83,7 +83,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 	}
 
 	@Override
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信模板")
 	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req) {
 		SmsTemplateReqeust reqeust = new SmsTemplateReqeust();

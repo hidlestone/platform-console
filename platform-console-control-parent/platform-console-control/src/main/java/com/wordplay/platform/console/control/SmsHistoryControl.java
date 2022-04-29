@@ -38,7 +38,7 @@ public class SmsHistoryControl {
 		return smsHistoryClient.get(id);
 	}
 
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信历史")
 	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req) {
 		return smsHistoryClient.list(req);

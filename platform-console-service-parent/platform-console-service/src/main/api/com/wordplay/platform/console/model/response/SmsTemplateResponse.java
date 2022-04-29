@@ -28,7 +28,7 @@ public class SmsTemplateResponse extends BaseEntityResponse {
 	private String from;
 
 	@ApiModelProperty("0-简单，1-模板")
-	private Boolean contentType;
+	private Byte contentType;
 
 	@ApiModelProperty("内容")
 	private String content;
@@ -50,5 +50,5 @@ public class SmsTemplateResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("更改时间")
 	private Date gmtModified;
-	
+
 }

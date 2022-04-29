@@ -27,7 +27,7 @@ public class SmsTemplateReq extends BasePageRequest {
 	private String from;
 
 	@ApiModelProperty("0-简单，1-模板")
-	private ContentTypeEnum contentType;
+	private Byte contentType;
 
 	@ApiModelProperty("内容")
 	private String content;

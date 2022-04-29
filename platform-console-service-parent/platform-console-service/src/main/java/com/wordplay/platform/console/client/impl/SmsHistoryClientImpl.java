@@ -51,7 +51,7 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 	}
 
 	@Override
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信历史")
 	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req) {
 		SmsHistoryRequest request = new SmsHistoryRequest();

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ import java.util.List;
 @RequestMapping("/${platform.console.control.version}/smsconfig")
 public class SmsConfigControl {
 
+	@Resource
 	private SmsConfigClient smsConfigClient;
 
 	@PostMapping("/save")
