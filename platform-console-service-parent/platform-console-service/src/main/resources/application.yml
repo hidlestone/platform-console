@@ -2,7 +2,7 @@
 # V1.0_0_202204292225__s_menu_update.sql
 # V  1.0_0(版本号) 202204292225(时间) s_menu_update(操作描述)
 # 执行方式：
-# 1、run maven --> package 则自动执行flyway:migrate。 2、右侧，Maven Project 选中对应项目Plugins --> flyway --> flyway:migrate 。 3、启动服务自动执行flyway:migrate
+# 1、run maven --> package 则自动执行flyway:migrate。2、右侧，Maven Project 选中对应项目Plugins --> flyway --> flyway:migrate 。3、启动服务自动执行flyway:migrate
 spring:
   first-datasource:
     skip: false
