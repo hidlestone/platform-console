@@ -6,13 +6,12 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.config.entity.SysParamGroup;
 import com.fallframework.platform.starter.config.entity.SysParamItem;
-import com.fallframework.platform.starter.config.model.SysParamGroupRequest;
 import com.fallframework.platform.starter.config.model.SysParamGroupResponse;
 import com.fallframework.platform.starter.config.service.SysParamGroupService;
 import com.fallframework.platform.starter.config.service.SysParamItemService;
 import com.wordplay.platform.console.client.api.SysParamClient;
-import com.wordplay.platform.console.model.request.SysParamGroupReq;
-import com.wordplay.platform.console.model.request.SysParamItemReq;
+import com.wordplay.platform.console.model.request.SysParamGroupRequest;
+import com.wordplay.platform.console.model.request.SysParamItemRequest;
 import com.wordplay.platform.console.model.response.SysParamGroupResp;
 import com.wordplay.platform.console.model.response.SysParamItemResp;
 import com.wordplay.platform.console.util.LeafPageUtil;
@@ -45,13 +44,13 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/savegroup")
 	@ApiOperation(value = "保存配置组及明细项")
-	public ResponseResult saveGroup(@RequestBody SysParamGroupReq req) {
+	public ResponseResult saveGroup(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = new SysParamGroup();
-		BeanUtils.copyProperties(req, sysParamGroup);
+		BeanUtils.copyProperties(request, sysParamGroup);
 		sysParamGroupService.save(sysParamGroup);
 		// 明细项
-		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(req.getSysParamItemList()), SysParamItem.class);
+		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(request.getSysParamItemList()), SysParamItem.class);
 		sysParamItemService.saveBatch(sysParamItemList);
 		return ResponseResult.success();
 	}
@@ -59,9 +58,9 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/saveitem")
 	@ApiOperation(value = "保存配置明细项")
-	public ResponseResult saveItem(@RequestBody SysParamItemReq req) {
+	public ResponseResult saveItem(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
-		BeanUtils.copyProperties(req, sysParamItem);
+		BeanUtils.copyProperties(request, sysParamItem);
 		return ResponseResult.success();
 	}
 
@@ -87,13 +86,13 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/updategroup")
 	@ApiOperation(value = "更新配置组及明细项")
-	public ResponseResult updateGroup(@RequestBody SysParamGroupReq req) {
+	public ResponseResult updateGroup(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = new SysParamGroup();
-		BeanUtils.copyProperties(req, sysParamGroup);
+		BeanUtils.copyProperties(request, sysParamGroup);
 		sysParamGroupService.updateById(sysParamGroup);
 		// 明细项
-		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(req.getSysParamItemList()), SysParamItem.class);
+		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(request.getSysParamItemList()), SysParamItem.class);
 		sysParamItemService.updateBatchById(sysParamItemList);
 		return ResponseResult.success();
 	}
@@ -101,9 +100,9 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override  
 	@PostMapping("/updateitem")
 	@ApiOperation(value = "更新配置明细项")
-	public ResponseResult updateItem(@RequestBody SysParamItemReq req) {
+	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
-		BeanUtils.copyProperties(req, sysParamItem);
+		BeanUtils.copyProperties(request, sysParamItem);
 		sysParamItemService.updateById(sysParamItem);
 		return ResponseResult.success();
 	}
@@ -129,8 +128,8 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@GetMapping("/groupList")
 	@ApiOperation(value = "分页查询配置组及明细项")
-	public ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupReq req) {
-		SysParamGroupRequest request = new SysParamGroupRequest();
+	public ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupRequest req) {
+		com.fallframework.platform.starter.config.model.SysParamGroupRequest request = new com.fallframework.platform.starter.config.model.SysParamGroupRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<SysParamGroupResponse> page = sysParamGroupService.list(request).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, SysParamGroupResp.class);

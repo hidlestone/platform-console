@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel("MQ轨迹日志请求参数")
-public class MqTraceLogReq extends BasePageRequest {
+public class MqTraceLogRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -5439688402841283381L;
 

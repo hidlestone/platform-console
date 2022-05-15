@@ -2,8 +2,8 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.SysParamGroupReq;
-import com.wordplay.platform.console.model.request.SysParamItemReq;
+import com.wordplay.platform.console.model.request.SysParamGroupRequest;
+import com.wordplay.platform.console.model.request.SysParamItemRequest;
 import com.wordplay.platform.console.model.response.SysParamGroupResp;
 import com.wordplay.platform.console.model.response.SysParamItemResp;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,10 +23,10 @@ import java.util.List;
 public interface SysParamClient {
 
 	@PostMapping("/savegroup")
-	ResponseResult saveGroup(@RequestBody SysParamGroupReq req);
+	ResponseResult saveGroup(@RequestBody SysParamGroupRequest request);
 
 	@PostMapping("/saveitem")
-	ResponseResult saveItem(@RequestBody SysParamItemReq req);
+	ResponseResult saveItem(@RequestBody SysParamItemRequest request);
 
 	@PostMapping("/deletegroup")
 	ResponseResult deleteGroup(@RequestParam String code);
@@ -35,10 +35,10 @@ public interface SysParamClient {
 	ResponseResult deleteItem(@RequestParam String code);
 
 	@PostMapping("/updategroup")
-	ResponseResult updateGroup(@RequestBody SysParamGroupReq req);
+	ResponseResult updateGroup(@RequestBody SysParamGroupRequest request);
 
 	@PostMapping("/updateitem")
-	ResponseResult updateItem(@RequestBody SysParamItemReq req);
+	ResponseResult updateItem(@RequestBody SysParamItemRequest request);
 
 	@GetMapping("/getgroupitems")
 	ResponseResult<SysParamGroupResp> getGroupItems(@RequestParam String code);
@@ -47,6 +47,6 @@ public interface SysParamClient {
 	ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(@RequestParam String groupCode);
 
 	@GetMapping("/groupList")
-	ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupReq req);
+	ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupRequest request);
 
 }

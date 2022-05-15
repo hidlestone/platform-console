@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("系统参数组请求参数")
-public class SysParamGroupReq extends BasePageRequest {
+public class SysParamGroupRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -5661148434944084869L;
 
@@ -29,6 +29,6 @@ public class SysParamGroupReq extends BasePageRequest {
 	private StatusEnum status;
 
 	@ApiModelProperty("系统参数组明细项")
-	private List<SysParamItemReq> sysParamItemList;
+	private List<SysParamItemRequest> sysParamItemList;
 
 }

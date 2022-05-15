@@ -5,10 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.i18n.entity.I18nResource;
-import com.fallframework.platform.starter.i18n.model.I18nResourceRequest;
 import com.fallframework.platform.starter.i18n.service.I18nResourceService;
 import com.wordplay.platform.console.client.api.I18NClient;
-import com.wordplay.platform.console.model.request.I18nResourceReq;
+import com.wordplay.platform.console.model.request.I18nResourceRequest;
 import com.wordplay.platform.console.model.response.I18nResourceResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -38,9 +37,9 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "新增I8N词条")
-	public ResponseResult save(@RequestBody I18nResourceReq req) {
+	public ResponseResult save(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
-		BeanUtils.copyProperties(req, i18nResource);
+		BeanUtils.copyProperties(request, i18nResource);
 		i18nResourceService.save(i18nResource);
 		return ResponseResult.success();
 	}
@@ -48,7 +47,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量新增I8N词条")
-	public ResponseResult saveBatch(@RequestBody List<I18nResourceReq> reqList) {
+	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> reqList) {
 		List<I18nResource> i18nResourceList = JSON.parseArray(JSON.toJSONString(reqList), I18nResource.class);
 		for (I18nResource entity : i18nResourceList) {
 			i18nResourceService.save(entity);
@@ -67,7 +66,7 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改I8N词条")
-	public ResponseResult update(@RequestBody I18nResourceReq req) {
+	public ResponseResult update(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
 		i18nResourceService.updateById(i18nResource);
 		return ResponseResult.success();
@@ -95,8 +94,8 @@ public class I18NClientImpl implements I18NClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询I8N词条")
-	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceReq req) {
-		I18nResourceRequest request = new I18nResourceRequest();
+	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceRequest req) {
+		com.fallframework.platform.starter.i18n.model.I18nResourceRequest request = new com.fallframework.platform.starter.i18n.model.I18nResourceRequest();
 		BeanUtils.copyProperties(req, request);
 		Page<I18nResource> page = i18nResourceService.list(request).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, I18nResourceResponse.class);

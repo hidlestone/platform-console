@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("系统参数明细项请求参数")
-public class SysParamItemReq extends BaseEntityRequest {
+public class SysParamItemRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = -8814225938153234154L;
 

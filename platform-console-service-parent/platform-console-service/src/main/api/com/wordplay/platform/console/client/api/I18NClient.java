@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.I18nResourceReq;
+import com.wordplay.platform.console.model.request.I18nResourceRequest;
 import com.wordplay.platform.console.model.response.I18nResourceResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +21,16 @@ import java.util.List;
 public interface I18NClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody I18nResourceReq req);
+	ResponseResult save(@RequestBody I18nResourceRequest request);
 
 	@PostMapping("/savebatch")
-	ResponseResult saveBatch(@RequestBody List<I18nResourceReq> reqList);
+	ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> reqList);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody I18nResourceReq req);
+	ResponseResult update(@RequestBody I18nResourceRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<I18nResourceResponse> get(@RequestParam Long id);
@@ -39,6 +39,6 @@ public interface I18NClient {
 	ResponseResult<List<I18nResourceResponse>> getByResourceKey(@RequestParam String resourceKey);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceReq req);
+	ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceRequest request);
 
 }

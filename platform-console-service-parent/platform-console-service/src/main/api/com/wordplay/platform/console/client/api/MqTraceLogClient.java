@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.MqTraceLogReq;
+import com.wordplay.platform.console.model.request.MqTraceLogRequest;
 import com.wordplay.platform.console.model.response.MqTraceLogResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,6 @@ public interface MqTraceLogClient {
 	ResponseResult<MqTraceLogResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogReq req);
+	ResponseResult<Leaf<MqTraceLogResponse>> list(MqTraceLogRequest request);
 
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("I18N请求参数")
-public class I18nResourceReq extends BasePageRequest {
+public class I18nResourceRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 7878442368913931813L;
 

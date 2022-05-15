@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mq.entity.MqTraceLog;
-import com.fallframework.platform.starter.mq.model.MqTraceLogRequest;
 import com.fallframework.platform.starter.mq.service.MqTraceLogService;
 import com.wordplay.platform.console.client.api.MqTraceLogClient;
-import com.wordplay.platform.console.model.request.MqTraceLogReq;
+import com.wordplay.platform.console.model.request.MqTraceLogRequest;
 import com.wordplay.platform.console.model.response.MqTraceLogResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -53,10 +52,10 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询MQ轨迹日志")
-	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogReq req) {
-		MqTraceLogRequest request = new MqTraceLogRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<MqTraceLog> page = mqTraceLogService.list(request).getData();
+	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogRequest req) {
+		MqTraceLog mqTraceLog = new MqTraceLog();
+		BeanUtils.copyProperties(req, mqTraceLog);
+		Page<MqTraceLog> page = mqTraceLogService.list(mqTraceLog).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MqTraceLogResponse.class);
 		return ResponseResult.success(leaf);
 	}
