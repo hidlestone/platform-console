@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.PermissionReq;
+import com.wordplay.platform.console.model.request.PermissionRequest;
 import com.wordplay.platform.console.model.response.PermissionResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PermissionClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody PermissionReq req);
+	ResponseResult save(@RequestBody PermissionRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody PermissionReq req);
+	ResponseResult update(@RequestBody PermissionRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<PermissionResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req);
+	ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionRequest request);
 
 }

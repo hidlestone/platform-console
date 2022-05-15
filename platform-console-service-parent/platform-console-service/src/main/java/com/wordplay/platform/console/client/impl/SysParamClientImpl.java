@@ -98,7 +98,7 @@ public class SysParamClientImpl implements SysParamClient {
 		return ResponseResult.success();
 	}
 
-	@Override
+	@Override  
 	@PostMapping("/updateitem")
 	@ApiOperation(value = "更新配置明细项")
 	public ResponseResult updateItem(@RequestBody SysParamItemReq req) {

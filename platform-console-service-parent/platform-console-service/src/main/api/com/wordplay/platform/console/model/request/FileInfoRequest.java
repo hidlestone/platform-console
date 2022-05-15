@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("文件明细项请求参数")
-public class FileInfoReq extends BasePageRequest {
+public class FileInfoRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -2336125469947087327L;
 

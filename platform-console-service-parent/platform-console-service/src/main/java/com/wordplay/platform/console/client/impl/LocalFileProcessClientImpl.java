@@ -1,10 +1,10 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.file.model.FileGroupUploadRequest;
+import com.fallframework.platform.starter.file.model.FileGroupUploadDto;
 import com.fallframework.platform.starter.file.service.FileProcessService;
 import com.wordplay.platform.console.client.api.LocalFileProcessClient;
-import com.wordplay.platform.console.model.request.FileGroupUploadReq;
+import com.wordplay.platform.console.model.request.FileGroupUploadRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -31,10 +31,10 @@ public class LocalFileProcessClientImpl implements LocalFileProcessClient {
 	@Override
 	@PostMapping("/uploadfilegroup")
 	@ApiOperation(value = "上传文件组")
-	public ResponseResult uploadFileGroup(FileGroupUploadReq req) {
-		FileGroupUploadRequest request = new FileGroupUploadRequest();
-		BeanUtils.copyProperties(req, request);
-		return fileProcessService.uploadFileGroup(request);
+	public ResponseResult uploadFileGroup(FileGroupUploadRequest req) {
+		FileGroupUploadDto dto = new FileGroupUploadDto();
+		BeanUtils.copyProperties(req, dto);
+		return fileProcessService.uploadFileGroup(dto);
 	}
 
 	@Override
@@ -44,5 +44,5 @@ public class LocalFileProcessClientImpl implements LocalFileProcessClient {
 		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 		return fileProcessService.downloadFile(fileInfoId, response);
 	}
-	
+
 }

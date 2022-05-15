@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("文件组请求参数")
-public class FileGroupReq extends BasePageRequest {
+public class FileGroupRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -2465784424791444246L;
 
@@ -29,6 +29,6 @@ public class FileGroupReq extends BasePageRequest {
 	private StatusEnum status;
 
 	@ApiModelProperty("文件明细项请求参数")
-	private List<FileInfoReq> fileInfoList;
+	private List<FileInfoRequest> fileInfos;
 
 }

@@ -7,11 +7,10 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.file.entity.FileGroup;
 import com.fallframework.platform.starter.file.entity.FileInfo;
-import com.fallframework.platform.starter.file.model.FileGroupRequest;
 import com.fallframework.platform.starter.file.service.FileGroupService;
 import com.fallframework.platform.starter.file.service.FileInfoService;
 import com.wordplay.platform.console.client.api.FileGroupClient;
-import com.wordplay.platform.console.model.request.FileGroupReq;
+import com.wordplay.platform.console.model.request.FileGroupRequest;
 import com.wordplay.platform.console.model.response.FileGroupResp;
 import com.wordplay.platform.console.model.response.FileInfoResp;
 import com.wordplay.platform.console.util.LeafPageUtil;
@@ -69,10 +68,10 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupReq req) {
-		FileGroupRequest fileGroupRequest = new FileGroupRequest();
-		BeanUtils.copyProperties(req, fileGroupRequest);
-		Page<FileGroup> page = fileGroupService.list(fileGroupRequest).getData();
+	public ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupRequest request) {
+		FileGroup fileGroup = new FileGroup();
+		BeanUtils.copyProperties(request, fileGroup);
+		Page<FileGroup> page = fileGroupService.list(fileGroup).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, FileGroupResp.class);
 		return ResponseResult.success(leaf);
 	}

@@ -4,7 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.ReUtil;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.cache.redis.util.RedisUtil;
-import com.fallframework.platform.starter.mail.model.MailSendInfoRequest;
+import com.fallframework.platform.starter.mail.model.MailSendInfoDto;
 import com.fallframework.platform.starter.mail.service.PlatformMailSender;
 import com.fallframework.platform.starter.rbac.constant.RbacStarterConstant;
 import com.wordplay.platform.console.model.enums.VerifyCodeSenderEnum;
@@ -42,8 +42,8 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 		// 发送邮件
 		if (VerifyCodeSenderEnum.MAIL.equals(request.getVerifyCodeSender())) {
 			// TODO 发送模板邮件
-			MailSendInfoRequest infoRequest = new MailSendInfoRequest();
-			platformMailSender.sendTemplateEmail(infoRequest);
+			MailSendInfoDto dto = new MailSendInfoDto();
+			platformMailSender.sendTemplateEmail(dto);
 
 		} else {
 			// TODO 发送模板短信

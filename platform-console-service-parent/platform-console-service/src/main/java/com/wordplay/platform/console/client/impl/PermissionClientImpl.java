@@ -6,7 +6,7 @@ import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Permission;
 import com.fallframework.platform.starter.rbac.service.PermissionService;
 import com.wordplay.platform.console.client.api.PermissionClient;
-import com.wordplay.platform.console.model.request.PermissionReq;
+import com.wordplay.platform.console.model.request.PermissionRequest;
 import com.wordplay.platform.console.model.response.PermissionResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -34,9 +34,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存接口权限")
-	public ResponseResult save(@RequestBody PermissionReq req) {
+	public ResponseResult save(@RequestBody PermissionRequest request) {
 		Permission permission = new Permission();
-		BeanUtils.copyProperties(req, permission);
+		BeanUtils.copyProperties(request, permission);
 		permissionService.save(permission);
 		return ResponseResult.success();
 	}
@@ -52,9 +52,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改接口权限")
-	public ResponseResult update(@RequestBody PermissionReq req) {
+	public ResponseResult update(@RequestBody PermissionRequest request) {
 		Permission permission = new Permission();
-		BeanUtils.copyProperties(req, permission);
+		BeanUtils.copyProperties(request, permission);
 		permissionService.updateById(permission);
 		return ResponseResult.success();
 	}
@@ -72,9 +72,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询接口权限")
-	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req) {
+	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionRequest request) {
 		Permission permission = new Permission();
-		BeanUtils.copyProperties(req, permission);
+		BeanUtils.copyProperties(request, permission);
 		Page<Permission> page = permissionService.list(permission).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, PermissionResponse.class);
 		return ResponseResult.success(leaf);

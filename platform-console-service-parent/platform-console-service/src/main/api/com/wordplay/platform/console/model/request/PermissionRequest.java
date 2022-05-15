@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("权限查询请求参数")
-public class PermissionReq extends BasePageRequest {
+public class PermissionRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 8949192605311863780L;
 

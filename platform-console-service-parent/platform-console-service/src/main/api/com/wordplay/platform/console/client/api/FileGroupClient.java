@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.FileGroupReq;
+import com.wordplay.platform.console.model.request.FileGroupRequest;
 import com.wordplay.platform.console.model.response.FileGroupResp;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +25,6 @@ public interface FileGroupClient {
 	ResponseResult<FileGroupResp> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupReq req);
+	ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupRequest request);
 
 }

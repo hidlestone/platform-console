@@ -1,7 +1,7 @@
 package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.FileGroupUploadReq;
+import com.wordplay.platform.console.model.request.FileGroupUploadRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface LocalFileProcessClient {
 
 	@PostMapping("/uploadfilegroup")
-	ResponseResult uploadFileGroup(FileGroupUploadReq req);
+	ResponseResult uploadFileGroup(FileGroupUploadRequest request);
 
 	@PostMapping("/downloadfile")
 	ResponseResult downloadFile(Long fileInfoId);

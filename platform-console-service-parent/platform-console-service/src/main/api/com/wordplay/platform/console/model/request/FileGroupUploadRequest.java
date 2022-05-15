@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("文件上传请求参数")
-public class FileGroupUploadReq extends BaseEntityRequest {
+public class FileGroupUploadRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = -355449103197876043L;
 
