@@ -18,7 +18,7 @@ import java.util.List;
 @FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/dictdtl")
 public interface DictDtlClient {
 
-	@RequestMapping("/getDictDtlsByDictCode")
+	@RequestMapping("/getdictdtlsbydictcode")
 	ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode);
 
 	@PostMapping("/list")
