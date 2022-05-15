@@ -1,19 +1,18 @@
 package com.wordplay.platform.console.client.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.config.entity.SysParamGroup;
 import com.fallframework.platform.starter.config.entity.SysParamItem;
-import com.fallframework.platform.starter.config.model.SysParamGroupResponse;
 import com.fallframework.platform.starter.config.service.SysParamGroupService;
 import com.fallframework.platform.starter.config.service.SysParamItemService;
 import com.wordplay.platform.console.client.api.SysParamClient;
 import com.wordplay.platform.console.model.request.SysParamGroupRequest;
 import com.wordplay.platform.console.model.request.SysParamItemRequest;
-import com.wordplay.platform.console.model.response.SysParamGroupResp;
-import com.wordplay.platform.console.model.response.SysParamItemResp;
+import com.wordplay.platform.console.model.response.SysParamItemResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,10 +67,14 @@ public class SysParamClientImpl implements SysParamClient {
 	@PostMapping("/deletegroup")
 	@ApiOperation(value = "删除配置组及明细项")
 	public ResponseResult deleteGroup(@RequestParam String code) {
+		QueryWrapper<SysParamGroup> wrapper01 = new QueryWrapper();
+		wrapper01.eq("code", code);
 		// 配置组
-		sysParamGroupService.removeById(code);
+		sysParamGroupService.remove(wrapper01);
 		// 明细项
-		sysParamItemService.deleteByGroupCode(code);
+		QueryWrapper<SysParamItem> wrapper02 = new QueryWrapper();
+		wrapper02.eq("group_code", code);
+		sysParamItemService.remove(wrapper02);
 		return ResponseResult.success();
 	}
 
@@ -79,7 +82,9 @@ public class SysParamClientImpl implements SysParamClient {
 	@PostMapping("/deleteitem")
 	@ApiOperation(value = "删除明细项")
 	public ResponseResult deleteItem(@RequestParam String code) {
-		sysParamItemService.removeById(code);
+		QueryWrapper<SysParamItem> wrapper = new QueryWrapper();
+		wrapper.eq("code", code);
+		sysParamItemService.remove(wrapper);
 		return ResponseResult.success();
 	}
 
@@ -97,7 +102,7 @@ public class SysParamClientImpl implements SysParamClient {
 		return ResponseResult.success();
 	}
 
-	@Override  
+	@Override
 	@PostMapping("/updateitem")
 	@ApiOperation(value = "更新配置明细项")
 	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
@@ -108,31 +113,34 @@ public class SysParamClientImpl implements SysParamClient {
 	}
 
 	@Override
-	@GetMapping("/getgroupitems")
-	@ApiOperation(value = "根据配置组编码查询配置组及明细项")
-	public ResponseResult<SysParamGroupResp> getGroupItems(@RequestParam String code) {
-		ResponseResult<SysParamGroupResponse> list = sysParamGroupService.get(code);
-		SysParamGroupResp resp = JSON.parseObject(JSON.toJSONString(list), SysParamGroupResp.class);
-		return ResponseResult.success(resp);
-	}
-
-	@Override
 	@GetMapping("/getitemsbygroupcode")
 	@ApiOperation(value = "根据配置组编码查询配置明细项")
-	public ResponseResult<List<SysParamItemResp>> getItemsByGroupCode(@RequestParam String groupCode) {
-		List<SysParamItem> list = sysParamItemService.getByGroupCode(groupCode).getData();
-		List<SysParamItemResp> respList = JSON.parseArray(JSON.toJSONString(list), SysParamItemResp.class);
+	public ResponseResult<List<SysParamItemResponse>> getItemsByGroupCode(@RequestParam String groupCode) {
+		QueryWrapper<SysParamItem> wrapper = new QueryWrapper();
+		wrapper.eq("group_code", groupCode);
+		List<SysParamItem> list = sysParamItemService.list(wrapper);
+		List<SysParamItemResponse> respList = JSON.parseArray(JSON.toJSONString(list), SysParamItemResponse.class);
 		return ResponseResult.success(respList);
 	}
 
 	@Override
-	@GetMapping("/groupList")
-	@ApiOperation(value = "分页查询配置组及明细项")
-	public ResponseResult<Leaf<SysParamGroupResp>> groupList(@RequestBody SysParamGroupRequest req) {
-		com.fallframework.platform.starter.config.model.SysParamGroupRequest request = new com.fallframework.platform.starter.config.model.SysParamGroupRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<SysParamGroupResponse> page = sysParamGroupService.list(request).getData();
-		Leaf leaf = LeafPageUtil.pageToLeaf(page, SysParamGroupResp.class);
+	@GetMapping("/get")
+	@ApiOperation(value = "根据编码查询配置明细")
+	public ResponseResult<SysParamItemResponse> get(String code) {
+		SysParamItem sysParamItem = sysParamItemService.get(code).getData();
+		SysParamItemResponse response = new SysParamItemResponse();
+		BeanUtils.copyProperties(sysParamItem, response);
+		return ResponseResult.success(response);
+	}
+
+	@Override
+	@PostMapping("/list")
+	@ApiOperation(value = "分页查询配置明细")
+	public ResponseResult<Leaf<SysParamItemResponse>> list(SysParamItemRequest request) {
+		SysParamItem sysParamItem = new SysParamItem();
+		BeanUtils.copyProperties(request, sysParamItem);
+		Page<SysParamItem> page = sysParamItemService.list(sysParamItem).getData();
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, SysParamItemResponse.class);
 		return ResponseResult.success(leaf);
 	}
 

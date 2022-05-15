@@ -1,4 +1,4 @@
-package com.wordplay.platform.console.model.request;
+package com.wordplay.platform.console.model.response;
 
 import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.request.BasePageRequest;
@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ApiModel("系统参数组请求参数")
-public class SysParamGroupRequest extends BasePageRequest {
+@ApiModel("系统参数组响应参数")
+public class SysParamGroupResponse extends BasePageRequest {
 
-	private static final long serialVersionUID = -5661148434944084869L;
+	private static final long serialVersionUID = 6260086277628440403L;
 
 	@ApiModelProperty("主键")
 	private Long id;
@@ -32,6 +32,6 @@ public class SysParamGroupRequest extends BasePageRequest {
 	private StatusEnum status;
 
 	@ApiModelProperty("系统参数组明细项")
-	private List<SysParamItemRequest> sysParamItemList;
+	private List<SysParamItemResponse> sysParamItems;
 
 }

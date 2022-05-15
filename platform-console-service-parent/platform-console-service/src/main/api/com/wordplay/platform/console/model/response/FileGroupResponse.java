@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("文件组响应参数")
-public class FileGroupResp extends BaseEntityResponse {
+public class FileGroupResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = -7980093753360873758L;
 
@@ -41,5 +41,5 @@ public class FileGroupResp extends BaseEntityResponse {
 	private Date gmtModified;
 
 	@ApiModelProperty("文件明细项")
-	private List<FileInfoResp> fileInfoResponseList;
+	private List<FileInfoResponse> fileInfoResponseList;
 }

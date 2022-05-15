@@ -11,8 +11,8 @@ import com.fallframework.platform.starter.file.service.FileGroupService;
 import com.fallframework.platform.starter.file.service.FileInfoService;
 import com.wordplay.platform.console.client.api.FileGroupClient;
 import com.wordplay.platform.console.model.request.FileGroupRequest;
-import com.wordplay.platform.console.model.response.FileGroupResp;
-import com.wordplay.platform.console.model.response.FileInfoResp;
+import com.wordplay.platform.console.model.response.FileGroupResponse;
+import com.wordplay.platform.console.model.response.FileInfoResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,26 +53,26 @@ public class FileGroupClientImpl implements FileGroupClient {
 	@Override
 	@PostMapping("/get")
 	@ApiOperation(value = "查询文件组及明细")
-	public ResponseResult<FileGroupResp> get(@RequestParam Long id) {
+	public ResponseResult<FileGroupResponse> get(@RequestParam Long id) {
 		FileGroup fileGroup = fileGroupService.getById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
 		wrapper.eq("file_group_id", id);
 		List<FileInfo> fileInfoList = fileInfoService.list(wrapper);
-		FileGroupResp fileGroupResp = new FileGroupResp();
-		BeanUtils.copyProperties(fileGroup, fileGroupResp);
-		List<FileInfoResp> fileInfoRespList = JSON.parseArray(JSON.toJSONString(fileInfoList), FileInfoResp.class);
-		fileGroupResp.setFileInfoResponseList(fileInfoRespList);
-		return ResponseResult.success(fileGroupResp);
+		FileGroupResponse fileGroupResponse = new FileGroupResponse();
+		BeanUtils.copyProperties(fileGroup, fileGroupResponse);
+		List<FileInfoResponse> fileInfoResponseList = JSON.parseArray(JSON.toJSONString(fileInfoList), FileInfoResponse.class);
+		fileGroupResponse.setFileInfoResponseList(fileInfoResponseList);
+		return ResponseResult.success(fileGroupResponse);
 	}
 
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupRequest request) {
+	public ResponseResult<Leaf<FileGroupResponse>> list(@RequestBody FileGroupRequest request) {
 		FileGroup fileGroup = new FileGroup();
 		BeanUtils.copyProperties(request, fileGroup);
 		Page<FileGroup> page = fileGroupService.list(fileGroup).getData();
-		Leaf leaf = LeafPageUtil.pageToLeaf(page, FileGroupResp.class);
+		Leaf leaf = LeafPageUtil.pageToLeaf(page, FileGroupResponse.class);
 		return ResponseResult.success(leaf);
 	}
 

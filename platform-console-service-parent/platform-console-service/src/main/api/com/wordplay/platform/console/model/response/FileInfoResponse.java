@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel("文件明细项响应参数")
-public class FileInfoResp extends BaseEntityResponse {
+public class FileInfoResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = -9115862325100666288L;
 
