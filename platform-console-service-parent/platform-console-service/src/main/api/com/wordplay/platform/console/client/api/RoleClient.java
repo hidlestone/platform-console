@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.RoleReq;
+import com.wordplay.platform.console.model.request.RoleRequest;
 import com.wordplay.platform.console.model.response.RoleResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,19 +21,19 @@ import java.util.List;
 public interface RoleClient {
 
 	@PostMapping("/save")
-	ResponseResult<RoleResponse> save(@RequestBody RoleReq req);
+	ResponseResult<RoleResponse> save(@RequestBody RoleRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody RoleReq req);
+	ResponseResult update(@RequestBody RoleRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<RoleResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req);
+	ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleRequest request);
 
 	@GetMapping("/getrolesbyuserid")
 	ResponseResult<List<RoleResponse>> getRolesByUserId(@RequestParam Long userId);

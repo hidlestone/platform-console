@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("菜单查询请求参数")
-public class MenuReq extends BasePageRequest {
+public class MenuRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 7111135764843134508L;
 

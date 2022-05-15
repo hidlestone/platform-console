@@ -16,7 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel("用户查询请求参数")
-public class UserQueryReq extends BasePageRequest {
+public class UserRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 254614521307599409L;
 

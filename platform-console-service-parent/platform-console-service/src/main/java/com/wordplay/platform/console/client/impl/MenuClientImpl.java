@@ -8,14 +8,12 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
 import com.fallframework.platform.starter.rbac.entity.User;
-import com.fallframework.platform.starter.rbac.model.MenuQueryRequest;
-import com.fallframework.platform.starter.rbac.model.MenuRequest;
 import com.fallframework.platform.starter.rbac.service.MenuService;
 import com.fallframework.platform.starter.rbac.util.RequestContexUtil;
 import com.fallframework.platform.starter.shiro.util.JWTUtil;
 import com.wordplay.platform.console.client.api.MenuClient;
-import com.wordplay.platform.console.model.request.MenuQueryReq;
-import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.request.MenuQueryRequest;
+import com.wordplay.platform.console.model.request.MenuRequest;
 import com.wordplay.platform.console.model.response.FrontMenuResponse;
 import com.wordplay.platform.console.model.response.MenuMetaInfoResponse;
 import com.wordplay.platform.console.model.response.MenuResponse;
@@ -55,9 +53,9 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存菜单")
-	public ResponseResult save(@RequestBody MenuReq req) {
+	public ResponseResult save(@RequestBody MenuRequest request) {
 		Menu menu = new Menu();
-		BeanUtils.copyProperties(req, menu);
+		BeanUtils.copyProperties(request, menu);
 		menuService.save(menu);
 		return ResponseResult.success();
 	}
@@ -73,9 +71,9 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改菜单")
-	public ResponseResult update(@RequestBody MenuReq req) {
+	public ResponseResult update(@RequestBody MenuRequest request) {
 		Menu menu = new Menu();
-		BeanUtils.copyProperties(req, menu);
+		BeanUtils.copyProperties(request, menu);
 		menuService.updateById(menu);
 		return ResponseResult.success();
 	}
@@ -93,10 +91,10 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuReq req) {
-		MenuRequest request = new MenuRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<Menu> page = menuService.list(request).getData();
+	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuRequest request) {
+		Menu menu = new Menu();
+		BeanUtils.copyProperties(request, menu);
+		Page<Menu> page = menuService.list(menu).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
 		return ResponseResult.success(leaf);
 	}
@@ -104,10 +102,10 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/getmenusbyuserid")
 	@ApiOperation(value = "根据用户ID分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
-		MenuQueryRequest request = new MenuQueryRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<Menu> page = menuService.getMenusByUserId(request).getData();
+	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryRequest request) {
+		Menu menu = new Menu();
+		BeanUtils.copyProperties(request, menu);
+		Page<Menu> page = menuService.list(menu).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
 		return ResponseResult.success(leaf);
 	}
@@ -115,10 +113,10 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/getmenusbyroleids")
 	@ApiOperation(value = "根据角色ID分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
-		MenuQueryRequest request = new MenuQueryRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<Menu> page = menuService.getMenusByRoleIds(request).getData();
+	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryRequest request) {
+		Menu menu = new Menu();
+		BeanUtils.copyProperties(request, menu);
+		Page<Menu> page = menuService.list(menu).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MenuResponse.class);
 		return ResponseResult.success(leaf);
 	}
@@ -174,10 +172,10 @@ public class MenuClientImpl implements MenuClient {
 	@Override
 	@PostMapping("/getmenutree")
 	@ApiOperation(value = "查询菜单树")
-	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
-		MenuQueryRequest request = new MenuQueryRequest();
-		BeanUtils.copyProperties(req, request);
-		ResponseResult<List<Menu>> responseResult = menuService.getMenuTree(request);
+	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryRequest request) {
+		Menu menu = new Menu();
+		BeanUtils.copyProperties(request, menu);
+		ResponseResult<List<Menu>> responseResult = menuService.getMenuTree(menu);
 		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(responseResult.getData()), MenuResponse.class);
 		return ResponseResult.success(menuResponseList);
 	}
@@ -186,7 +184,7 @@ public class MenuClientImpl implements MenuClient {
 	@GetMapping("/getmenulistbyparentid")
 	@ApiOperation(value = "根据父ID查询菜单")
 	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
-		ResponseResult<List<Menu>> menuList = menuService.getMenuListByParentId(parentId);
+		ResponseResult<List<Menu>> menuList = menuService.getMenusByParentId(parentId);
 		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
 		return ResponseResult.success(menuResponseList);
 	}

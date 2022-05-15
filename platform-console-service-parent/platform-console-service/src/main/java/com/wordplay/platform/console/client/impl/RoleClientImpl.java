@@ -7,13 +7,12 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Role;
 import com.fallframework.platform.starter.rbac.entity.RoleMenu;
-import com.fallframework.platform.starter.rbac.model.RoleRequest;
 import com.fallframework.platform.starter.rbac.service.RoleMenuService;
 import com.fallframework.platform.starter.rbac.service.RolePermissionService;
 import com.fallframework.platform.starter.rbac.service.RoleService;
 import com.wordplay.platform.console.client.api.RoleClient;
-import com.wordplay.platform.console.model.request.MenuReq;
-import com.wordplay.platform.console.model.request.RoleReq;
+import com.wordplay.platform.console.model.request.MenuRequest;
+import com.wordplay.platform.console.model.request.RoleRequest;
 import com.wordplay.platform.console.model.response.RoleResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -50,25 +49,25 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存角色及菜单关联")
-	public ResponseResult<RoleResponse> save(@Validated @RequestBody RoleReq req) {
+	public ResponseResult<RoleResponse> save(@Validated @RequestBody RoleRequest request) {
 		Role role = new Role();
-		BeanUtils.copyProperties(req, role);
+		BeanUtils.copyProperties(request, role);
 		roleService.save(role);
 		// 保存菜单关联
-		List<RoleMenu> roleMenuList = getRoleMenuList(role.getId(), req);
+		List<RoleMenu> roleMenuList = getRoleMenuList(role.getId(), request);
 		roleMenuService.saveBatch(roleMenuList);
 		RoleResponse roleResponse = new RoleResponse();
 		BeanUtils.copyProperties(role, roleResponse);
 		return ResponseResult.success(roleResponse);
 	}
 
-	public List<RoleMenu> getRoleMenuList(Long roleId, RoleReq req) {
-		List<MenuReq> menuReqList = req.getMenuReqList();
+	public List<RoleMenu> getRoleMenuList(Long roleId, RoleRequest req) {
+		List<MenuRequest> menuRequestList = req.getMenuRequestList();
 		List<RoleMenu> roleMenuList = new ArrayList<>();
-		for (MenuReq menuReq : menuReqList) {
+		for (MenuRequest menuRequest : menuRequestList) {
 			RoleMenu roleMenu = new RoleMenu();
 			roleMenu.setRoleId(roleId);
-			roleMenu.setMenuId(menuReq.getId());
+			roleMenu.setMenuId(menuRequest.getId());
 			roleMenuList.add(roleMenu);
 		}
 		return roleMenuList;
@@ -92,19 +91,19 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改角色")
-	public ResponseResult update(@RequestBody RoleReq req) {
+	public ResponseResult update(@RequestBody RoleRequest request) {
 		Role role = new Role();
-		BeanUtils.copyProperties(req, role);
+		BeanUtils.copyProperties(request, role);
 		roleService.updateById(role);
 		// 删除原来角色菜单
-		if (null == req.getId()) {
+		if (null == request.getId()) {
 			return ResponseResult.fail("角色ID不能为空");
 		}
 		QueryWrapper wrapper = new QueryWrapper();
-		wrapper.eq("role_id", req.getId());
+		wrapper.eq("role_id", request.getId());
 		roleMenuService.remove(wrapper);
 		// 新增角色菜单
-		List<RoleMenu> roleMenuList = getRoleMenuList(role.getId(), req);
+		List<RoleMenu> roleMenuList = getRoleMenuList(role.getId(), request);
 		roleMenuService.saveBatch(roleMenuList);
 		return ResponseResult.success();
 	}
@@ -122,8 +121,8 @@ public class RoleClientImpl implements RoleClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询角色")
-	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req) {
-		RoleRequest request = new RoleRequest();
+	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleRequest req) {
+		Role request = new Role();
 		BeanUtils.copyProperties(req, request);
 		Page<Role> page = roleService.list(request).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, RoleResponse.class);

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Permission;
-import com.fallframework.platform.starter.rbac.model.PermissionRequest;
 import com.fallframework.platform.starter.rbac.service.PermissionService;
 import com.wordplay.platform.console.client.api.PermissionClient;
 import com.wordplay.platform.console.model.request.PermissionReq;
@@ -74,9 +73,9 @@ public class PermissionClientImpl implements PermissionClient {
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询接口权限")
 	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req) {
-		PermissionRequest request = new PermissionRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<Permission> page = permissionService.list(request).getData();
+		Permission permission = new Permission();
+		BeanUtils.copyProperties(req, permission);
+		Page<Permission> page = permissionService.list(permission).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, PermissionResponse.class);
 		return ResponseResult.success(leaf);
 	}

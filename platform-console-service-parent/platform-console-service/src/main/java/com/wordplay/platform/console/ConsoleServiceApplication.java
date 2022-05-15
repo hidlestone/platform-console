@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 		basePackages = {"com.wordplay.platform.console.client.api"}
 )
 @MapperScan(basePackages = {
+		"com.fallframework.platform.starter.data.mp.mapper", // 基础字段
 		"com.fallframework.platform.starter.config.mapper",
 		"com.fallframework.platform.starter.i18n.mapper",
 		"com.fallframework.platform.starter.mail.mapper",

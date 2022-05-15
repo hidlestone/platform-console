@@ -8,13 +8,12 @@ import com.fallframework.platform.starter.cache.redis.util.RedisUtil;
 import com.fallframework.platform.starter.rbac.constant.RbacStarterConstant;
 import com.fallframework.platform.starter.rbac.entity.Role;
 import com.fallframework.platform.starter.rbac.entity.User;
-import com.fallframework.platform.starter.rbac.model.UserQueryRequest;
 import com.fallframework.platform.starter.rbac.service.RoleService;
 import com.fallframework.platform.starter.rbac.service.UserService;
 import com.fallframework.platform.starter.rbac.util.RequestContexUtil;
 import com.fallframework.platform.starter.shiro.util.JWTUtil;
 import com.wordplay.platform.console.client.api.UserClient;
-import com.wordplay.platform.console.model.request.UserQueryReq;
+import com.wordplay.platform.console.model.request.UserRequest;
 import com.wordplay.platform.console.model.response.UserDtlInfoResponse;
 import com.wordplay.platform.console.model.response.UserResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
@@ -62,10 +61,10 @@ public class UserClientImpl implements UserClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询用户")
-	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserQueryReq req) {
-		UserQueryRequest request = new UserQueryRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<User> page = userService.list(request).getData();
+	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserRequest request) {
+		User user = new User();
+		BeanUtils.copyProperties(request, user);
+		Page<User> page = userService.list(user).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, UserResponse.class);
 		return ResponseResult.success(leaf);
 	}

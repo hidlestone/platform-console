@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("角色请求参数")
-public class RoleReq extends BasePageRequest {
+public class RoleRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 4243904600353181565L;
 
@@ -36,6 +36,6 @@ public class RoleReq extends BasePageRequest {
 
 	@NotNull(message = "角色关联的菜单不能为空")
 	@ApiModelProperty("角色关联的菜单")
-	private List<MenuReq> menuReqList;
+	private List<MenuRequest> menuRequestList;
 
 }

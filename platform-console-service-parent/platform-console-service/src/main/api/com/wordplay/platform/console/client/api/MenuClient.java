@@ -2,8 +2,8 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.MenuQueryReq;
-import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.request.MenuQueryRequest;
+import com.wordplay.platform.console.model.request.MenuRequest;
 import com.wordplay.platform.console.model.response.FrontMenuResponse;
 import com.wordplay.platform.console.model.response.MenuResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,31 +23,31 @@ import java.util.List;
 public interface MenuClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MenuReq req);
+	ResponseResult save(@RequestBody MenuRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MenuReq req);
+	ResponseResult update(@RequestBody MenuRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<MenuResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuReq req);
+	ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuRequest request);
 
 	@PostMapping("/getmenusbyuserid")
-	ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req);
+	ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryRequest request);
 
 	@PostMapping("/getmenusbyroleids")
-	ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req);
+	ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryRequest request);
 
 	@GetMapping("/getallmenus")
 	ResponseResult<List<FrontMenuResponse>> getAllMenus();
 
 	@PostMapping("/getmenutree")
-	ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req);
+	ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryRequest request);
 
 	@GetMapping("/getmenulistbyparentid")
 	ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId);

@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("菜单查询请求参数")
-public class MenuQueryReq extends BasePageRequest {
+public class MenuQueryRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -1176042930719311116L;
 
