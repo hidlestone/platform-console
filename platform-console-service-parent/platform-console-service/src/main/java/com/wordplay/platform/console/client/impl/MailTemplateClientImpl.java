@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailTemplate;
-import com.fallframework.platform.starter.mail.model.MailTemplateRequest;
 import com.fallframework.platform.starter.mail.service.MailTemplateService;
 import com.wordplay.platform.console.client.api.MailTemplateClient;
-import com.wordplay.platform.console.model.request.MailTemplateReq;
+import com.wordplay.platform.console.model.request.MailTemplateRequest;
 import com.wordplay.platform.console.model.response.MailTemplateResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -35,9 +34,9 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailTemplateReq req) {
+	public ResponseResult save(@RequestBody MailTemplateRequest request) {
 		MailTemplate mailTemplate = new MailTemplate();
-		BeanUtils.copyProperties(req, mailTemplate);
+		BeanUtils.copyProperties(request, mailTemplate);
 		mailTemplateService.save(mailTemplate);
 		return ResponseResult.success();
 	}
@@ -53,9 +52,9 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailTemplateReq req) {
+	public ResponseResult update(@RequestBody MailTemplateRequest request) {
 		MailTemplate mailTemplate = new MailTemplate();
-		BeanUtils.copyProperties(req, mailTemplate);
+		BeanUtils.copyProperties(request, mailTemplate);
 		mailTemplateService.updateById(mailTemplate);
 		return ResponseResult.success();
 	}
@@ -73,10 +72,10 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateReq req) {
-		MailTemplateRequest request = new MailTemplateRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<MailTemplate> page = mailTemplateService.list(request).getData();
+	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateRequest req) {
+		MailTemplate mailTemplate = new MailTemplate();
+		BeanUtils.copyProperties(req, mailTemplate);
+		Page<MailTemplate> page = mailTemplateService.list(mailTemplate).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailTemplateResponse.class);
 		return ResponseResult.success(leaf);
 	}

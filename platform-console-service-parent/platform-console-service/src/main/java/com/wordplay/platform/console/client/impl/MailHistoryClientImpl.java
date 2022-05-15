@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailHistory;
-import com.fallframework.platform.starter.mail.model.MailHistoryRequest;
 import com.fallframework.platform.starter.mail.service.MailHistoryService;
 import com.wordplay.platform.console.client.api.MailHistoryClient;
-import com.wordplay.platform.console.model.request.MailHistoryReq;
+import com.wordplay.platform.console.model.request.MailHistoryRequest;
 import com.wordplay.platform.console.model.response.MailHistoryResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -53,10 +52,10 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件历史")
-	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryReq req) {
-		MailHistoryRequest request = new MailHistoryRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<MailHistory> page = mailHistoryService.list(request).getData();
+	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryRequest req) {
+		MailHistory mailHistory = new MailHistory();
+		BeanUtils.copyProperties(req, mailHistory);
+		Page<MailHistory> page = mailHistoryService.list(mailHistory).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailHistoryResponse.class);
 		return ResponseResult.success(leaf);
 	}

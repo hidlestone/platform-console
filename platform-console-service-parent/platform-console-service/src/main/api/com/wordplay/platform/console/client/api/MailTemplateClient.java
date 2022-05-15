@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.MailTemplateReq;
+import com.wordplay.platform.console.model.request.MailTemplateRequest;
 import com.wordplay.platform.console.model.response.MailTemplateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MailTemplateClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MailTemplateReq req);
+	ResponseResult save(@RequestBody MailTemplateRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MailTemplateReq req);
+	ResponseResult update(@RequestBody MailTemplateRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<MailTemplateResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateReq req);
+	ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateRequest request);
 
 }

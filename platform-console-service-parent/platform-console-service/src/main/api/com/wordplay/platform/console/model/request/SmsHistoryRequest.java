@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel("短信历史请求参数")
-public class SmsHistoryReq extends BasePageRequest {
+public class SmsHistoryRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 4745709034024473849L;
 

@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.SmsTemplateReq;
+import com.wordplay.platform.console.model.request.SmsTemplateRequest;
 import com.wordplay.platform.console.model.response.SmsTemplateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,21 +21,21 @@ import java.util.List;
 public interface SmsTemplateClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody SmsTemplateReq req);
+	ResponseResult save(@RequestBody SmsTemplateRequest request);
 
 	@PostMapping("/savebatch")
-	ResponseResult saveBatch(@RequestBody List<SmsTemplateReq> reqList);
+	ResponseResult saveBatch(@RequestBody List<SmsTemplateRequest> reqList);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody SmsTemplateReq req);
+	ResponseResult update(@RequestBody SmsTemplateRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<SmsTemplateResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req);
+	ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateRequest request);
 
 }

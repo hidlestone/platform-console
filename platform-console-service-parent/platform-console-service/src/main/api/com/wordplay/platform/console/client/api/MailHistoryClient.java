@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.MailHistoryReq;
+import com.wordplay.platform.console.model.request.MailHistoryRequest;
 import com.wordplay.platform.console.model.response.MailHistoryResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,6 @@ public interface MailHistoryClient {
 	ResponseResult<MailHistoryResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryReq req);
+	ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryRequest request);
 
 }

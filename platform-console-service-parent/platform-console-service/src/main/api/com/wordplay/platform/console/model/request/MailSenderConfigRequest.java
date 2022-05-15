@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("邮件配置请求参数")
-public class MailSenderConfigReq extends BasePageRequest {
+public class MailSenderConfigRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -5804463321305692737L;
 

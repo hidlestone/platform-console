@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.MailSenderConfigReq;
+import com.wordplay.platform.console.model.request.MailSenderConfigRequest;
 import com.wordplay.platform.console.model.response.MailSenderConfigResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MailSenderConfigClient {
 
 	@PostMapping("/save")
-	ResponseResult save(@RequestBody MailSenderConfigReq req);
+	ResponseResult save(@RequestBody MailSenderConfigRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
 
 	@PostMapping("/update")
-	ResponseResult update(@RequestBody MailSenderConfigReq req);
+	ResponseResult update(@RequestBody MailSenderConfigRequest request);
 
 	@GetMapping("/get")
 	ResponseResult<MailSenderConfigResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req);
+	ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigRequest request);
 
 }

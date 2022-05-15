@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("短信模板请求参数")
-public class SmsTemplateReq extends BasePageRequest {
+public class SmsTemplateRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -1097471572487020453L;
 

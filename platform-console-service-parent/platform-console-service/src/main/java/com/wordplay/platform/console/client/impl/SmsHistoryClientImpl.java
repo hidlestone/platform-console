@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.sms.entity.SmsHistory;
-import com.fallframework.platform.starter.sms.model.SmsHistoryRequest;
 import com.fallframework.platform.starter.sms.service.SmsHistoryService;
 import com.wordplay.platform.console.client.api.SmsHistoryClient;
-import com.wordplay.platform.console.model.request.SmsHistoryReq;
+import com.wordplay.platform.console.model.request.SmsHistoryRequest;
 import com.wordplay.platform.console.model.response.SmsHistoryResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -53,9 +52,9 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信历史")
-	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req) {
-		SmsHistoryRequest request = new SmsHistoryRequest();
-		Page<SmsHistory> page = smsHistoryService.list(request).getData();
+	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryRequest req) {
+		SmsHistory smsHistory = new SmsHistory();
+		Page<SmsHistory> page = smsHistoryService.list(smsHistory).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, SmsHistoryResponse.class);
 		return ResponseResult.success(leaf);
 	}

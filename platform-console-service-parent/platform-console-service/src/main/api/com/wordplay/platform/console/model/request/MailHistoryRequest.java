@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel("邮件历史请求参数")
-public class MailHistoryReq extends BasePageRequest {
+public class MailHistoryRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -2169210238876831711L;
 

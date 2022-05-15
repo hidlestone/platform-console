@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.mail.entity.MailSenderConfig;
-import com.fallframework.platform.starter.mail.model.MailSenderConfigRequest;
 import com.fallframework.platform.starter.mail.service.MailSenderConfigService;
 import com.wordplay.platform.console.client.api.MailSenderConfigClient;
-import com.wordplay.platform.console.model.request.MailSenderConfigReq;
+import com.wordplay.platform.console.model.request.MailSenderConfigRequest;
 import com.wordplay.platform.console.model.response.MailSenderConfigResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -35,9 +34,9 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailSenderConfigReq req) {
+	public ResponseResult save(@RequestBody MailSenderConfigRequest request) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
-		BeanUtils.copyProperties(req, mailSenderConfig);
+		BeanUtils.copyProperties(request, mailSenderConfig);
 		mailSenderConfigService.save(mailSenderConfig);
 		return ResponseResult.success();
 	}
@@ -53,9 +52,9 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailSenderConfigReq req) {
+	public ResponseResult update(@RequestBody MailSenderConfigRequest request) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
-		BeanUtils.copyProperties(req, mailSenderConfig);
+		BeanUtils.copyProperties(request, mailSenderConfig);
 		mailSenderConfigService.updateById(mailSenderConfig);
 		return ResponseResult.success();
 	}
@@ -73,10 +72,10 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req) {
-		MailSenderConfigRequest request = new MailSenderConfigRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<MailSenderConfig> page = mailSenderConfigService.list(request).getData();
+	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigRequest req) {
+		MailSenderConfig mailSenderConfig = new MailSenderConfig();
+		BeanUtils.copyProperties(req, mailSenderConfig);
+		Page<MailSenderConfig> page = mailSenderConfigService.list(mailSenderConfig).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, MailSenderConfigResponse.class);
 		return ResponseResult.success(leaf);
 	}

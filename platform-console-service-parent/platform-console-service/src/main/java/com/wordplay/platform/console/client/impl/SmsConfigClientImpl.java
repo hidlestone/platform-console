@@ -5,10 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.sms.entity.SmsConfig;
-import com.fallframework.platform.starter.sms.model.SmsConfigRequest;
 import com.fallframework.platform.starter.sms.service.SmsConfigService;
 import com.wordplay.platform.console.client.api.SmsConfigClient;
-import com.wordplay.platform.console.model.request.SmsConfigReq;
+import com.wordplay.platform.console.model.request.SmsConfigRequest;
 import com.wordplay.platform.console.model.response.SmsConfigResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -39,7 +38,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信配置")
-	public ResponseResult save(@RequestBody SmsConfigReq req) {
+	public ResponseResult save(@RequestBody SmsConfigRequest req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);
 		smsConfigService.save(smsConfig);
@@ -49,7 +48,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信配置")
-	public ResponseResult saveBatch(@RequestBody List<SmsConfigReq> reqList) {
+	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> reqList) {
 		List<SmsConfig> smsConfigList = JSON.parseArray(JSON.toJSONString(reqList), SmsConfig.class);
 		smsConfigService.saveBatch(smsConfigList);
 		return ResponseResult.success();
@@ -66,7 +65,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信配置")
-	public ResponseResult update(@RequestBody SmsConfigReq req) {
+	public ResponseResult update(@RequestBody SmsConfigRequest req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);
 		smsConfig.setGmtModified(new Date());
@@ -87,10 +86,10 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信配置")
-	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigReq req) {
-		SmsConfigRequest request = new SmsConfigRequest();
-		BeanUtils.copyProperties(req, request);
-		Page<SmsConfig> page = smsConfigService.list(request).getData();
+	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigRequest req) {
+		SmsConfig smsConfig = new SmsConfig();
+		BeanUtils.copyProperties(req, smsConfig);
+		Page<SmsConfig> page = smsConfigService.list(smsConfig).getData();
 		Leaf leaf = LeafPageUtil.pageToLeaf(page, SmsConfigResponse.class);
 		return ResponseResult.success(leaf);
 	}

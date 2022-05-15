@@ -2,7 +2,7 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.SmsHistoryReq;
+import com.wordplay.platform.console.model.request.SmsHistoryRequest;
 import com.wordplay.platform.console.model.response.SmsHistoryResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +25,6 @@ public interface SmsHistoryClient {
 	ResponseResult<SmsHistoryResponse> get(@RequestParam Long id);
 
 	@PostMapping("/list")
-	ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req);
+	ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryRequest request);
 
 }
