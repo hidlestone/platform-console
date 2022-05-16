@@ -34,5 +34,5 @@ public class DictControl {
 	public ResponseResult<Leaf<DictResponse>> list(DictRequest request) {
 		return dictClient.list(request);
 	}
-	
+
 }
