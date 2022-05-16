@@ -93,12 +93,10 @@ public class SysParamClientImpl implements SysParamClient {
 	@ApiOperation(value = "更新配置组及明细项")
 	public ResponseResult updateGroup(@RequestBody SysParamGroupRequest request) {
 		// 配置组
-		SysParamGroup sysParamGroup = new SysParamGroup();
-		BeanUtils.copyProperties(request, sysParamGroup);
+		SysParamGroup sysParamGroup = JSON.parseObject(JSON.toJSONString(request), SysParamGroup.class);
 		sysParamGroupService.updateById(sysParamGroup);
 		// 明细项
-		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(request.getSysParamItemList()), SysParamItem.class);
-		sysParamItemService.updateBatchById(sysParamItemList);
+		sysParamItemService.updateBatchById(sysParamGroup.getSysParamItems());
 		return ResponseResult.success();
 	}
 
