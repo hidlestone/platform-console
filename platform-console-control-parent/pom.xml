@@ -17,16 +17,20 @@
 		<url>https://github.com/hidlestone/platform-console</url>
 	</scm>
 
+	<properties>
+		<platform-console.version>1.0-SNAPSHOT</platform-console.version>
+	</properties>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.wordplay.console</groupId>
 				<artifactId>platform-console-api</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>${platform-console.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<modules>
 		<module>platform-console-control</module>
 	</modules>

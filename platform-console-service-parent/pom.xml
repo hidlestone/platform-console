@@ -17,6 +17,26 @@
 		<url>https://github.com/hidlestone/platform-console</url>
 	</scm>
 
+	<properties>
+		<platform-console.version>1.0-SNAPSHOT</platform-console.version>
+		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.wordplay.console</groupId>
+				<artifactId>platform-console-api</artifactId>
+				<version>${platform-console.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.validator</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<modules>
 		<module>platform-console-api</module>
 		<module>platform-console-service</module>

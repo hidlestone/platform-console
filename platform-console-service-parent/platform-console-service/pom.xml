@@ -56,7 +56,6 @@
 		<dependency>
 			<groupId>com.wordplay.console</groupId>
 			<artifactId>platform-console-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<!-- 对于其他service节点，相当于control -->
 		<dependency>
