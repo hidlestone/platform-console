@@ -3,8 +3,8 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.FileGroupClient;
-import com.wordplay.platform.console.model.request.FileGroupReq;
-import com.wordplay.platform.console.model.response.FileGroupResp;
+import com.wordplay.platform.console.model.request.FileGroupRequest;
+import com.wordplay.platform.console.model.response.FileGroupResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +33,14 @@ public class FileGroupControl {
 
 	@PostMapping("/get")
 	@ApiOperation(value = "查询文件组及明细")
-	public ResponseResult<FileGroupResp> get(@RequestParam Long id) {
+	public ResponseResult<FileGroupResponse> get(@RequestParam Long id) {
 		return fileGroupClient.get(id);
 	}
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询文件组")
-	public ResponseResult<Leaf<FileGroupResp>> list(@RequestBody FileGroupReq req) {
-		return fileGroupClient.list(req);
+	public ResponseResult<Leaf<FileGroupResponse>> list(@RequestBody FileGroupRequest request) {
+		return fileGroupClient.list(request);
 	}
 
 }

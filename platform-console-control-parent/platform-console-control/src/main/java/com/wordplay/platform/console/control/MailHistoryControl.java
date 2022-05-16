@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MailHistoryClient;
-import com.wordplay.platform.console.model.request.MailHistoryReq;
+import com.wordplay.platform.console.model.request.MailHistoryRequest;
 import com.wordplay.platform.console.model.response.MailHistoryResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,8 +40,8 @@ public class MailHistoryControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件历史")
-	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryReq req) {
-		return mailHistoryClient.list(req);
+	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryRequest request) {
+		return mailHistoryClient.list(request);
 	}
 
 }

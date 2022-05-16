@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MailSenderConfigClient;
-import com.wordplay.platform.console.model.request.MailSenderConfigReq;
+import com.wordplay.platform.console.model.request.MailSenderConfigRequest;
 import com.wordplay.platform.console.model.response.MailSenderConfigResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,8 +27,8 @@ public class MailSenderControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailSenderConfigReq req) {
-		return mailSenderConfigClient.save(req);
+	public ResponseResult save(@RequestBody MailSenderConfigRequest request) {
+		return mailSenderConfigClient.save(request);
 	}
 
 	@PostMapping("/delete")
@@ -39,8 +39,8 @@ public class MailSenderControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailSenderConfigReq req) {
-		return mailSenderConfigClient.update(req);
+	public ResponseResult update(@RequestBody MailSenderConfigRequest request) {
+		return mailSenderConfigClient.update(request);
 	}
 
 	@ApiOperation(value = "查询邮件发送配置")
@@ -50,8 +50,8 @@ public class MailSenderControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigReq req) {
-		return mailSenderConfigClient.list(req);
+	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigRequest request) {
+		return mailSenderConfigClient.list(request);
 	}
 
 }

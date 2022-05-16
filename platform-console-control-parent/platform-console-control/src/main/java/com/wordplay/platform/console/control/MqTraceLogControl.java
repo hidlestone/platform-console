@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MqTraceLogClient;
-import com.wordplay.platform.console.model.request.MqTraceLogReq;
+import com.wordplay.platform.console.model.request.MqTraceLogRequest;
 import com.wordplay.platform.console.model.response.MqTraceLogResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,8 +40,8 @@ public class MqTraceLogControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询MQ轨迹日志")
-	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogReq req) {
-		return mqTraceLogClient.list(req);
+	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogRequest request) {
+		return mqTraceLogClient.list(request);
 	}
 
 }

@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.SmsConfigClient;
-import com.wordplay.platform.console.model.request.SmsConfigReq;
+import com.wordplay.platform.console.model.request.SmsConfigRequest;
 import com.wordplay.platform.console.model.response.SmsConfigResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,13 +30,13 @@ public class SmsConfigControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信配置")
-	public ResponseResult save(@RequestBody SmsConfigReq req) {
-		return smsConfigClient.save(req);
+	public ResponseResult save(@RequestBody SmsConfigRequest request) {
+		return smsConfigClient.save(request);
 	}
 
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信配置")
-	public ResponseResult saveBatch(@RequestBody List<SmsConfigReq> reqList) {
+	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> reqList) {
 		return smsConfigClient.saveBatch(reqList);
 	}
 
@@ -48,8 +48,8 @@ public class SmsConfigControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信配置")
-	public ResponseResult update(@RequestBody SmsConfigReq req) {
-		return smsConfigClient.update(req);
+	public ResponseResult update(@RequestBody SmsConfigRequest request) {
+		return smsConfigClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -60,8 +60,8 @@ public class SmsConfigControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信配置")
-	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigReq req) {
-		return smsConfigClient.list(req);
+	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigRequest request) {
+		return smsConfigClient.list(request);
 	}
 
 }

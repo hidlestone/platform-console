@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.SmsTemplateClient;
-import com.wordplay.platform.console.model.request.SmsTemplateReq;
+import com.wordplay.platform.console.model.request.SmsTemplateRequest;
 import com.wordplay.platform.console.model.response.SmsTemplateResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,13 +30,13 @@ public class SmsTemplateControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存短信模板")
-	public ResponseResult save(@RequestBody SmsTemplateReq req) {
-		return smsTemplateClient.save(req);
+	public ResponseResult save(@RequestBody SmsTemplateRequest request) {
+		return smsTemplateClient.save(request);
 	}
 
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量保存短信模板")
-	public ResponseResult saveBatch(@RequestBody List<SmsTemplateReq> reqList) {
+	public ResponseResult saveBatch(@RequestBody List<SmsTemplateRequest> reqList) {
 		return smsTemplateClient.saveBatch(reqList);
 	}
 
@@ -48,8 +48,8 @@ public class SmsTemplateControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改短信模板")
-	public ResponseResult update(@RequestBody SmsTemplateReq req) {
-		return smsTemplateClient.update(req);
+	public ResponseResult update(@RequestBody SmsTemplateRequest request) {
+		return smsTemplateClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -60,8 +60,8 @@ public class SmsTemplateControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信模板")
-	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateReq req) {
-		return smsTemplateClient.list(req);
+	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateRequest request) {
+		return smsTemplateClient.list(request);
 	}
 
 }

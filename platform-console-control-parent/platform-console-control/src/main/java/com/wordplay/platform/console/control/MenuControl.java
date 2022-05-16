@@ -3,8 +3,8 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MenuClient;
-import com.wordplay.platform.console.model.request.MenuQueryReq;
-import com.wordplay.platform.console.model.request.MenuReq;
+import com.wordplay.platform.console.model.request.MenuQueryRequest;
+import com.wordplay.platform.console.model.request.MenuRequest;
 import com.wordplay.platform.console.model.response.FrontMenuResponse;
 import com.wordplay.platform.console.model.response.MenuResponse;
 import io.swagger.annotations.Api;
@@ -32,8 +32,8 @@ public class MenuControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存菜单")
-	public ResponseResult save(@RequestBody MenuReq req) {
-		return menuClient.save(req);
+	public ResponseResult save(@RequestBody MenuRequest request) {
+		return menuClient.save(request);
 	}
 
 	@PostMapping("/delete")
@@ -44,8 +44,8 @@ public class MenuControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改菜单")
-	public ResponseResult update(@RequestBody MenuReq req) {
-		return menuClient.update(req);
+	public ResponseResult update(@RequestBody MenuRequest request) {
+		return menuClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -56,20 +56,20 @@ public class MenuControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuReq req) {
-		return menuClient.list(req);
+	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuRequest request) {
+		return menuClient.list(request);
 	}
 
 	@PostMapping("/getmenusbyuserid")
 	@ApiOperation(value = "根据用户ID分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryReq req) {
-		return menuClient.getMenusByUserId(req);
+	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryRequest request) {
+		return menuClient.getMenusByUserId(request);
 	}
 
 	@PostMapping("/getmenusbyroleids")
 	@ApiOperation(value = "根据角色ID分页查询菜单")
-	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryReq req) {
-		return menuClient.getMenusByRoleIds(req);
+	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryRequest request) {
+		return menuClient.getMenusByRoleIds(request);
 	}
 
 	@GetMapping("/getallmenus")
@@ -80,8 +80,8 @@ public class MenuControl {
 
 	@PostMapping("/getmenutree")
 	@ApiOperation(value = "查询菜单树")
-	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryReq req) {
-		return menuClient.getMenuTree(req);
+	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryRequest request) {
+		return menuClient.getMenuTree(request);
 	}
 
 	@GetMapping("/getmenulistbyparentid")

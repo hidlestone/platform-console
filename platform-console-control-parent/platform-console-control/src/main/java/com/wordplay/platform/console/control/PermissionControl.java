@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.PermissionClient;
-import com.wordplay.platform.console.model.request.PermissionReq;
+import com.wordplay.platform.console.model.request.PermissionRequest;
 import com.wordplay.platform.console.model.response.PermissionResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +28,7 @@ public class PermissionControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存接口权限")
-	public ResponseResult save(@RequestBody PermissionReq request) {
+	public ResponseResult save(@RequestBody PermissionRequest request) {
 		return permissionClient.save(request);
 	}
 
@@ -40,8 +40,8 @@ public class PermissionControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改接口权限")
-	public ResponseResult update(@RequestBody PermissionReq req) {
-		return permissionClient.update(req);
+	public ResponseResult update(@RequestBody PermissionRequest request) {
+		return permissionClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -52,8 +52,8 @@ public class PermissionControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询接口权限")
-	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionReq req) {
-		return permissionClient.list(req);
+	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionRequest request) {
+		return permissionClient.list(request);
 	}
 
 }

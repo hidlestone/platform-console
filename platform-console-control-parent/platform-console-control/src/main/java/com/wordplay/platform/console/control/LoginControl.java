@@ -2,7 +2,7 @@ package com.wordplay.platform.console.control;
 
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.LoginClient;
-import com.wordplay.platform.console.model.AccountPwdLoginReq;
+import com.wordplay.platform.console.model.AccPwdLoginRequest;
 import com.wordplay.platform.console.model.request.AccountPwdLoginRequest;
 import com.wordplay.platform.console.model.request.QRCodeLoginRequest;
 import com.wordplay.platform.console.model.request.VerificationCodeLoginRequest;
@@ -28,11 +28,11 @@ public class LoginControl {
 
 	@PostMapping("/loginbyaccount")
 	@ApiOperation(value = "账号密码登录")
-	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginReq req) {
+	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccPwdLoginRequest request1) {
 		AccountPwdLoginRequest request = new AccountPwdLoginRequest();
-		request.setAccount(req.getUsername());
-		request.setTel(req.getTel());
-		request.setPassword(req.getPassword());
+		request.setAccount(request1.getUsername());
+		request.setTel(request1.getTel());
+		request.setPassword(request1.getPassword());
 		return loginClient.loginByAccount(request);
 	}
 

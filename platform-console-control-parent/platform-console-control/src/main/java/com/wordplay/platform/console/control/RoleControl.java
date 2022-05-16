@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.RoleClient;
-import com.wordplay.platform.console.model.request.RoleReq;
+import com.wordplay.platform.console.model.request.RoleRequest;
 import com.wordplay.platform.console.model.response.RoleResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +30,8 @@ public class RoleControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存角色")
-	public ResponseResult save(@RequestBody RoleReq req) {
-		return roleClient.save(req);
+	public ResponseResult save(@RequestBody RoleRequest request) {
+		return roleClient.save(request);
 	}
 
 	@PostMapping("/delete")
@@ -42,8 +42,8 @@ public class RoleControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改角色")
-	public ResponseResult update(@RequestBody RoleReq req) {
-		return roleClient.update(req);
+	public ResponseResult update(@RequestBody RoleRequest request) {
+		return roleClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -54,8 +54,8 @@ public class RoleControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询角色")
-	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleReq req) {
-		return roleClient.list(req);
+	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleRequest request) {
+		return roleClient.list(request);
 	}
 
 	@GetMapping("/getrolesbyuserid")

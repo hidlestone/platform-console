@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.SmsHistoryClient;
-import com.wordplay.platform.console.model.request.SmsHistoryReq;
+import com.wordplay.platform.console.model.request.SmsHistoryRequest;
 import com.wordplay.platform.console.model.response.SmsHistoryResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,8 +40,8 @@ public class SmsHistoryControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询短信历史")
-	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryReq req) {
-		return smsHistoryClient.list(req);
+	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryRequest request) {
+		return smsHistoryClient.list(request);
 	}
 
 }

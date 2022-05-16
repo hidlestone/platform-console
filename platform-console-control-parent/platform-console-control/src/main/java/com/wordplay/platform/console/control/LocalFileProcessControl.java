@@ -2,7 +2,7 @@ package com.wordplay.platform.console.control;
 
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.LocalFileProcessClient;
-import com.wordplay.platform.console.model.request.FileGroupUploadReq;
+import com.wordplay.platform.console.model.request.FileGroupUploadRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class LocalFileProcessControl {
 
 	@PostMapping("/uploadfilegroup")
 	@ApiOperation(value = "上传文件组")
-	public ResponseResult uploadFileGroup(FileGroupUploadReq req) {
-		return localFileProcessClient.uploadFileGroup(req);
+	public ResponseResult uploadFileGroup(FileGroupUploadRequest request) {
+		return localFileProcessClient.uploadFileGroup(request);
 	}
 
 	@PostMapping("/downloadfile")

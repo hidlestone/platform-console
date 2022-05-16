@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.UserClient;
-import com.wordplay.platform.console.model.request.UserQueryReq;
+import com.wordplay.platform.console.model.request.UserRequest;
 import com.wordplay.platform.console.model.response.UserDtlInfoResponse;
 import com.wordplay.platform.console.model.response.UserResponse;
 import io.swagger.annotations.Api;
@@ -35,8 +35,8 @@ public class UserControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询用户")
-	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserQueryReq req) {
-		return userClient.list(req);
+	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserRequest request) {
+		return userClient.list(request);
 	}
 
 	@GetMapping("/getuserinfo")

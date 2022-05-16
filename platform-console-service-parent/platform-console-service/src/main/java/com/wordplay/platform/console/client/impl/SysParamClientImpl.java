@@ -124,7 +124,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@GetMapping("/get")
 	@ApiOperation(value = "根据编码查询配置明细")
-	public ResponseResult<SysParamItemResponse> get(String code) {
+	public ResponseResult<SysParamItemResponse> get(@RequestParam String code) {
 		SysParamItem sysParamItem = sysParamItemService.get(code).getData();
 		SysParamItemResponse response = new SysParamItemResponse();
 		BeanUtils.copyProperties(sysParamItem, response);
@@ -134,7 +134,7 @@ public class SysParamClientImpl implements SysParamClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询配置明细")
-	public ResponseResult<Leaf<SysParamItemResponse>> list(SysParamItemRequest request) {
+	public ResponseResult<Leaf<SysParamItemResponse>> list(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
 		Page<SysParamItem> page = sysParamItemService.list(sysParamItem).getData();

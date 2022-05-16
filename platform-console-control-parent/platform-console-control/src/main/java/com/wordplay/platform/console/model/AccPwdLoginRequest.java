@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("账号登录请求参数")
-public class AccountPwdLoginReq extends BaseEntityRequest {
+public class AccPwdLoginRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = -1867620935199084853L;
 	

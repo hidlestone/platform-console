@@ -2,7 +2,6 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.config.entity.SysParamGroup;
 import com.wordplay.platform.console.model.request.SysParamGroupQueryRequest;
 import com.wordplay.platform.console.model.response.SysParamGroupResponse;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.MailTemplateClient;
-import com.wordplay.platform.console.model.request.MailTemplateReq;
+import com.wordplay.platform.console.model.request.MailTemplateRequest;
 import com.wordplay.platform.console.model.response.MailTemplateResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +28,8 @@ public class MailTemplateControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "保存邮件发送配置")
-	public ResponseResult save(@RequestBody MailTemplateReq req) {
-		return mailTemplateClient.save(req);
+	public ResponseResult save(@RequestBody MailTemplateRequest request) {
+		return mailTemplateClient.save(request);
 	}
 
 	@PostMapping("/delete")
@@ -40,8 +40,8 @@ public class MailTemplateControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改邮件发送配置")
-	public ResponseResult update(@RequestBody MailTemplateReq req) {
-		return mailTemplateClient.update(req);
+	public ResponseResult update(@RequestBody MailTemplateRequest request) {
+		return mailTemplateClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -52,8 +52,8 @@ public class MailTemplateControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询邮件发送配置")
-	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateReq req) {
-		return mailTemplateClient.list(req);
+	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateRequest request) {
+		return mailTemplateClient.list(request);
 	}
 
 }

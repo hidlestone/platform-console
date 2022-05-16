@@ -3,7 +3,7 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.I18NClient;
-import com.wordplay.platform.console.model.request.I18nResourceReq;
+import com.wordplay.platform.console.model.request.I18nResourceRequest;
 import com.wordplay.platform.console.model.response.I18nResourceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,13 +30,13 @@ public class I18NClientControl {
 
 	@PostMapping("/save")
 	@ApiOperation(value = "新增I8N词条")
-	public ResponseResult save(@RequestBody I18nResourceReq req) {
-		return i18NClient.save(req);
+	public ResponseResult save(@RequestBody I18nResourceRequest request) {
+		return i18NClient.save(request);
 	}
 
 	@PostMapping("/savebatch")
 	@ApiOperation(value = "批量新增I8N词条")
-	public ResponseResult saveBatch(@RequestBody List<I18nResourceReq> reqList) {
+	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> reqList) {
 		return i18NClient.saveBatch(reqList);
 	}
 
@@ -48,8 +48,8 @@ public class I18NClientControl {
 
 	@PostMapping("/update")
 	@ApiOperation(value = "修改I8N词条")
-	public ResponseResult update(@RequestBody I18nResourceReq req) {
-		return i18NClient.update(req);
+	public ResponseResult update(@RequestBody I18nResourceRequest request) {
+		return i18NClient.update(request);
 	}
 
 	@GetMapping("/get")
@@ -66,8 +66,8 @@ public class I18NClientControl {
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询I8N词条")
-	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceReq req) {
-		return i18NClient.list(req);
+	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceRequest request) {
+		return i18NClient.list(request);
 	}
 
 }
