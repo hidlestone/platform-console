@@ -14,7 +14,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 	@Override
 	@RequestMapping("/getdictdtlsbydictcode")
 	@ApiOperation(value = "根据字典编码查询明细")
-	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(String dictCode) {
+	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode) {
 		List<DictDtl> dictDtlList = dictDtlService.getDictDtlsByDictCode(dictCode).getData();
 		List<DictDtlResponse> dictDtlResponseList = JSON.parseArray(JSON.toJSONString(dictDtlList), DictDtlResponse.class);
 		return ResponseResult.success(dictDtlResponseList);
@@ -39,7 +41,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 	@Override
 	@RequestMapping("/list")
 	@ApiOperation(value = "分页查询字典明细")
-	public ResponseResult<Leaf<DictDtlResponse>> list(DictDtlRequest request) {
+	public ResponseResult<Leaf<DictDtlResponse>> list(@RequestBody DictDtlRequest request) {
 		DictDtl dictDtl = new DictDtl();
 		BeanUtils.copyProperties(request, dictDtl);
 		Page<DictDtl> page = dictDtlService.list(dictDtl).getData();
