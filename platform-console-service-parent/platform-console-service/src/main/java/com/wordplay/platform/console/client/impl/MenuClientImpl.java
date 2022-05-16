@@ -146,8 +146,8 @@ public class MenuClientImpl implements MenuClient {
 		}
 		// 转换成前端展示的数据结构
 		List<FrontMenuResponse> oneMenuResponseList = new ArrayList<>();
-		// 一级菜单，即parentId为null，按照order降序
-		List<Menu> oneMenuList = menuList.stream().filter(e -> null == e.getParentId()).sorted(Comparator.comparing(Menu::getOrder)).collect(Collectors.toList());
+		// 一级菜单，即parentId为null，按照order升序
+		List<Menu> oneMenuList = menuList.stream().filter(e -> 0 == e.getParentId()).sorted(Comparator.comparing(Menu::getOrder)).collect(Collectors.toList());
 		if (CollectionUtil.isEmpty(oneMenuList)) {
 			return ResponseResult.fail("一级菜单不存在");
 		}
@@ -194,7 +194,7 @@ public class MenuClientImpl implements MenuClient {
 	@ApiOperation(value = "查询主菜单")
 	public ResponseResult<List<MenuResponse>> getMainMenus() {
 		QueryWrapper<Menu> wrapper = new QueryWrapper();
-		wrapper.isNull("parent_id");
+		wrapper.eq("level", 1);
 		List<Menu> menuList = menuService.list(wrapper);
 		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
 		return ResponseResult.success(menuResponseList);
