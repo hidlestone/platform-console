@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * @author zhuangpf
  */
@@ -17,16 +19,19 @@ public class DictResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = 5328299430439282758L;
 
-	@ApiModelProperty(value = "主键")
+	@ApiModelProperty("主键")
 	private Long id;
 
-	@ApiModelProperty(value = "字典编码")
+	@ApiModelProperty("字典编码")
 	private String code;
 
-	@ApiModelProperty(value = "字典描述")
+	@ApiModelProperty("字典描述")
 	private String desc;
 
-	@ApiModelProperty(value = "是否启用")
+	@ApiModelProperty("是否启用")
 	private StatusEnum status;
+
+	@ApiModelProperty("字典项明细")
+	private List<DictDtlResponse> dictDtls;
 
 }

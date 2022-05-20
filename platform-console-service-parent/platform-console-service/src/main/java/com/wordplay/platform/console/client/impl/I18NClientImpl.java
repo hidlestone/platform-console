@@ -68,6 +68,7 @@ public class I18NClientImpl implements I18NClient {
 	@ApiOperation(value = "修改I8N词条")
 	public ResponseResult update(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
+		BeanUtils.copyProperties(request, i18nResource);
 		i18nResourceService.updateById(i18nResource);
 		return ResponseResult.success();
 	}

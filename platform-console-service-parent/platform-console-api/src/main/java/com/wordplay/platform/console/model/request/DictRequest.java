@@ -19,19 +19,19 @@ public class DictRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = 8921795209201188863L;
 
-	@ApiModelProperty(value = "主键")
+	@ApiModelProperty("主键")
 	private Long id;
 
-	@ApiModelProperty(value = "字典编码")
+	@ApiModelProperty("字典编码")
 	private String code;
 
-	@ApiModelProperty(value = "字典描述")
+	@ApiModelProperty("字典描述")
 	private String desc;
 
-	@ApiModelProperty(value = "是否启用")
+	@ApiModelProperty("是否启用")
 	private StatusEnum status;
 
 	@ApiModelProperty("多语言词条")
 	private List<I18nResourceRequest> i18nResources;
-	
+
 }
