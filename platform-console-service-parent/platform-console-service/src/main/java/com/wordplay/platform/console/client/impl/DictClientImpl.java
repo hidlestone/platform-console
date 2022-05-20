@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author zhuangpf
@@ -28,7 +29,7 @@ public class DictClientImpl implements DictClient {
 	@Override
 	@PostMapping("/savedict")
 	@ApiOperation(value = "保存字典项")
-	public ResponseResult saveDict(DictRequest request) {
+	public ResponseResult saveDict(@RequestBody DictRequest request) {
 		Dict dict = JSON.parseObject(JSON.toJSONString(request), Dict.class);
 		return dictService.saveDict(dict);
 	}
@@ -36,7 +37,7 @@ public class DictClientImpl implements DictClient {
 	@Override
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询字典项")
-	public ResponseResult<Leaf<DictResponse>> list(DictRequest request) {
+	public ResponseResult<Leaf<DictResponse>> list(@RequestBody DictRequest request) {
 		Dict dict = new Dict();
 		BeanUtils.copyProperties(request, dict);
 		Page<Dict> page = dictService.list(dict).getData();

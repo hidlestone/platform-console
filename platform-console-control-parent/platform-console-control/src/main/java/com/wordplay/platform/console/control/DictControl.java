@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,13 +26,13 @@ public class DictControl {
 
 	@PostMapping("/savedict")
 	@ApiOperation(value = "保存字典项")
-	public ResponseResult saveDict(DictRequest request) {
+	public ResponseResult saveDict(@RequestBody DictRequest request) {
 		return dictClient.saveDict(request);
 	}
 
 	@PostMapping("/list")
 	@ApiOperation(value = "分页查询字典项")
-	public ResponseResult<Leaf<DictResponse>> list(DictRequest request) {
+	public ResponseResult<Leaf<DictResponse>> list(@RequestBody DictRequest request) {
 		return dictClient.list(request);
 	}
 
