@@ -58,9 +58,11 @@ public class DictClientImpl implements DictClient {
 	@PostMapping("/update")
 	@ApiOperation(value = "删除字典项")
 	public ResponseResult update(@RequestBody DictRequest request) {
-		Dict dict = new Dict();
-		BeanUtils.copyProperties(request, dict);
+		Dict dict = JSON.parseObject(JSON.toJSONString(request), Dict.class);
 		dictService.updateById(dict);
+		// 更新明细
+		List<DictDtl> dictDtls = dict.getDictDtls();
+		dictDtlService.updateBatchById(dictDtls);
 		return ResponseResult.success();
 	}
 
