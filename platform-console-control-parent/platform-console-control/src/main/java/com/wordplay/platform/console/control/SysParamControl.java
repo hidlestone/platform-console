@@ -3,7 +3,6 @@ package com.wordplay.platform.console.control;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.SysParamClient;
-import com.wordplay.platform.console.model.request.SysParamGroupRequest;
 import com.wordplay.platform.console.model.request.SysParamItemRequest;
 import com.wordplay.platform.console.model.response.SysParamItemResponse;
 import io.swagger.annotations.Api;
@@ -29,40 +28,22 @@ public class SysParamControl {
 	@Autowired
 	private SysParamClient sysParamClient;
 
-	@PostMapping("/savegroup")
-	@ApiOperation(value = "保存配置组及明细项")
-	public ResponseResult saveGroup(@RequestBody SysParamGroupRequest request) {
-		return sysParamClient.saveGroup(request);
-	}
-
-	@PostMapping("/saveitem")
+	@PostMapping("/save")
 	@ApiOperation(value = "保存配置明细项")
-	public ResponseResult saveItem(@RequestBody SysParamItemRequest request) {
-		return sysParamClient.saveItem(request);
+	public ResponseResult save(@RequestBody SysParamItemRequest request) {
+		return sysParamClient.save(request);
 	}
 
-	@PostMapping("/deletegroup")
-	@ApiOperation(value = "删除配置组及明细项")
-	public ResponseResult deleteGroup(@RequestParam String code) {
-		return sysParamClient.deleteGroup(code);
-	}
-
-	@PostMapping("/deleteitem")
+	@PostMapping("/delete")
 	@ApiOperation(value = "删除明细项")
-	public ResponseResult deleteItem(@RequestParam String code) {
-		return sysParamClient.deleteItem(code);
-	}
-
-	@PostMapping("/updategroup")
-	@ApiOperation(value = "更新配置组及明细项")
-	public ResponseResult updateGroup(@RequestBody SysParamGroupRequest request) {
-		return sysParamClient.updateGroup(request);
+	public ResponseResult delete(@RequestParam String code) {
+		return sysParamClient.delete(code);
 	}
 
 	@PostMapping("/updateitem")
 	@ApiOperation(value = "更新配置明细项")
 	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
-		return sysParamClient.updateItem(request);
+		return sysParamClient.update(request);
 	}
 
 	@GetMapping("/getitemsbygroupcode")

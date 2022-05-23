@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @author zhuangpf
  */
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface DictClient {
 
 	@PostMapping("/savedict")
-	ResponseResult saveDict(DictRequest request);
+	ResponseResult saveDict(@RequestBody DictRequest request);
 
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam Long id);
@@ -30,5 +32,8 @@ public interface DictClient {
 
 	@PostMapping("/list")
 	ResponseResult<Leaf<DictResponse>> list(@RequestBody DictRequest request);
+
+	@PostMapping("/list")
+	ResponseResult<List<DictResponse>> getAllDicts();
 
 }

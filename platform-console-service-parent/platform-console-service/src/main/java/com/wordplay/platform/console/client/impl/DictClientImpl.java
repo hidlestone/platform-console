@@ -91,4 +91,13 @@ public class DictClientImpl implements DictClient {
 		return ResponseResult.success(leaf);
 	}
 
+	@Override
+	@PostMapping("/getalldicts")
+	@ApiOperation(value = "查询所有字典项")
+	public ResponseResult<List<DictResponse>> getAllDicts() {
+		ResponseResult<List<Dict>> allDicts = dictService.getAllDicts();
+		List<DictResponse> dictResponses = JSON.parseArray(JSON.toJSONString(allDicts), DictResponse.class);
+		return ResponseResult.success(dictResponses);
+	}
+
 }

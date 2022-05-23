@@ -4,6 +4,7 @@ import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.wordplay.platform.console.client.api.SysParamGroupClient;
 import com.wordplay.platform.console.model.request.SysParamGroupQueryRequest;
+import com.wordplay.platform.console.model.request.SysParamGroupRequest;
 import com.wordplay.platform.console.model.response.SysParamGroupResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +26,24 @@ public class SysParamGroupControl {
 
 	@Autowired
 	private SysParamGroupClient sysParamGroupClient;
+
+	@PostMapping("/save")
+	@ApiOperation(value = "保存配置组及明细项")
+	public ResponseResult save(@RequestBody SysParamGroupRequest request) {
+		return sysParamGroupClient.save(request);
+	}
+
+	@PostMapping("/delete")
+	@ApiOperation(value = "删除配置组及明细项")
+	public ResponseResult delete(@RequestParam String code) {
+		return sysParamGroupClient.delete(code);
+	}
+
+	@PostMapping("/update")
+	@ApiOperation(value = "更新配置组及明细项")
+	public ResponseResult update(@RequestBody SysParamGroupRequest request) {
+		return sysParamGroupClient.update(request);
+	}
 
 	@GetMapping("/get")
 	@ApiOperation(value = "根据配置组编码查询配置组及明细项")

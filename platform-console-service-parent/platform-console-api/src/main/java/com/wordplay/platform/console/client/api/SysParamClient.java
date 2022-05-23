@@ -2,7 +2,6 @@ package com.wordplay.platform.console.client.api;
 
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.wordplay.platform.console.model.request.SysParamGroupRequest;
 import com.wordplay.platform.console.model.request.SysParamItemRequest;
 import com.wordplay.platform.console.model.response.SysParamItemResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,23 +20,14 @@ import java.util.List;
 @FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/sysparam")
 public interface SysParamClient {
 
-	@PostMapping("/savegroup")
-	ResponseResult saveGroup(@RequestBody SysParamGroupRequest request);
+	@PostMapping("/save")
+	ResponseResult save(@RequestBody SysParamItemRequest request);
 
-	@PostMapping("/saveitem")
-	ResponseResult saveItem(@RequestBody SysParamItemRequest request);
+	@PostMapping("/delete")
+	ResponseResult delete(@RequestParam String code);
 
-	@PostMapping("/deletegroup")
-	ResponseResult deleteGroup(@RequestParam String code);
-
-	@PostMapping("/deleteitem")
-	ResponseResult deleteItem(@RequestParam String code);
-
-	@PostMapping("/updategroup")
-	ResponseResult updateGroup(@RequestBody SysParamGroupRequest request);
-
-	@PostMapping("/updateitem")
-	ResponseResult updateItem(@RequestBody SysParamItemRequest request);
+	@PostMapping("/update")
+	ResponseResult update(@RequestBody SysParamItemRequest request);
 
 	@GetMapping("/getitemsbygroupcode")
 	ResponseResult<List<SysParamItemResponse>> getItemsByGroupCode(@RequestParam String groupCode);

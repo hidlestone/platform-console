@@ -5,12 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
 import com.fallframework.platform.starter.api.response.ResponseResult;
-import com.fallframework.platform.starter.config.entity.SysParamGroup;
 import com.fallframework.platform.starter.config.entity.SysParamItem;
 import com.fallframework.platform.starter.config.service.SysParamGroupService;
 import com.fallframework.platform.starter.config.service.SysParamItemService;
 import com.wordplay.platform.console.client.api.SysParamClient;
-import com.wordplay.platform.console.model.request.SysParamGroupRequest;
 import com.wordplay.platform.console.model.request.SysParamItemRequest;
 import com.wordplay.platform.console.model.response.SysParamItemResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
@@ -41,47 +39,18 @@ public class SysParamClientImpl implements SysParamClient {
 	private SysParamItemService sysParamItemService;
 
 	@Override
-	@PostMapping("/savegroup")
-	@ApiOperation(value = "保存配置组及明细项")
-	public ResponseResult saveGroup(@RequestBody SysParamGroupRequest request) {
-		// 配置组
-		SysParamGroup sysParamGroup = new SysParamGroup();
-		BeanUtils.copyProperties(request, sysParamGroup);
-		sysParamGroupService.save(sysParamGroup);
-		// 明细项
-		List<SysParamItem> sysParamItemList = JSON.parseArray(JSON.toJSONString(request.getSysParamItemList()), SysParamItem.class);
-		sysParamItemService.saveBatch(sysParamItemList);
-		return ResponseResult.success();
-	}
-
-	@Override
-	@PostMapping("/saveitem")
+	@PostMapping("/save")
 	@ApiOperation(value = "保存配置明细项")
-	public ResponseResult saveItem(@RequestBody SysParamItemRequest request) {
+	public ResponseResult save(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
 		return ResponseResult.success();
 	}
 
 	@Override
-	@PostMapping("/deletegroup")
-	@ApiOperation(value = "删除配置组及明细项")
-	public ResponseResult deleteGroup(@RequestParam String code) {
-		QueryWrapper<SysParamGroup> wrapper01 = new QueryWrapper();
-		wrapper01.eq("code", code);
-		// 配置组
-		sysParamGroupService.remove(wrapper01);
-		// 明细项
-		QueryWrapper<SysParamItem> wrapper02 = new QueryWrapper();
-		wrapper02.eq("group_code", code);
-		sysParamItemService.remove(wrapper02);
-		return ResponseResult.success();
-	}
-
-	@Override
-	@PostMapping("/deleteitem")
+	@PostMapping("/delete")
 	@ApiOperation(value = "删除明细项")
-	public ResponseResult deleteItem(@RequestParam String code) {
+	public ResponseResult delete(@RequestParam String code) {
 		QueryWrapper<SysParamItem> wrapper = new QueryWrapper();
 		wrapper.eq("code", code);
 		sysParamItemService.remove(wrapper);
@@ -89,21 +58,9 @@ public class SysParamClientImpl implements SysParamClient {
 	}
 
 	@Override
-	@PostMapping("/updategroup")
-	@ApiOperation(value = "更新配置组及明细项")
-	public ResponseResult updateGroup(@RequestBody SysParamGroupRequest request) {
-		// 配置组
-		SysParamGroup sysParamGroup = JSON.parseObject(JSON.toJSONString(request), SysParamGroup.class);
-		sysParamGroupService.updateById(sysParamGroup);
-		// 明细项
-		sysParamItemService.updateBatchById(sysParamGroup.getSysParamItems());
-		return ResponseResult.success();
-	}
-
-	@Override
-	@PostMapping("/updateitem")
+	@PostMapping("/update")
 	@ApiOperation(value = "更新配置明细项")
-	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
+	public ResponseResult update(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
 		sysParamItemService.updateById(sysParamItem);
