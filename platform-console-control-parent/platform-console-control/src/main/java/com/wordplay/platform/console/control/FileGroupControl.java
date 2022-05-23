@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author zhuangpf
  */
-@Api(tags = "文件组上传下载")
+@Api(tags = "文件组管理")
 @RestController
 @RequestMapping("/${platform.console.control.version}/filegroup")
 public class FileGroupControl {

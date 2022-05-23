@@ -40,7 +40,7 @@ public class SysParamControl {
 		return sysParamClient.delete(code);
 	}
 
-	@PostMapping("/updateitem")
+	@PostMapping("/update")
 	@ApiOperation(value = "更新配置明细项")
 	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
 		return sysParamClient.update(request);
