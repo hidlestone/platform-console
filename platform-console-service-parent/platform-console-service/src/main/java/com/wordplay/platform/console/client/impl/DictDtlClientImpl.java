@@ -37,6 +37,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/save")
+	@ApiOperation(value = "保存字典明细")
 	public ResponseResult save(@RequestBody DictDtlRequest request) {
 		Dict dict = dictService.getById(request.getDictId());
 		if (null == dict) {
@@ -49,6 +50,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/delete")
+	@ApiOperation(value = "删除字典明细")
 	public ResponseResult delete(@RequestParam Long id) {
 		dictService.removeById(id);
 		return ResponseResult.success();
@@ -56,6 +58,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/update")
+	@ApiOperation(value = "更新字典明细")
 	public ResponseResult update(@RequestBody DictDtlRequest request) {
 		Dict dict = dictService.getById(request.getDictId());
 		if (null == dict) {
@@ -68,6 +71,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@GetMapping("/get")
+	@ApiOperation(value = "查询字典明细")
 	public ResponseResult<DictDtlResponse> get(@RequestParam Long id) {
 		DictDtl dictDtl = dictDtlService.getById(id);
 		DictDtlResponse response = new DictDtlResponse();

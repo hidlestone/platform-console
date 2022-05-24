@@ -8,6 +8,8 @@ import com.wordplay.platform.console.model.response.DictDtlResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,30 @@ public class DictDtlControl {
 	@Autowired
 	private DictDtlClient dictDtlClient;
 
+	@PostMapping("/save")
+	@ApiOperation(value = "保存字典明细")
+	public ResponseResult save(@RequestBody DictDtlRequest request) {
+		return dictDtlClient.save(request);
+	}
+
+	@PostMapping("/delete")
+	@ApiOperation(value = "删除字典明细")
+	public ResponseResult delete(@RequestParam Long id) {
+		return dictDtlClient.delete(id);
+	}
+
+	@PostMapping("/update")
+	@ApiOperation(value = "更新字典明细")
+	public ResponseResult update(@RequestBody DictDtlRequest request) {
+		return dictDtlClient.update(request);
+	}
+
+	@GetMapping("/get")
+	@ApiOperation(value = "查询字典明细")
+	public ResponseResult<DictDtlResponse> get(@RequestParam Long id) {
+		return dictDtlClient.get(id);
+	}
+
 	@RequestMapping("/getdictdtlsbydictcode")
 	@ApiOperation(value = "根据字典编码查询明细")
 	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode) {
@@ -37,5 +63,5 @@ public class DictDtlControl {
 	public ResponseResult<Leaf<DictDtlResponse>> list(@RequestBody DictDtlRequest request) {
 		return dictDtlClient.list(request);
 	}
-	
+
 }

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fallframework.platform.starter.api.model.Leaf;
+import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import com.fallframework.platform.starter.rbac.entity.Menu;
 import com.fallframework.platform.starter.rbac.entity.User;
@@ -210,7 +211,7 @@ public class MenuClientImpl implements MenuClient {
 		FrontMenuResponse frontMenu = new FrontMenuResponse();
 		frontMenu.setPath(menu.getPath());
 		/*frontMenu.setRedirect(menu.getFuncLink());*/
-		frontMenu.setAlwaysShow(true);
+		frontMenu.setAlwaysShow(StatusEnum.Y.equals(menu.getStatus()) ? true : false);
 		frontMenu.setName(menu.getMenuName());
 		MenuMetaInfoResponse meta = new MenuMetaInfoResponse();
 		meta.setTitle(menu.getMenuName());
