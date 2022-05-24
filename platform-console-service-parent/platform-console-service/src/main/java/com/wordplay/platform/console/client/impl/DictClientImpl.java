@@ -13,20 +13,24 @@ import com.wordplay.platform.console.client.api.DictClient;
 import com.wordplay.platform.console.model.request.DictRequest;
 import com.wordplay.platform.console.model.response.DictResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * @author zhuangpf
  */
-@FeignClient(name = "${platform.console.service.name}${platform.console.service.version:}/${platform.console.service.version}/dict")
+@Api(tags = "数据字典")
+@RestController
+@RequestMapping("/${platform.console.service.version}/dict")
 public class DictClientImpl implements DictClient {
 
 	@Autowired
