@@ -48,4 +48,19 @@ public class LeafPageUtil {
 		return leaf;
 	}
 
+	public static Leaf leafToType(Leaf leaf, Class clazz) {
+		List records = leaf.getRecords();
+		if (null != clazz) {
+			try {
+				List list = JSON.parseArray(JSON.toJSONString(records), clazz);
+				leaf.setRecords(list);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			throw new RuntimeException("paramter class is not exist");
+		}
+		return leaf;
+	}
+
 }

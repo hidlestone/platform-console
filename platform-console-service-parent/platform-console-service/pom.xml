@@ -52,6 +52,10 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-shiro</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-activiti</artifactId>
+		</dependency>
 		<!-- client接口包 -->
 		<dependency>
 			<groupId>com.wordplay.console</groupId>
