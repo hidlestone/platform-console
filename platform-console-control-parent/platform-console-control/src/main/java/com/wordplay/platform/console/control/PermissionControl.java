@@ -27,31 +27,31 @@ public class PermissionControl {
 	private PermissionClient permissionClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存接口权限")
+	@ApiOperation("保存接口权限")
 	public ResponseResult save(@RequestBody PermissionRequest request) {
 		return permissionClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除接口权限")
+	@ApiOperation("删除接口权限")
 	public ResponseResult delete(@RequestParam Long id) {
 		return permissionClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改接口权限")
+	@ApiOperation("修改接口权限")
 	public ResponseResult update(@RequestBody PermissionRequest request) {
 		return permissionClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询接口权限")
+	@ApiOperation("查询接口权限")
 	public ResponseResult<PermissionResponse> get(@RequestParam Long id) {
 		return permissionClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询接口权限")
+	@ApiOperation("分页查询接口权限")
 	public ResponseResult<Leaf<PermissionResponse>> list(@RequestBody PermissionRequest request) {
 		return permissionClient.list(request);
 	}

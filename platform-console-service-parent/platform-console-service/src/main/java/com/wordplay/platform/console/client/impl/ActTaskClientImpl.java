@@ -1,9 +1,11 @@
 package com.wordplay.platform.console.client.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.fallframework.platform.starter.activiti.model.AssignTaskDto;
 import com.fallframework.platform.starter.activiti.model.CompleteTaskDto;
 import com.fallframework.platform.starter.activiti.model.PendingTaskDto;
 import com.fallframework.platform.starter.activiti.model.RejectTaskDto;
+import com.fallframework.platform.starter.activiti.model.TaskDetailOutVo;
 import com.fallframework.platform.starter.activiti.model.TaskQueryDto;
 import com.fallframework.platform.starter.activiti.service.ActTaskService;
 import com.fallframework.platform.starter.api.model.Leaf;
@@ -14,6 +16,7 @@ import com.wordplay.platform.console.model.request.CompleteTaskRequest;
 import com.wordplay.platform.console.model.request.PendingTaskRequest;
 import com.wordplay.platform.console.model.request.RejectTaskRequest;
 import com.wordplay.platform.console.model.request.TaskQueryRequest;
+import com.wordplay.platform.console.model.response.TaskDetailResponse;
 import com.wordplay.platform.console.model.response.TaskResponse;
 import com.wordplay.platform.console.util.LeafPageUtil;
 import io.swagger.annotations.Api;
@@ -24,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -40,8 +44,8 @@ public class ActTaskClientImpl implements ActTaskClient {
 
 	@Override
 	@PostMapping("/gettasklist")
-	@ApiOperation(value = "分页查询任务")
-	public ResponseResult<Leaf<TaskResponse>> getTaskList(TaskQueryRequest request) {
+	@ApiOperation("分页查询任务")
+	public ResponseResult<Leaf<TaskResponse>> getTaskList(@RequestBody TaskQueryRequest request) {
 		TaskQueryDto dto = new TaskQueryDto();
 		BeanUtils.copyProperties(request, dto);
 		Leaf<Task> page = actTaskService.getTaskList(dto).getData();
@@ -51,8 +55,8 @@ public class ActTaskClientImpl implements ActTaskClient {
 
 	@Override
 	@PostMapping("/getpendingtasklist")
-	@ApiOperation(value = "查询用户待处理任务列表")
-	public ResponseResult<Leaf<TaskResponse>> getPendingTaskList(PendingTaskRequest request) {
+	@ApiOperation("查询用户待处理任务列表")
+	public ResponseResult<Leaf<TaskResponse>> getPendingTaskList(@RequestBody PendingTaskRequest request) {
 		PendingTaskDto dto = new PendingTaskDto();
 		BeanUtils.copyProperties(request, dto);
 		Leaf<Task> page = actTaskService.getPendingTaskList(dto).getData();
@@ -62,7 +66,7 @@ public class ActTaskClientImpl implements ActTaskClient {
 
 	@Override
 	@PostMapping("/complettask")
-	@ApiOperation(value = "完成任务")
+	@ApiOperation("完成任务")
 	public ResponseResult completTask(@RequestBody CompleteTaskRequest request) {
 		CompleteTaskDto dto = new CompleteTaskDto();
 		BeanUtils.copyProperties(request, dto);
@@ -71,8 +75,8 @@ public class ActTaskClientImpl implements ActTaskClient {
 
 	@Override
 	@PostMapping("/rejecttask")
-	@ApiOperation(value = "任务驳回")
-	public ResponseResult rejectTask(RejectTaskRequest request) {
+	@ApiOperation("任务驳回")
+	public ResponseResult rejectTask(@RequestBody RejectTaskRequest request) {
 		RejectTaskDto dto = new RejectTaskDto();
 		BeanUtils.copyProperties(request, dto);
 		return actTaskService.rejectTask(dto);
@@ -80,18 +84,20 @@ public class ActTaskClientImpl implements ActTaskClient {
 
 	@Override
 	@PostMapping("/assigntask")
-	@ApiOperation(value = "指派任务")
-	public ResponseResult assignTask(AssignTaskRequest request) {
+	@ApiOperation("指派任务")
+	public ResponseResult assignTask(@RequestBody AssignTaskRequest request) {
 		AssignTaskDto dto = new AssignTaskDto();
 		BeanUtils.copyProperties(request, dto);
 		return actTaskService.assignTask(dto);
 	}
 
 	@Override
-	@PostMapping("/getTaskDetail")
-	@ApiOperation(value = "获取任务详细信息")
-	public ResponseResult getTaskDetail(String taskId) {
-		return null;
+	@PostMapping("/gettaskdetail")
+	@ApiOperation("获取任务详细信息")
+	public ResponseResult<TaskDetailResponse> getTaskDetail(@RequestParam String taskId) {
+		TaskDetailOutVo outVo = actTaskService.getTaskDetail(taskId).getData();
+		TaskDetailResponse response = JSON.parseObject(JSON.toJSONString(outVo), TaskDetailResponse.class);
+		return ResponseResult.success(response);
 	}
-	
+
 }

@@ -29,37 +29,37 @@ public class DictDtlControl {
 	private DictDtlClient dictDtlClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存字典明细")
+	@ApiOperation("保存字典明细")
 	public ResponseResult save(@RequestBody DictDtlRequest request) {
 		return dictDtlClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除字典明细")
+	@ApiOperation("删除字典明细")
 	public ResponseResult delete(@RequestParam Long id) {
 		return dictDtlClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "更新字典明细")
+	@ApiOperation("更新字典明细")
 	public ResponseResult update(@RequestBody DictDtlRequest request) {
 		return dictDtlClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询字典明细")
+	@ApiOperation("查询字典明细")
 	public ResponseResult<DictDtlResponse> get(@RequestParam Long id) {
 		return dictDtlClient.get(id);
 	}
 
 	@RequestMapping("/getdictdtlsbydictcode")
-	@ApiOperation(value = "根据字典编码查询明细")
+	@ApiOperation("根据字典编码查询明细")
 	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode) {
 		return dictDtlClient.getDictDtlsByDictCode(dictCode);
 	}
 
 	@RequestMapping("/list")
-	@ApiOperation(value = "分页查询字典明细")
+	@ApiOperation("分页查询字典明细")
 	public ResponseResult<Leaf<DictDtlResponse>> list(@RequestBody DictDtlRequest request) {
 		return dictDtlClient.list(request);
 	}

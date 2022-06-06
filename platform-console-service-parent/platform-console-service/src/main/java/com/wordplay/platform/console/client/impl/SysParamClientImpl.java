@@ -40,7 +40,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存配置明细项")
+	@ApiOperation("保存配置明细项")
 	public ResponseResult save(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
@@ -49,7 +49,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除明细项")
+	@ApiOperation("删除明细项")
 	public ResponseResult delete(@RequestParam String code) {
 		QueryWrapper<SysParamItem> wrapper = new QueryWrapper();
 		wrapper.eq("code", code);
@@ -59,7 +59,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "更新配置明细项")
+	@ApiOperation("更新配置明细项")
 	public ResponseResult update(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);
@@ -69,7 +69,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@GetMapping("/getitemsbygroupcode")
-	@ApiOperation(value = "根据配置组编码查询配置明细项")
+	@ApiOperation("根据配置组编码查询配置明细项")
 	public ResponseResult<List<SysParamItemResponse>> getItemsByGroupCode(@RequestParam String groupCode) {
 		QueryWrapper<SysParamItem> wrapper = new QueryWrapper();
 		wrapper.eq("group_code", groupCode);
@@ -80,7 +80,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "根据编码查询配置明细")
+	@ApiOperation("根据编码查询配置明细")
 	public ResponseResult<SysParamItemResponse> get(@RequestParam String code) {
 		SysParamItem sysParamItem = sysParamItemService.get(code).getData();
 		SysParamItemResponse response = new SysParamItemResponse();
@@ -90,7 +90,7 @@ public class SysParamClientImpl implements SysParamClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询配置明细")
+	@ApiOperation("分页查询配置明细")
 	public ResponseResult<Leaf<SysParamItemResponse>> list(@RequestBody SysParamItemRequest request) {
 		SysParamItem sysParamItem = new SysParamItem();
 		BeanUtils.copyProperties(request, sysParamItem);

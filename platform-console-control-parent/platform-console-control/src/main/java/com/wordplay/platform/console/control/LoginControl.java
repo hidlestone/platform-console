@@ -27,7 +27,7 @@ public class LoginControl {
 	private LoginClient loginClient;
 
 	@PostMapping("/loginbyaccount")
-	@ApiOperation(value = "账号密码登录")
+	@ApiOperation("账号密码登录")
 	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccPwdLoginRequest request1) {
 		AccountPwdLoginRequest request = new AccountPwdLoginRequest();
 		request.setAccount(request1.getUsername());
@@ -37,13 +37,13 @@ public class LoginControl {
 	}
 
 	@PostMapping("/loginbyverificationcode")
-	@ApiOperation(value = "账号验证码登录")
+	@ApiOperation("账号验证码登录")
 	public ResponseResult loginByVerificationCode(VerificationCodeLoginRequest request) {
 		return loginClient.loginByVerificationCode(request);
 	}
 
 	@PostMapping("/loginbyqrcodelogin")
-	@ApiOperation(value = "扫二维码登录")
+	@ApiOperation("扫二维码登录")
 	public ResponseResult loginByQRCodeLogin(QRCodeLoginRequest request) {
 		return loginClient.loginByQRCodeLogin(request);
 	}

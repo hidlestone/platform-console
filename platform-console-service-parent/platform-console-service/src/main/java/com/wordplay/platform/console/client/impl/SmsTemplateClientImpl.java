@@ -36,7 +36,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存短信模板")
+	@ApiOperation("保存短信模板")
 	public ResponseResult save(@RequestBody SmsTemplateRequest request) {
 		SmsTemplate smsTemplate = new SmsTemplate();
 		BeanUtils.copyProperties(request, smsTemplate);
@@ -46,7 +46,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@PostMapping("/savebatch")
-	@ApiOperation(value = "批量保存短信模板")
+	@ApiOperation("批量保存短信模板")
 	public ResponseResult saveBatch(@RequestBody List<SmsTemplateRequest> reqList) {
 		List<SmsTemplate> smsTemplateList = JSON.parseArray(JSON.toJSONString(reqList), SmsTemplate.class);
 		smsTemplateService.saveBatch(smsTemplateList);
@@ -55,7 +55,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除短信模板")
+	@ApiOperation("删除短信模板")
 	public ResponseResult delete(@RequestParam Long id) {
 		smsTemplateService.removeById(id);
 		return ResponseResult.success();
@@ -63,7 +63,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改短信模板")
+	@ApiOperation("修改短信模板")
 	public ResponseResult update(@RequestBody SmsTemplateRequest request) {
 		SmsTemplate smsTemplate = new SmsTemplate();
 		BeanUtils.copyProperties(request, smsTemplate);
@@ -73,7 +73,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询短信模板")
+	@ApiOperation("查询短信模板")
 	public ResponseResult<SmsTemplateResponse> get(@RequestParam Long id) {
 		SmsTemplate smsTemplate = smsTemplateService.getById(id);
 		SmsTemplateResponse response = new SmsTemplateResponse();
@@ -83,7 +83,7 @@ public class SmsTemplateClientImpl implements SmsTemplateClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询短信模板")
+	@ApiOperation("分页查询短信模板")
 	public ResponseResult<Leaf<SmsTemplateResponse>> list(@RequestBody SmsTemplateRequest request) {
 		SmsTemplate smsTemplate = new SmsTemplate();
 		BeanUtils.copyProperties(request, smsTemplate);

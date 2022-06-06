@@ -26,30 +26,30 @@ public class MailSenderControl {
 	private MailSenderConfigClient mailSenderConfigClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存邮件发送配置")
+	@ApiOperation("保存邮件发送配置")
 	public ResponseResult save(@RequestBody MailSenderConfigRequest request) {
 		return mailSenderConfigClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件发送配置")
+	@ApiOperation("删除邮件发送配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		return mailSenderConfigClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改邮件发送配置")
+	@ApiOperation("修改邮件发送配置")
 	public ResponseResult update(@RequestBody MailSenderConfigRequest request) {
 		return mailSenderConfigClient.update(request);
 	}
 
-	@ApiOperation(value = "查询邮件发送配置")
+	@ApiOperation("查询邮件发送配置")
 	public ResponseResult<MailSenderConfigResponse> get(@RequestParam Long id) {
 		return mailSenderConfigClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件发送配置")
+	@ApiOperation("分页查询邮件发送配置")
 	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigRequest request) {
 		return mailSenderConfigClient.list(request);
 	}

@@ -33,7 +33,7 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除短信历史")
+	@ApiOperation("删除短信历史")
 	public ResponseResult delete(@RequestParam Long id) {
 		smsHistoryService.removeById(id);
 		return ResponseResult.success();
@@ -41,7 +41,7 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询短信历史")
+	@ApiOperation("查询短信历史")
 	public ResponseResult<SmsHistoryResponse> get(@RequestParam Long id) {
 		SmsHistory smsHistory = smsHistoryService.getById(id);
 		SmsHistoryResponse response = new SmsHistoryResponse();
@@ -51,7 +51,7 @@ public class SmsHistoryClientImpl implements SmsHistoryClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询短信历史")
+	@ApiOperation("分页查询短信历史")
 	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryRequest req) {
 		SmsHistory smsHistory = new SmsHistory();
 		Page<SmsHistory> page = smsHistoryService.list(smsHistory).getData();

@@ -48,7 +48,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存角色及菜单关联")
+	@ApiOperation("保存角色及菜单关联")
 	public ResponseResult<RoleResponse> save(@Validated @RequestBody RoleRequest request) {
 		Role role = new Role();
 		BeanUtils.copyProperties(request, role);
@@ -75,7 +75,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除角色")
+	@ApiOperation("删除角色")
 	public ResponseResult delete(@RequestParam Long id) {
 		// 删除角色
 		roleService.removeById(id);
@@ -90,7 +90,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改角色")
+	@ApiOperation("修改角色")
 	public ResponseResult update(@RequestBody RoleRequest request) {
 		Role role = new Role();
 		BeanUtils.copyProperties(request, role);
@@ -110,7 +110,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询角色")
+	@ApiOperation("查询角色")
 	public ResponseResult<RoleResponse> get(@RequestParam Long id) {
 		Role role = roleService.getById(id);
 		RoleResponse response = new RoleResponse();
@@ -120,7 +120,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询角色")
+	@ApiOperation("分页查询角色")
 	public ResponseResult<Leaf<RoleResponse>> list(@RequestBody RoleRequest req) {
 		Role request = new Role();
 		BeanUtils.copyProperties(req, request);
@@ -131,7 +131,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@GetMapping("/getrolesbyuserid")
-	@ApiOperation(value = "根据用户ID查询角色")
+	@ApiOperation("根据用户ID查询角色")
 	public ResponseResult<List<RoleResponse>> getRolesByUserId(@RequestParam Long userId) {
 		List<Role> roleList = roleService.getRolesByUserId(userId);
 		List<RoleResponse> respList = JSON.parseArray(JSON.toJSONString(roleList), RoleResponse.class);
@@ -140,7 +140,7 @@ public class RoleClientImpl implements RoleClient {
 
 	@Override
 	@PostMapping("/getallrole")
-	@ApiOperation(value = "查询所有角色")
+	@ApiOperation("查询所有角色")
 	public ResponseResult<List<RoleResponse>> getAllRole() {
 		List<Role> roleList = roleService.getAllRole().getData();
 		List<RoleResponse> roleResponseList = JSON.parseArray(JSON.toJSONString(roleList), RoleResponse.class);

@@ -37,7 +37,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存短信配置")
+	@ApiOperation("保存短信配置")
 	public ResponseResult save(@RequestBody SmsConfigRequest req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);
@@ -47,7 +47,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@PostMapping("/savebatch")
-	@ApiOperation(value = "批量保存短信配置")
+	@ApiOperation("批量保存短信配置")
 	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> reqList) {
 		List<SmsConfig> smsConfigList = JSON.parseArray(JSON.toJSONString(reqList), SmsConfig.class);
 		smsConfigService.saveBatch(smsConfigList);
@@ -56,7 +56,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除短信配置")
+	@ApiOperation("删除短信配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		smsConfigService.removeById(id);
 		return ResponseResult.success();
@@ -64,7 +64,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改短信配置")
+	@ApiOperation("修改短信配置")
 	public ResponseResult update(@RequestBody SmsConfigRequest req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);
@@ -75,7 +75,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询短信配置")
+	@ApiOperation("查询短信配置")
 	public ResponseResult<SmsConfigResponse> get(@RequestParam Long id) {
 		SmsConfig smsConfig = smsConfigService.getById(id);
 		SmsConfigResponse response = new SmsConfigResponse();
@@ -85,7 +85,7 @@ public class SmsConfigClientImpl implements SmsConfigClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询短信配置")
+	@ApiOperation("分页查询短信配置")
 	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigRequest req) {
 		SmsConfig smsConfig = new SmsConfig();
 		BeanUtils.copyProperties(req, smsConfig);

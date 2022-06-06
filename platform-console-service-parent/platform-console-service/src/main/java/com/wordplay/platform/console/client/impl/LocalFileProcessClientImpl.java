@@ -30,7 +30,7 @@ public class LocalFileProcessClientImpl implements LocalFileProcessClient {
 
 	@Override
 	@PostMapping("/uploadfilegroup")
-	@ApiOperation(value = "上传文件组")
+	@ApiOperation("上传文件组")
 	public ResponseResult uploadFileGroup(FileGroupUploadRequest req) {
 		FileGroupUploadDto dto = new FileGroupUploadDto();
 		BeanUtils.copyProperties(req, dto);
@@ -39,7 +39,7 @@ public class LocalFileProcessClientImpl implements LocalFileProcessClient {
 
 	@Override
 	@PostMapping("/downloadfile")
-	@ApiOperation(value = "下载文件")
+	@ApiOperation("下载文件")
 	public ResponseResult downloadFile(Long fileInfoId) {
 		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 		return fileProcessService.downloadFile(fileInfoId, response);

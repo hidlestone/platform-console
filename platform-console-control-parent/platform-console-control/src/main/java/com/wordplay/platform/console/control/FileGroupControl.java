@@ -26,19 +26,19 @@ public class FileGroupControl {
 	private FileGroupClient fileGroupClient;
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除文件组及明细")
+	@ApiOperation("删除文件组及明细")
 	public ResponseResult delete(@RequestParam Long id) {
 		return fileGroupClient.delete(id);
 	}
 
 	@PostMapping("/get")
-	@ApiOperation(value = "查询文件组及明细")
+	@ApiOperation("查询文件组及明细")
 	public ResponseResult<FileGroupResponse> get(@RequestParam Long id) {
 		return fileGroupClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询文件组")
+	@ApiOperation("分页查询文件组")
 	public ResponseResult<Leaf<FileGroupResponse>> list(@RequestBody FileGroupRequest request) {
 		return fileGroupClient.list(request);
 	}

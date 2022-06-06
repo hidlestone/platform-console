@@ -22,7 +22,7 @@ public class VerifyCodeControl {
 	private VerifyCodeClient verifyCodeClient;
 
 	@PostMapping("/sendverifycode")
-	@ApiOperation(value = "发送随机的验证码")
+	@ApiOperation("发送随机的验证码")
 	public ResponseResult sendVerifyCode(VerifyCodeSenderRequest request) {
 		return verifyCodeClient.sendVerifyCode(request);
 	}

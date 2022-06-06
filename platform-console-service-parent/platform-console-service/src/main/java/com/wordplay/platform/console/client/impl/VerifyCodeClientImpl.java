@@ -26,7 +26,7 @@ public class VerifyCodeClientImpl implements VerifyCodeClient {
 
 	@Override
 	@PostMapping("/sendverifycode")
-	@ApiOperation(value = "发送随机的验证码")
+	@ApiOperation("发送随机的验证码")
 	public ResponseResult sendVerifyCode(VerifyCodeSenderRequest request) {
 		return verifyCodeService.sendVerifyCode(request);
 	}

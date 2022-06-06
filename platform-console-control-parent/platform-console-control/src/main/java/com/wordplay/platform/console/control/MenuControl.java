@@ -31,67 +31,67 @@ public class MenuControl {
 	private MenuClient menuClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存菜单")
+	@ApiOperation("保存菜单")
 	public ResponseResult save(@RequestBody MenuRequest request) {
 		return menuClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除菜单")
+	@ApiOperation("删除菜单")
 	public ResponseResult delete(@RequestParam Long id) {
 		return menuClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改菜单")
+	@ApiOperation("修改菜单")
 	public ResponseResult update(@RequestBody MenuRequest request) {
 		return menuClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询菜单")
+	@ApiOperation("查询菜单")
 	public ResponseResult<MenuResponse> get(@RequestParam Long id) {
 		return menuClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询菜单")
+	@ApiOperation("分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuRequest request) {
 		return menuClient.list(request);
 	}
 
 	@PostMapping("/getmenusbyuserid")
-	@ApiOperation(value = "根据用户ID分页查询菜单")
+	@ApiOperation("根据用户ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryRequest request) {
 		return menuClient.getMenusByUserId(request);
 	}
 
 	@PostMapping("/getmenusbyroleids")
-	@ApiOperation(value = "根据角色ID分页查询菜单")
+	@ApiOperation("根据角色ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryRequest request) {
 		return menuClient.getMenusByRoleIds(request);
 	}
 
 	@GetMapping("/getallmenus")
-	@ApiOperation(value = "根据token获取当前用户所有菜单")
+	@ApiOperation("根据token获取当前用户所有菜单")
 	public ResponseResult<List<FrontMenuResponse>> getAllMenus() {
 		return menuClient.getAllMenus();
 	}
 
 	@PostMapping("/getmenutree")
-	@ApiOperation(value = "查询菜单树")
+	@ApiOperation("查询菜单树")
 	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryRequest request) {
 		return menuClient.getMenuTree(request);
 	}
 
 	@GetMapping("/getmenulistbyparentid")
-	@ApiOperation(value = "根据父ID查询菜单")
+	@ApiOperation("根据父ID查询菜单")
 	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
 		return menuClient.getMenuListByParentId(parentId);
 	}
 
 	@GetMapping("/getmainmenus")
-	@ApiOperation(value = "查询主菜单")
+	@ApiOperation("查询主菜单")
 	public ResponseResult<List<MenuResponse>> getMainMenus() {
 		return menuClient.getMainMenus();
 	}

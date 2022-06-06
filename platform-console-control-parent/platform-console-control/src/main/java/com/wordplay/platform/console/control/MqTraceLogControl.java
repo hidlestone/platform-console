@@ -27,19 +27,19 @@ public class MqTraceLogControl {
 	private MqTraceLogClient mqTraceLogClient;
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除MQ轨迹日志")
+	@ApiOperation("删除MQ轨迹日志")
 	public ResponseResult delete(@RequestParam Long id) {
 		return mqTraceLogClient.delete(id);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询MQ轨迹日志")
+	@ApiOperation("查询MQ轨迹日志")
 	public ResponseResult<MqTraceLogResponse> get(@RequestParam Long id) {
 		return mqTraceLogClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询MQ轨迹日志")
+	@ApiOperation("分页查询MQ轨迹日志")
 	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogRequest request) {
 		return mqTraceLogClient.list(request);
 	}

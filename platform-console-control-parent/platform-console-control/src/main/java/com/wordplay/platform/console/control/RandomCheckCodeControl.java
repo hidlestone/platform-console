@@ -21,7 +21,7 @@ public class RandomCheckCodeControl {
 	private RandomCheckCodeClient randomCheckCodeClient;
 
 	@PostMapping("/getrandomcheckcode")
-	@ApiOperation(value = "四位随机校验码")
+	@ApiOperation("四位随机校验码")
 	public ResponseResult getRandomCheckCode() {
 		return randomCheckCodeClient.getRandomCheckCode();
 	}

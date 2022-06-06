@@ -18,7 +18,7 @@ public class TransactionClientImpl implements TransactionClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询交易")
+	@ApiOperation("分页查询交易")
 	public ResponseResult list() {
 		return null;
 	}

@@ -21,7 +21,7 @@ public class TransactionControl {
 	private TransactionClient transactionClient;
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询交易")
+	@ApiOperation("分页查询交易")
 	public ResponseResult list() {
 		return ResponseResult.success();
 	}

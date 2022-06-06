@@ -41,7 +41,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除文件组及明细")
+	@ApiOperation("删除文件组及明细")
 	public ResponseResult delete(@RequestParam Long id) {
 		fileGroupService.removeById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
@@ -52,7 +52,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 
 	@Override
 	@PostMapping("/get")
-	@ApiOperation(value = "查询文件组及明细")
+	@ApiOperation("查询文件组及明细")
 	public ResponseResult<FileGroupResponse> get(@RequestParam Long id) {
 		FileGroup fileGroup = fileGroupService.getById(id);
 		QueryWrapper<FileInfo> wrapper = new QueryWrapper();
@@ -67,7 +67,7 @@ public class FileGroupClientImpl implements FileGroupClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询文件组")
+	@ApiOperation("分页查询文件组")
 	public ResponseResult<Leaf<FileGroupResponse>> list(@RequestBody FileGroupRequest request) {
 		FileGroup fileGroup = new FileGroup();
 		BeanUtils.copyProperties(request, fileGroup);

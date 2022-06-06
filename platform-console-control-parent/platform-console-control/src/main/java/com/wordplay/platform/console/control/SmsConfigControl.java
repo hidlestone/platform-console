@@ -29,37 +29,37 @@ public class SmsConfigControl {
 	private SmsConfigClient smsConfigClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存短信配置")
+	@ApiOperation("保存短信配置")
 	public ResponseResult save(@RequestBody SmsConfigRequest request) {
 		return smsConfigClient.save(request);
 	}
 
 	@PostMapping("/savebatch")
-	@ApiOperation(value = "批量保存短信配置")
+	@ApiOperation("批量保存短信配置")
 	public ResponseResult saveBatch(@RequestBody List<SmsConfigRequest> reqList) {
 		return smsConfigClient.saveBatch(reqList);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除短信配置")
+	@ApiOperation("删除短信配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		return smsConfigClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改短信配置")
+	@ApiOperation("修改短信配置")
 	public ResponseResult update(@RequestBody SmsConfigRequest request) {
 		return smsConfigClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询短信配置")
+	@ApiOperation("查询短信配置")
 	public ResponseResult<SmsConfigResponse> get(@RequestParam Long id) {
 		return smsConfigClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询短信配置")
+	@ApiOperation("分页查询短信配置")
 	public ResponseResult<Leaf<SmsConfigResponse>> list(@RequestBody SmsConfigRequest request) {
 		return smsConfigClient.list(request);
 	}

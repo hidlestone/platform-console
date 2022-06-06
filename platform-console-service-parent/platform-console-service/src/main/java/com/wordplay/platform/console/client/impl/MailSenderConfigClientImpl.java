@@ -33,7 +33,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存邮件发送配置")
+	@ApiOperation("保存邮件发送配置")
 	public ResponseResult save(@RequestBody MailSenderConfigRequest request) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
 		BeanUtils.copyProperties(request, mailSenderConfig);
@@ -43,7 +43,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件发送配置")
+	@ApiOperation("删除邮件发送配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		mailSenderConfigService.removeById(id);
 		return ResponseResult.success();
@@ -51,7 +51,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改邮件发送配置")
+	@ApiOperation("修改邮件发送配置")
 	public ResponseResult update(@RequestBody MailSenderConfigRequest request) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
 		BeanUtils.copyProperties(request, mailSenderConfig);
@@ -61,7 +61,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询邮件发送配置")
+	@ApiOperation("查询邮件发送配置")
 	public ResponseResult<MailSenderConfigResponse> get(@RequestParam Long id) {
 		MailSenderConfig mailSenderConfig = mailSenderConfigService.getById(id);
 		MailSenderConfigResponse response = new MailSenderConfigResponse();
@@ -71,7 +71,7 @@ public class MailSenderConfigClientImpl implements MailSenderConfigClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件发送配置")
+	@ApiOperation("分页查询邮件发送配置")
 	public ResponseResult<Leaf<MailSenderConfigResponse>> list(@RequestBody MailSenderConfigRequest req) {
 		MailSenderConfig mailSenderConfig = new MailSenderConfig();
 		BeanUtils.copyProperties(req, mailSenderConfig);

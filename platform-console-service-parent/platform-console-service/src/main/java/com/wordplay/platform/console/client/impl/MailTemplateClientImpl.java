@@ -33,7 +33,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存邮件发送配置")
+	@ApiOperation("保存邮件发送配置")
 	public ResponseResult save(@RequestBody MailTemplateRequest request) {
 		MailTemplate mailTemplate = new MailTemplate();
 		BeanUtils.copyProperties(request, mailTemplate);
@@ -43,7 +43,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件发送配置")
+	@ApiOperation("删除邮件发送配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		mailTemplateService.removeById(id);
 		return ResponseResult.success();
@@ -51,7 +51,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改邮件发送配置")
+	@ApiOperation("修改邮件发送配置")
 	public ResponseResult update(@RequestBody MailTemplateRequest request) {
 		MailTemplate mailTemplate = new MailTemplate();
 		BeanUtils.copyProperties(request, mailTemplate);
@@ -61,7 +61,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询邮件发送配置")
+	@ApiOperation("查询邮件发送配置")
 	public ResponseResult<MailTemplateResponse> get(@RequestParam Long id) {
 		MailTemplate mailTemplate = mailTemplateService.getById(id);
 		MailTemplateResponse response = new MailTemplateResponse();
@@ -71,7 +71,7 @@ public class MailTemplateClientImpl implements MailTemplateClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件发送配置")
+	@ApiOperation("分页查询邮件发送配置")
 	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateRequest req) {
 		MailTemplate mailTemplate = new MailTemplate();
 		BeanUtils.copyProperties(req, mailTemplate);

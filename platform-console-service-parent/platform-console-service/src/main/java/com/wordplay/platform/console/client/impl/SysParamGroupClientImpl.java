@@ -42,7 +42,7 @@ public class SysParamGroupClientImpl implements SysParamGroupClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存配置组及明细项")
+	@ApiOperation("保存配置组及明细项")
 	public ResponseResult save(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = new SysParamGroup();
@@ -56,7 +56,7 @@ public class SysParamGroupClientImpl implements SysParamGroupClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除配置组及明细项")
+	@ApiOperation("删除配置组及明细项")
 	public ResponseResult delete(@RequestParam String code) {
 		QueryWrapper<SysParamGroup> wrapper01 = new QueryWrapper();
 		wrapper01.eq("code", code);
@@ -71,7 +71,7 @@ public class SysParamGroupClientImpl implements SysParamGroupClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "更新配置组及明细项")
+	@ApiOperation("更新配置组及明细项")
 	public ResponseResult update(@RequestBody SysParamGroupRequest request) {
 		// 配置组
 		SysParamGroup sysParamGroup = JSON.parseObject(JSON.toJSONString(request), SysParamGroup.class);
@@ -83,7 +83,7 @@ public class SysParamGroupClientImpl implements SysParamGroupClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "根据配置组编码查询配置组及明细项")
+	@ApiOperation("根据配置组编码查询配置组及明细项")
 	public ResponseResult<SysParamGroupResponse> get(@RequestParam String code) {
 		SysParamGroup sysParamGroup = sysParamGroupService.get(code).getData();
 		SysParamGroupResponse response = JSON.parseObject(JSON.toJSONString(sysParamGroup), SysParamGroupResponse.class);
@@ -92,7 +92,7 @@ public class SysParamGroupClientImpl implements SysParamGroupClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询配置组")
+	@ApiOperation("分页查询配置组")
 	public ResponseResult<Leaf<SysParamGroupResponse>> list(@RequestBody SysParamGroupQueryRequest request) {
 		SysParamGroup sysParamGroup = new SysParamGroup();
 		BeanUtils.copyProperties(request, sysParamGroup);

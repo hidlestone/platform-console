@@ -36,7 +36,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "新增I8N词条")
+	@ApiOperation("新增I8N词条")
 	public ResponseResult save(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
 		BeanUtils.copyProperties(request, i18nResource);
@@ -46,7 +46,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@PostMapping("/savebatch")
-	@ApiOperation(value = "批量新增I8N词条")
+	@ApiOperation("批量新增I8N词条")
 	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> reqList) {
 		List<I18nResource> i18nResourceList = JSON.parseArray(JSON.toJSONString(reqList), I18nResource.class);
 		for (I18nResource entity : i18nResourceList) {
@@ -57,7 +57,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除I8N词条")
+	@ApiOperation("删除I8N词条")
 	public ResponseResult delete(@RequestParam Long id) {
 		i18nResourceService.removeById(id);
 		return ResponseResult.success();
@@ -65,7 +65,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改I8N词条")
+	@ApiOperation("修改I8N词条")
 	public ResponseResult update(@RequestBody I18nResourceRequest request) {
 		I18nResource i18nResource = new I18nResource();
 		BeanUtils.copyProperties(request, i18nResource);
@@ -75,7 +75,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "ID查询I8N词条")
+	@ApiOperation("ID查询I8N词条")
 	public ResponseResult<I18nResourceResponse> get(@RequestParam Long id) {
 		I18nResource i18nResource = i18nResourceService.getById(id);
 		I18nResourceResponse response = new I18nResourceResponse();
@@ -85,7 +85,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@GetMapping("/getbyresourcekey")
-	@ApiOperation(value = "resourceKey查询I8N词条")
+	@ApiOperation("resourceKey查询I8N词条")
 	public ResponseResult<List<I18nResourceResponse>> getByResourceKey(@RequestParam String resourceKey) {
 		List<I18nResource> i18nResourceList = i18nResourceService.getByResourceKey(resourceKey).getData();
 		List<I18nResourceResponse> respList = JSON.parseArray(JSON.toJSONString(i18nResourceList), I18nResourceResponse.class);
@@ -94,7 +94,7 @@ public class I18NClientImpl implements I18NClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询I8N词条")
+	@ApiOperation("分页查询I8N词条")
 	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceRequest req) {
 		com.fallframework.platform.starter.i18n.model.I18nResourceRequest request = new com.fallframework.platform.starter.i18n.model.I18nResourceRequest();
 		BeanUtils.copyProperties(req, request);

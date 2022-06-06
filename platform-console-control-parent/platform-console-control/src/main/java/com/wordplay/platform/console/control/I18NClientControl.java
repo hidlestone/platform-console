@@ -29,43 +29,43 @@ public class I18NClientControl {
 	private I18NClient i18NClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "新增I8N词条")
+	@ApiOperation("新增I8N词条")
 	public ResponseResult save(@RequestBody I18nResourceRequest request) {
 		return i18NClient.save(request);
 	}
 
 	@PostMapping("/savebatch")
-	@ApiOperation(value = "批量新增I8N词条")
+	@ApiOperation("批量新增I8N词条")
 	public ResponseResult saveBatch(@RequestBody List<I18nResourceRequest> reqList) {
 		return i18NClient.saveBatch(reqList);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除I8N词条")
+	@ApiOperation("删除I8N词条")
 	public ResponseResult delete(@RequestParam Long id) {
 		return i18NClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改I8N词条")
+	@ApiOperation("修改I8N词条")
 	public ResponseResult update(@RequestBody I18nResourceRequest request) {
 		return i18NClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "ID查询I8N词条")
+	@ApiOperation("ID查询I8N词条")
 	public ResponseResult<I18nResourceResponse> get(@RequestParam Long id) {
 		return i18NClient.get(id);
 	}
 
 	@GetMapping("/getbyresourcekey")
-	@ApiOperation(value = "resourceKey查询I8N词条")
+	@ApiOperation("resourceKey查询I8N词条")
 	public ResponseResult<List<I18nResourceResponse>> getByResourceKey(@RequestParam String resourceKey) {
 		return i18NClient.getByResourceKey(resourceKey);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询I8N词条")
+	@ApiOperation("分页查询I8N词条")
 	public ResponseResult<Leaf<I18nResourceResponse>> list(@RequestBody I18nResourceRequest request) {
 		return i18NClient.list(request);
 	}

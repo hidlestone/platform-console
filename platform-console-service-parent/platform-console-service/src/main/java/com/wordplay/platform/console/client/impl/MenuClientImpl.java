@@ -53,7 +53,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存菜单")
+	@ApiOperation("保存菜单")
 	public ResponseResult save(@RequestBody MenuRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -63,7 +63,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除菜单")
+	@ApiOperation("删除菜单")
 	public ResponseResult delete(@RequestParam Long id) {
 		menuService.removeById(id);
 		return ResponseResult.success();
@@ -71,7 +71,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "修改菜单")
+	@ApiOperation("修改菜单")
 	public ResponseResult update(@RequestBody MenuRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -81,7 +81,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询菜单")
+	@ApiOperation("查询菜单")
 	public ResponseResult<MenuResponse> get(@RequestParam Long id) {
 		Menu menu = menuService.getById(id);
 		MenuResponse response = new MenuResponse();
@@ -91,7 +91,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询菜单")
+	@ApiOperation("分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> list(@RequestBody MenuRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -102,7 +102,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/getmenusbyuserid")
-	@ApiOperation(value = "根据用户ID分页查询菜单")
+	@ApiOperation("根据用户ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByUserId(@RequestBody MenuQueryRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -113,7 +113,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/getmenusbyroleids")
-	@ApiOperation(value = "根据角色ID分页查询菜单")
+	@ApiOperation("根据角色ID分页查询菜单")
 	public ResponseResult<Leaf<MenuResponse>> getMenusByRoleIds(@RequestBody MenuQueryRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -124,7 +124,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@GetMapping("/getallmenus")
-	@ApiOperation(value = "根据token获取当前用户所有菜单")
+	@ApiOperation("根据token获取当前用户所有菜单")
 	public ResponseResult<List<FrontMenuResponse>> getAllMenus() {
 		Subject currentUser = SecurityUtils.getSubject();
 		User curUser = (User) currentUser.getPrincipal();
@@ -172,7 +172,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@PostMapping("/getmenutree")
-	@ApiOperation(value = "查询菜单树")
+	@ApiOperation("查询菜单树")
 	public ResponseResult<List<MenuResponse>> getMenuTree(@RequestBody MenuQueryRequest request) {
 		Menu menu = new Menu();
 		BeanUtils.copyProperties(request, menu);
@@ -183,7 +183,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@GetMapping("/getmenulistbyparentid")
-	@ApiOperation(value = "根据父ID查询菜单")
+	@ApiOperation("根据父ID查询菜单")
 	public ResponseResult<List<MenuResponse>> getMenuListByParentId(@RequestParam Long parentId) {
 		ResponseResult<List<Menu>> menuList = menuService.getMenusByParentId(parentId);
 		List<MenuResponse> menuResponseList = JSON.parseArray(JSON.toJSONString(menuList), MenuResponse.class);
@@ -192,7 +192,7 @@ public class MenuClientImpl implements MenuClient {
 
 	@Override
 	@GetMapping("/getmainmenus")
-	@ApiOperation(value = "查询主菜单")
+	@ApiOperation("查询主菜单")
 	public ResponseResult<List<MenuResponse>> getMainMenus() {
 		QueryWrapper<Menu> wrapper = new QueryWrapper();
 		wrapper.eq("level", 1);

@@ -27,19 +27,19 @@ public class MailHistoryControl {
 	private MailHistoryClient mailHistoryClient;
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件历史")
+	@ApiOperation("删除邮件历史")
 	public ResponseResult delete(@RequestParam Long id) {
 		return mailHistoryClient.delete(id);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询邮件历史")
+	@ApiOperation("查询邮件历史")
 	public ResponseResult<MailHistoryResponse> get(@RequestParam Long id) {
 		return mailHistoryClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件历史")
+	@ApiOperation("分页查询邮件历史")
 	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryRequest request) {
 		return mailHistoryClient.list(request);
 	}

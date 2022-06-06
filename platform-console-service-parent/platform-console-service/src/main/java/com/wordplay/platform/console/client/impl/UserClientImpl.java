@@ -50,7 +50,7 @@ public class UserClientImpl implements UserClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询用户")
+	@ApiOperation("查询用户")
 	public ResponseResult<UserResponse> get(@RequestParam Long id) {
 		User user = userService.getById(id);
 		UserResponse response = new UserResponse();
@@ -60,7 +60,7 @@ public class UserClientImpl implements UserClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询用户")
+	@ApiOperation("分页查询用户")
 	public ResponseResult<Leaf<UserResponse>> list(@RequestBody UserRequest request) {
 		User user = new User();
 		BeanUtils.copyProperties(request, user);
@@ -71,7 +71,7 @@ public class UserClientImpl implements UserClient {
 
 	@Override
 	@GetMapping("/getuserinfo")
-	@ApiOperation(value = "根据accessToken获取用户信息")
+	@ApiOperation("根据accessToken获取用户信息")
 	public ResponseResult<UserDtlInfoResponse> getUserInfo() {
 		String accesstoken = RequestContexUtil.getAccesstoken();
 		User model = null;
@@ -99,7 +99,7 @@ public class UserClientImpl implements UserClient {
 
 	@Override
 	@GetMapping("/logout")
-	@ApiOperation(value = "用户登出")
+	@ApiOperation("用户登出")
 	public ResponseResult logout(@RequestParam String accesstoken) {
 		User model = null;
 		try {

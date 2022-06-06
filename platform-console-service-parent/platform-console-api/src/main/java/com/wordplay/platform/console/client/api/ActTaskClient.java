@@ -7,6 +7,7 @@ import com.wordplay.platform.console.model.request.CompleteTaskRequest;
 import com.wordplay.platform.console.model.request.PendingTaskRequest;
 import com.wordplay.platform.console.model.request.RejectTaskRequest;
 import com.wordplay.platform.console.model.request.TaskQueryRequest;
+import com.wordplay.platform.console.model.response.TaskDetailResponse;
 import com.wordplay.platform.console.model.response.TaskResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,6 +73,6 @@ public interface ActTaskClient {
 	 * @return 任务详细信息
 	 */
 	@GetMapping("/gettaskdetail")
-	ResponseResult getTaskDetail(@RequestParam String taskId);
+	ResponseResult<TaskDetailResponse> getTaskDetail(@RequestParam String taskId);
 
 }

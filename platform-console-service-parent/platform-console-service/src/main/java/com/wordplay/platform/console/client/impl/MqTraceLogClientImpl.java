@@ -33,7 +33,7 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除MQ轨迹日志")
+	@ApiOperation("删除MQ轨迹日志")
 	public ResponseResult delete(@RequestParam Long id) {
 		mqTraceLogService.removeById(id);
 		return ResponseResult.success();
@@ -41,7 +41,7 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询MQ轨迹日志")
+	@ApiOperation("查询MQ轨迹日志")
 	public ResponseResult<MqTraceLogResponse> get(@RequestParam Long id) {
 		MqTraceLog mqTraceLog = mqTraceLogService.getById(id);
 		MqTraceLogResponse response = new MqTraceLogResponse();
@@ -51,7 +51,7 @@ public class MqTraceLogClientImpl implements MqTraceLogClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询MQ轨迹日志")
+	@ApiOperation("分页查询MQ轨迹日志")
 	public ResponseResult<Leaf<MqTraceLogResponse>> list(@RequestBody MqTraceLogRequest req) {
 		MqTraceLog mqTraceLog = new MqTraceLog();
 		BeanUtils.copyProperties(req, mqTraceLog);

@@ -33,7 +33,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件历史")
+	@ApiOperation("删除邮件历史")
 	public ResponseResult delete(@RequestParam Long id) {
 		mailHistoryService.removeById(id);
 		return ResponseResult.success();
@@ -41,7 +41,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询邮件历史")
+	@ApiOperation("查询邮件历史")
 	public ResponseResult<MailHistoryResponse> get(@RequestParam Long id) {
 		MailHistory mailHistory = mailHistoryService.getById(id);
 		MailHistoryResponse response = new MailHistoryResponse();
@@ -51,7 +51,7 @@ public class MailHistoryClientImpl implements MailHistoryClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件历史")
+	@ApiOperation("分页查询邮件历史")
 	public ResponseResult<Leaf<MailHistoryResponse>> list(@RequestBody MailHistoryRequest req) {
 		MailHistory mailHistory = new MailHistory();
 		BeanUtils.copyProperties(req, mailHistory);

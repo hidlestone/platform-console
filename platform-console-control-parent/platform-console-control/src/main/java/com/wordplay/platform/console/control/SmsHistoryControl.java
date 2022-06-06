@@ -27,19 +27,19 @@ public class SmsHistoryControl {
 	private SmsHistoryClient smsHistoryClient;
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除短信历史")
+	@ApiOperation("删除短信历史")
 	public ResponseResult delete(@RequestParam Long id) {
 		return smsHistoryClient.delete(id);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询短信历史")
+	@ApiOperation("查询短信历史")
 	public ResponseResult<SmsHistoryResponse> get(@RequestParam Long id) {
 		return smsHistoryClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询短信历史")
+	@ApiOperation("分页查询短信历史")
 	public ResponseResult<Leaf<SmsHistoryResponse>> list(@RequestBody SmsHistoryRequest request) {
 		return smsHistoryClient.list(request);
 	}

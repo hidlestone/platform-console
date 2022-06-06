@@ -23,7 +23,7 @@ public class RandomCheckCodeClientImpl implements RandomCheckCodeClient {
 
 	@Override
 	@GetMapping("/getrandomcheckcode")
-	@ApiOperation(value = "四位随机校验码")
+	@ApiOperation("四位随机校验码")
 	public ResponseResult getRandomCheckCode() {
 		return randomCheckCodeService.getRandomCheckCode();
 	}

@@ -29,37 +29,37 @@ public class SysParamControl {
 	private SysParamClient sysParamClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存配置明细项")
+	@ApiOperation("保存配置明细项")
 	public ResponseResult save(@RequestBody SysParamItemRequest request) {
 		return sysParamClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除明细项")
+	@ApiOperation("删除明细项")
 	public ResponseResult delete(@RequestParam String code) {
 		return sysParamClient.delete(code);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "更新配置明细项")
+	@ApiOperation("更新配置明细项")
 	public ResponseResult updateItem(@RequestBody SysParamItemRequest request) {
 		return sysParamClient.update(request);
 	}
 
 	@GetMapping("/getitemsbygroupcode")
-	@ApiOperation(value = "根据配置组编码查询配置明细项")
+	@ApiOperation("根据配置组编码查询配置明细项")
 	public ResponseResult<List<SysParamItemResponse>> getItemsByGroupCode(@RequestParam String groupCode) {
 		return sysParamClient.getItemsByGroupCode(groupCode);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "根据编码查询配置明细")
+	@ApiOperation("根据编码查询配置明细")
 	public ResponseResult<SysParamItemResponse> get(String code) {
 		return sysParamClient.get(code);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询配置明细")
+	@ApiOperation("分页查询配置明细")
 	public ResponseResult<Leaf<SysParamItemResponse>> list(SysParamItemRequest request) {
 		return sysParamClient.list(request);
 	}

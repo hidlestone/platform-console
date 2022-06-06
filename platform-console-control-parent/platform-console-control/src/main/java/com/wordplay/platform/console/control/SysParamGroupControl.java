@@ -28,31 +28,31 @@ public class SysParamGroupControl {
 	private SysParamGroupClient sysParamGroupClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存配置组及明细项")
+	@ApiOperation("保存配置组及明细项")
 	public ResponseResult save(@RequestBody SysParamGroupRequest request) {
 		return sysParamGroupClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除配置组及明细项")
+	@ApiOperation("删除配置组及明细项")
 	public ResponseResult delete(@RequestParam String code) {
 		return sysParamGroupClient.delete(code);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "更新配置组及明细项")
+	@ApiOperation("更新配置组及明细项")
 	public ResponseResult update(@RequestBody SysParamGroupRequest request) {
 		return sysParamGroupClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "根据配置组编码查询配置组及明细项")
+	@ApiOperation("根据配置组编码查询配置组及明细项")
 	public ResponseResult<SysParamGroupResponse> get(@RequestParam String code) {
 		return sysParamGroupClient.get(code);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询配置组")
+	@ApiOperation("分页查询配置组")
 	public ResponseResult<Leaf<SysParamGroupResponse>> list(@RequestBody SysParamGroupQueryRequest request) {
 		return sysParamGroupClient.list(request);
 	}

@@ -22,13 +22,13 @@ public class LocalFileProcessControl {
 	private LocalFileProcessClient localFileProcessClient;
 
 	@PostMapping("/uploadfilegroup")
-	@ApiOperation(value = "上传文件组")
+	@ApiOperation("上传文件组")
 	public ResponseResult uploadFileGroup(FileGroupUploadRequest request) {
 		return localFileProcessClient.uploadFileGroup(request);
 	}
 
 	@PostMapping("/downloadfile")
-	@ApiOperation(value = "下载文件")
+	@ApiOperation("下载文件")
 	public ResponseResult downloadFile(Long fileInfoId) {
 		return localFileProcessClient.downloadFile(fileInfoId);
 	}

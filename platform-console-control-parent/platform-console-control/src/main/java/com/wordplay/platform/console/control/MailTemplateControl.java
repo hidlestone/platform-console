@@ -27,31 +27,31 @@ public class MailTemplateControl {
 	private MailTemplateClient mailTemplateClient;
 
 	@PostMapping("/save")
-	@ApiOperation(value = "保存邮件发送配置")
+	@ApiOperation("保存邮件发送配置")
 	public ResponseResult save(@RequestBody MailTemplateRequest request) {
 		return mailTemplateClient.save(request);
 	}
 
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除邮件发送配置")
+	@ApiOperation("删除邮件发送配置")
 	public ResponseResult delete(@RequestParam Long id) {
 		return mailTemplateClient.delete(id);
 	}
 
 	@PostMapping("/update")
-	@ApiOperation(value = "修改邮件发送配置")
+	@ApiOperation("修改邮件发送配置")
 	public ResponseResult update(@RequestBody MailTemplateRequest request) {
 		return mailTemplateClient.update(request);
 	}
 
 	@GetMapping("/get")
-	@ApiOperation(value = "查询邮件发送配置")
+	@ApiOperation("查询邮件发送配置")
 	public ResponseResult<MailTemplateResponse> get(@RequestParam Long id) {
 		return mailTemplateClient.get(id);
 	}
 
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询邮件发送配置")
+	@ApiOperation("分页查询邮件发送配置")
 	public ResponseResult<Leaf<MailTemplateResponse>> list(@RequestBody MailTemplateRequest request) {
 		return mailTemplateClient.list(request);
 	}

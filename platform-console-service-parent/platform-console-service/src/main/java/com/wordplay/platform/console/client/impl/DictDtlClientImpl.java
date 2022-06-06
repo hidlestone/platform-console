@@ -41,7 +41,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/save")
-	@ApiOperation(value = "保存字典明细")
+	@ApiOperation("保存字典明细")
 	public ResponseResult save(@RequestBody DictDtlRequest request) {
 		Dict dict = dictService.getById(request.getDictId());
 		if (null == dict) {
@@ -54,7 +54,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除字典明细")
+	@ApiOperation("删除字典明细")
 	public ResponseResult delete(@RequestParam Long id) {
 		dictService.removeById(id);
 		return ResponseResult.success();
@@ -62,7 +62,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "更新字典明细")
+	@ApiOperation("更新字典明细")
 	public ResponseResult update(@RequestBody DictDtlRequest request) {
 		Dict dict = dictService.getById(request.getDictId());
 		if (null == dict) {
@@ -75,7 +75,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation(value = "查询字典明细")
+	@ApiOperation("查询字典明细")
 	public ResponseResult<DictDtlResponse> get(@RequestParam Long id) {
 		DictDtl dictDtl = dictDtlService.getById(id);
 		DictDtlResponse response = new DictDtlResponse();
@@ -85,7 +85,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@RequestMapping("/getdictdtlsbydictcode")
-	@ApiOperation(value = "根据字典编码查询明细")
+	@ApiOperation("根据字典编码查询明细")
 	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode) {
 		List<DictDtl> dictDtlList = dictDtlService.getDictDtlsByDictCode(dictCode).getData();
 		List<DictDtlResponse> dictDtlResponseList = JSON.parseArray(JSON.toJSONString(dictDtlList), DictDtlResponse.class);
@@ -94,7 +94,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 
 	@Override
 	@RequestMapping("/list")
-	@ApiOperation(value = "分页查询字典明细")
+	@ApiOperation("分页查询字典明细")
 	public ResponseResult<Leaf<DictDtlResponse>> list(@RequestBody DictDtlRequest request) {
 		DictDtl dictDtl = new DictDtl();
 		BeanUtils.copyProperties(request, dictDtl);

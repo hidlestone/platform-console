@@ -40,7 +40,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/savedict")
-	@ApiOperation(value = "保存字典项")
+	@ApiOperation("保存字典项")
 	public ResponseResult saveDict(@RequestBody DictRequest request) {
 		Dict dict = JSON.parseObject(JSON.toJSONString(request), Dict.class);
 		return dictService.saveDict(dict);
@@ -48,7 +48,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/delete")
-	@ApiOperation(value = "删除字典项")
+	@ApiOperation("删除字典项")
 	public ResponseResult delete(@RequestParam Long id) {
 		Dict dict = dictService.getById(id);
 		QueryWrapper<DictDtl> wrapper = new QueryWrapper<>();
@@ -60,7 +60,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/update")
-	@ApiOperation(value = "删除字典项")
+	@ApiOperation("删除字典项")
 	public ResponseResult update(@RequestBody DictRequest request) {
 		Dict dict = JSON.parseObject(JSON.toJSONString(request), Dict.class);
 		dictService.updateById(dict);
@@ -72,7 +72,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/get")
-	@ApiOperation(value = "查询字典项")
+	@ApiOperation("查询字典项")
 	public ResponseResult<DictResponse> get(@RequestParam Long id) {
 		Dict dict = dictService.getById(id);
 		QueryWrapper<DictDtl> wrapper = new QueryWrapper<>();
@@ -86,7 +86,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/list")
-	@ApiOperation(value = "分页查询字典项")
+	@ApiOperation("分页查询字典项")
 	public ResponseResult<Leaf<DictResponse>> list(@RequestBody DictRequest request) {
 		Dict dict = new Dict();
 		BeanUtils.copyProperties(request, dict);
@@ -97,7 +97,7 @@ public class DictClientImpl implements DictClient {
 
 	@Override
 	@PostMapping("/getalldicts")
-	@ApiOperation(value = "查询所有字典项")
+	@ApiOperation("查询所有字典项")
 	public ResponseResult<List<DictResponse>> getAllDicts() {
 		ResponseResult<List<Dict>> allDicts = dictService.getAllDicts();
 		List<DictResponse> dictResponses = JSON.parseArray(JSON.toJSONString(allDicts), DictResponse.class);

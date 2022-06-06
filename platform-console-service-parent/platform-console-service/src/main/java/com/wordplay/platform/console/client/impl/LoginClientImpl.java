@@ -46,7 +46,7 @@ public class LoginClientImpl implements LoginClient {
 
 	@Override
 	@PostMapping("/loginbyaccount")
-	@ApiOperation(value = "账号密码登录")
+	@ApiOperation("账号密码登录")
 	public ResponseResult<LoginSuccessResponse> loginByAccount(@RequestBody AccountPwdLoginRequest request) {
 		if ((StringUtils.isBlank(request.getAccount()) && StringUtils.isBlank(request.getTel())) || StringUtils.isBlank(request.getPassword())) {
 			return ResponseResult.fail("账号密码不能为空");
@@ -79,7 +79,7 @@ public class LoginClientImpl implements LoginClient {
 
 	@Override
 	@PostMapping("/loginbyverificationcode")
-	@ApiOperation(value = "账号验证码登录")
+	@ApiOperation("账号验证码登录")
 	public ResponseResult loginByVerificationCode(VerificationCodeLoginRequest request) {
 
 
@@ -88,7 +88,7 @@ public class LoginClientImpl implements LoginClient {
 
 	@Override
 	@PostMapping("/loginbyqrcodelogin")
-	@ApiOperation(value = "扫二维码登录")
+	@ApiOperation("扫二维码登录")
 	public ResponseResult loginByQRCodeLogin(QRCodeLoginRequest request) {
 		return null;
 	}
