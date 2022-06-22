@@ -48,10 +48,12 @@
 			<artifactId>fall-platform-starter-sms</artifactId>
 		</dependency>
 		<!-- 基础模块END -->
+		<!-- shiro -->
 		<dependency>
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-shiro</artifactId>
 		</dependency>
+		<!-- activiti -->
 		<!--<dependency>
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-activiti</artifactId>

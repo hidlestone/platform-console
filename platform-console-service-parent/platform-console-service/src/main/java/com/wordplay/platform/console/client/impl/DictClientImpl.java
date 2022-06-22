@@ -17,6 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,11 +97,11 @@ public class DictClientImpl implements DictClient {
 	}
 
 	@Override
-	@PostMapping("/getalldicts")
+	@GetMapping("/getalldicts")
 	@ApiOperation("查询所有字典项")
 	public ResponseResult<List<DictResponse>> getAllDicts() {
-		ResponseResult<List<Dict>> allDicts = dictService.getAllDicts();
-		List<DictResponse> dictResponses = JSON.parseArray(JSON.toJSONString(allDicts), DictResponse.class);
+		List<Dict> dictList = dictService.getAllDicts().getData();
+		List<DictResponse> dictResponses = JSON.parseArray(JSON.toJSONString(dictList), DictResponse.class);
 		return ResponseResult.success(dictResponses);
 	}
 

@@ -33,7 +33,7 @@ public interface DictClient {
 	@PostMapping("/list")
 	ResponseResult<Leaf<DictResponse>> list(@RequestBody DictRequest request);
 
-	@PostMapping("/list")
+	@GetMapping("/getalldicts")
 	ResponseResult<List<DictResponse>> getAllDicts();
 
 }
