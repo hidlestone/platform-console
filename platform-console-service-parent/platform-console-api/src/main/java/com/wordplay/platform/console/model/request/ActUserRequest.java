@@ -1,7 +1,6 @@
 package com.wordplay.platform.console.model.request;
 
 import com.fallframework.platform.starter.api.request.BaseEntityRequest;
-import com.wordplay.platform.console.model.response.ByteArrayRef;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

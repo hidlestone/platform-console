@@ -45,5 +45,5 @@ public class DictDtlRequest extends BaseEntityRequest {
 
 	@ApiModelProperty("多语言词条")
 	private List<I18nResourceRequest> i18nResources;
-	
+
 }

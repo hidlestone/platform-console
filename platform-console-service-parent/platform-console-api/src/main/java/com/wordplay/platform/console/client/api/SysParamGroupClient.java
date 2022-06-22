@@ -19,7 +19,7 @@ public interface SysParamGroupClient {
 
 	@PostMapping("/save")
 	ResponseResult save(@RequestBody SysParamGroupRequest request);
-	
+
 	@PostMapping("/delete")
 	ResponseResult delete(@RequestParam String code);
 

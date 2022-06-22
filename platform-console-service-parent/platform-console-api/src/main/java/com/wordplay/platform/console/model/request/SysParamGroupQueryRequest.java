@@ -16,7 +16,7 @@ import lombok.Setter;
 public class SysParamGroupQueryRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 2978597290682806206L;
-	
+
 	@ApiModelProperty("主键")
 	private Long id;
 

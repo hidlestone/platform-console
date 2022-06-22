@@ -15,7 +15,7 @@ import lombok.Setter;
 public class LogoutRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = -469351639513773140L;
-	
+
 	@ApiModelProperty("访问token")
 	private String accesstoken;
 

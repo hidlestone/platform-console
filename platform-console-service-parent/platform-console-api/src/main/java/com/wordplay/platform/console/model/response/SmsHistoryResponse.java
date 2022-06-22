@@ -68,5 +68,5 @@ public class SmsHistoryResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("更改时间")
 	private Date gmtModified;
-	
+
 }

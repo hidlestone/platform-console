@@ -15,7 +15,7 @@ import lombok.Setter;
 public class AccPwdLoginRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = -1867620935199084853L;
-	
+
 	@ApiModelProperty("用户名")
 	private String username;
 

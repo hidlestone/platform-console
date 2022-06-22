@@ -21,8 +21,8 @@ public class AccountPwdLoginRequest extends BaseEntityRequest {
 
 	@ApiModelProperty("电话号码")
 	private String tel;
-	
+
 	@ApiModelProperty("用户密码")
 	private String password;
-	
+
 }

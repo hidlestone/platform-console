@@ -13,5 +13,5 @@ public enum AuthcTypeEnum {
 	 * 登录即可访问
 	 */
 	AUTH;
-	
+
 }

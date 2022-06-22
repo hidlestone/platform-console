@@ -15,7 +15,7 @@ import lombok.Setter;
 public class AssignTaskRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = -5520030032350951067L;
-	
+
 	@ApiModelProperty(value = "任务ID")
 	private String taskId;
 

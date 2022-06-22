@@ -14,5 +14,5 @@ import lombok.Setter;
 public class QRCodeLoginRequest extends BaseEntityRequest {
 
 	private static final long serialVersionUID = 2510190274651128509L;
-	
+
 }

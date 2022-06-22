@@ -3,7 +3,6 @@ package com.wordplay.platform.console.client.api;
 import com.fallframework.platform.starter.api.response.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 登录页随机校验码

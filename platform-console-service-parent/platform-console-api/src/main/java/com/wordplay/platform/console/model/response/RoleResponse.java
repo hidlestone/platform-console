@@ -18,7 +18,7 @@ public class RoleResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("ID")
 	private Long id;
-	
+
 	@ApiModelProperty("角色编码")
 	private String roleCode;
 
@@ -27,5 +27,5 @@ public class RoleResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("角色描述")
 	private String roleDesc;
-	
+
 }

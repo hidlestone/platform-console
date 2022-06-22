@@ -30,5 +30,5 @@ public class ActUserResponse extends BaseEntityRequest {
 
 	@ApiModelProperty("用户其他信息")
 	private ByteArrayRef pictureByteArrayRef;
-	
+
 }

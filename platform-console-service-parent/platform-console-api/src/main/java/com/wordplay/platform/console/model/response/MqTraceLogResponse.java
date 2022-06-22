@@ -74,5 +74,5 @@ public class MqTraceLogResponse extends BaseEntityResponse {
 
 	@ApiModelProperty("更改时间")
 	private Date gmtModified;
-	
+
 }

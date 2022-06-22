@@ -16,7 +16,7 @@ import java.util.Map;
 public class ProcessDefinitionResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = 7364461510467673512L;
-	
+
 	protected String name;
 	protected String description;
 	protected String key;

@@ -17,7 +17,7 @@ import lombok.Setter;
 public class ActGroupResponse extends BasePageRequest {
 
 	private static final long serialVersionUID = -6255188883899698790L;
-	
+
 	@ApiModelProperty("用户组名称")
 	private String name;
 

@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 @ApiModel("任务表单信息响应参数")
 public class TaskFormDataResponse extends BaseEntityResponse {
-	
-	
-	
+
+
 }

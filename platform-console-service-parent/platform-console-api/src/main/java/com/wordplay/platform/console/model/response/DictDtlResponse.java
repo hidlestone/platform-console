@@ -16,7 +16,7 @@ import lombok.Setter;
 public class DictDtlResponse extends BaseEntityResponse {
 
 	private static final long serialVersionUID = 8347797317622064846L;
-	
+
 	@ApiModelProperty(value = "主键")
 	private Long id;
 

@@ -138,93 +138,64 @@ public class HistoricTaskInstanceQueryReequest extends BasePageRequest {
 
 	@ApiModelProperty("候选组")
 	protected String candidateGroup;
-
-	@ApiModelProperty("候选组列表")
-	private List<String> candidateGroups;
-
 	@ApiModelProperty("参与用户")
 	protected String involvedUser;
-
 	@ApiModelProperty("参与组")
 	protected List<String> involvedGroups;
-
 	@ApiModelProperty("任务优先级")
 	protected Integer taskPriority;
-
 	@ApiModelProperty("任务最小优先级")
 	protected Integer taskMinPriority;
-
 	@ApiModelProperty("任务最大优先级")
 	protected Integer taskMaxPriority;
-
 	@ApiModelProperty("已结束")
 	protected Boolean finished;
-
 	@ApiModelProperty("未结束")
 	protected Boolean unfinished;
-
 	@ApiModelProperty("流程结束")
 	protected Boolean processFinished;
-
 	@ApiModelProperty("流程未结束")
 	protected Boolean processUnfinished;
-
 	@ApiModelProperty("截止日期")
 	protected Date dueDate;
-
 	@ApiModelProperty("在此日期后截止")
 	protected Date dueAfter;
-
 	@ApiModelProperty("在此日期前截止")
 	protected Date dueBefore;
-
 	@ApiModelProperty("无截止日期")
 	protected Boolean withoutDueDate;
-
 	@ApiModelProperty("创建日期")
 	protected Date creationDate;
-
 	@ApiModelProperty("在此日期后创建")
 	protected Date creationAfterDate;
-
 	@ApiModelProperty("在此日期前创建")
 	protected Date creationBeforeDate;
-
 	@ApiModelProperty("完成日期")
 	protected Date completedDate;
-
 	@ApiModelProperty("在此日期后完成")
 	protected Date completedAfterDate;
-
 	@ApiModelProperty("在此日期前完成")
 	protected Date completedBeforeDate;
-
 	@ApiModelProperty("分类")
 	protected String category;
-
 	@ApiModelProperty("租户ID")
 	protected String tenantId;
-
 	@ApiModelProperty("租户ID模糊")
 	protected String tenantIdLike;
-
 	@ApiModelProperty("排除租户ID")
 	protected Boolean withoutTenantId;
-
 	@ApiModelProperty("本地化")
 	protected String locale;
-
 	@ApiModelProperty("本地化")
 	protected Boolean withLocalizationFallback;
-
 	@ApiModelProperty("包括任务本地化变量")
 	protected Boolean includeTaskLocalVariables = false;
-
 	@ApiModelProperty("包括流程变量")
 	protected Boolean includeProcessVariables = false;
-
 	@ApiModelProperty("任务变量限制数量")
 	protected Integer taskVariablesLimit;
+	@ApiModelProperty("候选组列表")
+	private List<String> candidateGroups;
 
 //	@ApiModelProperty("查询条件")
 //	protected List<HistoricTaskInstanceQueryImpl> orQueryObjects = new ArrayList();
