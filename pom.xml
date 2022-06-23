@@ -21,8 +21,6 @@
 	<modules>
 		<module>platform-console-control-parent</module>
 		<module>platform-console-service-parent</module>
-		<module>wechatwork-console-service-parent</module>
-		<module>wechatwork-console-control-parent</module>
 	</modules>
 
 </project>

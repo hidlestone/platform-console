@@ -47,6 +47,10 @@
 			<groupId>com.fallframework.platform</groupId>
 			<artifactId>fall-platform-starter-sms</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fallframework.platform</groupId>
+			<artifactId>fall-platform-starter-wechatwork</artifactId>
+		</dependency>
 		<!-- 基础模块END -->
 		<!-- shiro -->
 		<dependency>

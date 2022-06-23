@@ -83,7 +83,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 	}
 
 	@Override
-	@RequestMapping("/getdictdtlsbydictcode")
+	@GetMapping("/getdictdtlsbydictcode")
 	@ApiOperation("根据字典编码查询明细")
 	public ResponseResult<List<DictDtlResponse>> getDictDtlsByDictCode(@RequestParam String dictCode) {
 		List<DictDtl> dictDtlList = dictDtlService.getDictDtlsByDictCode(dictCode).getData();
@@ -92,7 +92,7 @@ public class DictDtlClientImpl implements DictDtlClient {
 	}
 
 	@Override
-	@RequestMapping("/list")
+	@PostMapping("/list")
 	@ApiOperation("分页查询字典明细")
 	public ResponseResult<Leaf<DictDtlResponse>> list(@RequestBody DictDtlRequest request) {
 		DictDtl dictDtl = new DictDtl();

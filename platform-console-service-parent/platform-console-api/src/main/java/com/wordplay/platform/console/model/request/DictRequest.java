@@ -2,6 +2,7 @@ package com.wordplay.platform.console.model.request;
 
 import com.fallframework.platform.starter.api.model.StatusEnum;
 import com.fallframework.platform.starter.api.request.BaseEntityRequest;
+import com.fallframework.platform.starter.api.request.BasePageRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel("字典项请求参数")
-public class DictRequest extends BaseEntityRequest {
+public class DictRequest extends BasePageRequest {
 
 	private static final long serialVersionUID = 8921795209201188863L;
 
