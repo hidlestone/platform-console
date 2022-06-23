@@ -23,6 +23,5 @@ public interface WxWorkSynConfigClient {
 
 	@PostMapping("/list")
 	ResponseResult<Leaf<WxWorkSynConfigResponse>> list(@RequestBody WxWorkSynConfigRequest request);
-
-
+	
 }

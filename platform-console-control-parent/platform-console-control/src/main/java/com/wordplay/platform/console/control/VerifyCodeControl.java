@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class VerifyCodeControl {
 
 	@PostMapping("/sendverifycode")
 	@ApiOperation("发送随机的验证码")
-	public ResponseResult sendVerifyCode(VerifyCodeSenderRequest request) {
+	public ResponseResult sendVerifyCode(@RequestBody VerifyCodeSenderRequest request) {
 		return verifyCodeClient.sendVerifyCode(request);
 	}
 
