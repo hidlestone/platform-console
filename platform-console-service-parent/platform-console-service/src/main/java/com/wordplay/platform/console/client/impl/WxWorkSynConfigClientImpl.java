@@ -33,7 +33,7 @@ public class WxWorkSynConfigClientImpl implements WxWorkSynConfigClient {
 
 	@Override
 	@GetMapping("/get")
-	@ApiOperation("查询同步配置")
+	@ApiOperation("查询同步配置") 
 	public ResponseResult<WxWorkSynConfigResponse> get(@RequestParam Long id) {
 		SynConfig synConfig = synConfigService.getById(id);
 		WxWorkSynConfigResponse response = new WxWorkSynConfigResponse();
